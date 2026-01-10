@@ -54,30 +54,36 @@ def main():
         st.stop()
 
     # サイドバー
-    st.sidebar.markdown("## AIエージェント機能の利用有無")
-    agent_mode = st.sidebar.selectbox(" ", ["利用する", "利用しない"], index=0)
+    st.sidebar.markdown("## AIエージェント機能")
+    agent_mode = st.sidebar.selectbox("利用有無", ["利用する", "利用しない"], index=0)
 
-    st.sidebar.markdown("---")
-    st.sidebar.markdown("### 【AIエージェントとは】")
-    st.sidebar.info("質問に対して適切と考えられる回答を生成できるまで、生成AIが自己評価・改善を繰り返す機能です。")
-    st.sidebar.warning("AIエージェント機能を利用する場合、回答生成により多くの時間を要する可能性が高いです。")
+    with st.sidebar.expander("⚙️ 詳細", expanded=False):
+        st.markdown("**AIエージェントとは**  \n自己評価・改善を繰り返して、より正確な回答を生成する機能です。\n\n⚠️ 処理時間が長くなる可能性があります。")
 
     # メイン
     st.markdown("<h1 style='text-align:center; margin-bottom: 0.2em;'>問い合わせ対応自動化AIエージェント</h1>", unsafe_allow_html=True)
-    st.success("こちらは弊社に関する質問にお答えする生成AIチャットボットです。AIエージェントの利用有無を選択し、画面下部のチャット欄から質問してください。")
-    st.warning("具体的に入力したほうが期待通りの回答を得やすいです。")
+    st.markdown("<p style='text-align:center; color: #666; margin-top: -10px; margin-bottom: 20px;'><b>社内資料・PDFから問い合わせ対応を自動化するAI</b></p>", unsafe_allow_html=True)
+    st.info("📋 資料に基づいた正確な回答をお届けします。解約・返金・請求など、よくある質問にすぐに対応。")
+
+    # サンプル質問の表示（初回のみ）
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+    
+    if len(st.session_state.messages) == 0:
+        st.markdown("---")
+        st.markdown("<p style='text-align:center; color: #999; font-size: 16px;'><b>質問例</b></p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align:center; color: #aaa; font-size: 15px;'>解約したい　/　返金条件を教えて　/　請求内容を確認したい</p>", unsafe_allow_html=True)
+        st.markdown("---")
 
     # チャット履歴（無制限に増えるとメモリを食うので上限をつける）
     MAX_MESSAGES = 20
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
 
     # 表示は直近だけ
     for m in st.session_state.messages[-MAX_MESSAGES:]:
         with st.chat_message(m["role"], avatar=user_icon_path if m["role"] == "user" else ai_icon_path):
             st.markdown(m["content"])
 
-    user_text = st.chat_input("こちらからメッセージを送信してください。")
+    user_text = st.chat_input("例：解約したい / 返金条件を教えて")
     if not user_text:
         return
 

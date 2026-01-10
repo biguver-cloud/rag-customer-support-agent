@@ -1,1 +1,1 @@
-invalid type: string "返金対象に該当する可能性がある場合は、 \n以下の方法でお問い合わせください。 \n \n・管理画面内の問い合わせフォーム   \n・メール：support@sampledesk.example   \n \n※返金の自動処理は行っていません   \n※内容確認のため、追加情報の提出をお願いする場合があります   \n \n�����������
+invalid type: string "サポート窓口：support@sampledesk.example   \n受付時間：平日 9:00～18:00   \n電話番号：000-0000-0000   \n公式サイト：https://www.sampledesk.example", expected f64oolean\n対象：契約中のお客様／新規検討中のお客様／社内サポート担当 \n \n��────────────── \n【アップグレード】 \n： \n�������
