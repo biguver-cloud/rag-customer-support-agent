@@ -15,6 +15,7 @@ PDFや社内資料をそのまま活かし、
 ## 🌐 公開デモ
 
 Streamlit Cloud 上で動作するデモはこちら
+
 👉 [https://rag-customer-support-agent-afisjncrkgflsn7dusecdd.streamlit.app](https://rag-customer-support-agent-afisjncrkgflsn7dusecdd.streamlit.app)
 
 ---
@@ -67,15 +68,27 @@ Streamlit Cloud 上で動作するデモはこちら
 * **Document Loader**：PDF（pypdf）
 * **検索方式**：Similarity Search + RAG
 
-処理フロー：
+---
 
-ユーザー質問
-↓
-Retriever（ChromaDB）
-↓
-関連PDFチャンク取得
-↓
-LLM（回答生成）
+## 🖥 使用環境
+
+* OS：Windows
+* Python：3.11
+* フレームワーク：Streamlit
+* LLM：OpenAI API（LangChain経由）
+* ベクトルDB：ChromaDB
+* 主なライブラリ：langchain, chromadb, pypdf, streamlit
+* デプロイ：Streamlit Cloud
+
+---
+
+## 🧩 拡張予定機能
+
+* 回答の根拠PDFを画面上に明示（引用表示）
+* カテゴリ別検索の精度向上
+* 管理者向けログ・評価画面の追加
+* 多言語対応（日本語 / 英語）
+* 認証・利用制限機能の追加
 
 ---
 
@@ -90,7 +103,7 @@ LLM（回答生成）
 ├── data/
 │   ├── company/      # 会社情報（架空）
 │   ├── customer/     # カスタマープロフィール（架空）
-│   └── service/      # 料金・解約・利用ガイド等
+│   └── service/      # 料金・解約・利用ガイド等（架空）
 ├── rag/
 │   ├── loader.py
 │   ├── retriever.py
@@ -169,21 +182,6 @@ http://localhost:8501
 * 関連するPDF内容を検索
 * 根拠に基づいた回答を生成
 * 判断が必要な内容は「案内」に留める
-
----
-
-## 💼 クライアント様へ
-
-本プロジェクトは、以下のような案件を想定して設計しています。
-
-* 社内FAQ / 業務マニュアル検索
-* カスタマーサポート自動化
-* RAG構成のPoC / 検証環境構築
-* 既存PDF・マニュアルのAI化
-
-「自社データを使ったAIチャットを作りたい」
-「まずは小さくPoCを作りたい」
-といったご相談にも対応可能です。
 
 ---
 
