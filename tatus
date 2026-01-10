@@ -1,0 +1,125 @@
+[1mdiff --git a/README.md b/README.md[m
+[1mindex 4cb1a0a..e69de29 100644[m
+[1m--- a/README.md[m
+[1m+++ b/README.md[m
+[36m@@ -1 +0,0 @@[m
+[31m-# rag-customer-support-agent[m
+\ No newline at end of file[m
+[1mdiff --git a/app.py b/app.py[m
+[1mindex 0a6a232..f6d44e9 100644[m
+[1m--- a/app.py[m
+[1m+++ b/app.py[m
+[36m@@ -12,6 +12,17 @@[m [mfrom rag.agent import agent_answer[m
+ from rag.ui import render_citations, render_contact_guidance[m
+ [m
+ [m
+[32m+[m[32m@st.cache_resource(show_spinner=False)[m
+[32m+[m[32mdef get_db(persist_dir: Path):[m
+[32m+[m[32m    # persist_dir は Path のままでOK（内部で str 化されてもよい）[m
+[32m+[m[32m    return open_vectorstore(persist_dir)[m
+[32m+[m
+[32m+[m
+[32m+[m[32m@st.cache_resource(show_spinner=False)[m
+[32m+[m[32mdef get_llm():[m
+[32m+[m[32m    return ChatOpenAI(model=MODEL_NAME, temperature=TEMPERATURE)[m
+[32m+[m
+[32m+[m
+ def build_followup_questions(user_text: str) -> str:[m
+     return f"""資料だけでは特定できませんでした。次のどれに近いですか？[m
+ [m
+[36m@@ -37,6 +48,7 @@[m [mdef main():[m
+     persist_dir = base_dir / "storage" / "chroma"[m
+     user_icon_path = str(base_dir / "images" / "User_アイコン.png")[m
+     ai_icon_path = str(base_dir / "images" / "AI_アイコン.png")[m
+[32m+[m
+     if not persist_dir.exists():[m
+         st.error("ベクトルDBがありません。先に `python build_index.py` を実行してください。")[m
+         st.stop()[m
+[36m@@ -55,10 +67,13 @@[m [mdef main():[m
+     st.success("こちらは弊社に関する質問にお答えする生成AIチャットボットです。AIエージェントの利用有無を選択し、画面下部のチャット欄から質問してください。")[m
+     st.warning("具体的に入力したほうが期待通りの回答を得やすいです。")[m
+ [m
+[31m-    # チャット履歴[m
+[32m+[m[32m    # チャット履歴（無制限に増えるとメモリを食うので上限をつける）[m
+[32m+[m[32m    MAX_MESSAGES = 20[m
+     if "messages" not in st.session_state:[m
+         st.session_state.messages = [][m
+[31m-    for m in st.session_state.messages:[m
+[32m+[m
+[32m+[m[32m    # 表示は直近だけ[m
+[32m+[m[32m    for m in st.session_state.messages[-MAX_MESSAGES:]:[m
+         with st.chat_message(m["role"], avatar=user_icon_path if m["role"] == "user" else ai_icon_path):[m
+             st.markdown(m["content"])[m
+ [m
+[36m@@ -67,32 +82,25 @@[m [mdef main():[m
+         return[m
+ [m
+     st.session_state.messages.append({"role": "user", "content": user_text})[m
+[32m+[m[32m    st.session_state.messages = st.session_state.messages[-MAX_MESSAGES:]  # ここが重要[m
+[32m+[m
+     with st.chat_message("user", avatar=user_icon_path):[m
+         st.markdown(user_text)[m
+ [m
+     with st.chat_message("assistant", avatar=ai_icon_path):[m
+         with st.spinner("PDFから検索して回答中..."):[m
+[31m-            db = open_vectorstore(persist_dir)[m
+[32m+[m[32m            # 毎回ロードしない（ここが一番効く）[m
+[32m+[m[32m            db = get_db(persist_dir)[m
+ [m
+             search_query = rewrite_query_for_search(user_text)[m
+             category = guess_category(user_text)[m
+ [m
+[31m-            context, citations, best_score = retrieve_with_score(db, search_query, k=TOP_K, category=category)[m
+[31m-[m
+[31m-            # デバッグ情報の表示[m
+[31m-            with st.expander("🔍 デバッグ情報"):[m
+[31m-                st.write(f"元の質問: {user_text}")[m
+[31m-                st.write(f"改写後クエリ: {search_query}")[m
+[31m-                st.write(f"推測カテゴリ: {category}")[m
+[31m-                st.write(f"取得スコア: {best_score}")[m
+[31m-                st.write(f"スコア閾値: {WEAK_SCORE_THRESHOLD}")[m
+[31m-                st.write(f"コンテキスト長: {len(context) if context else 0}")[m
+[31m-                st.write(f"引用数: {len(citations)}")[m
+[31m-                if context:[m
+[31m-                    st.write("**取得コンテキスト（最初の500文字）:**")[m
+[31m-                    st.code(context[:500])[m
+[32m+[m[32m            context, citations, best_score = retrieve_with_score([m
+[32m+[m[32m                db, search_query, k=TOP_K, category=category[m
+[32m+[m[32m            )[m
+ [m
+[31m-            llm = ChatOpenAI(model=MODEL_NAME, temperature=TEMPERATURE)[m
+[32m+[m[32m            # LLM も毎回作らない[m
+[32m+[m[32m            llm = get_llm()[m
+ [m
+             if not context.strip():[m
+                 answer = "資料に記載がありません。該当するPDF名や用語（例：解約、返金、請求など）を少し具体的に教えてください。"[m
+[36m@@ -129,6 +137,7 @@[m [mdef main():[m
+         render_contact_guidance(user_text, citations)[m
+ [m
+     st.session_state.messages.append({"role": "assistant", "content": answer})[m
+[32m+[m[32m    st.session_state.messages = st.session_state.messages[-MAX_MESSAGES:]  # ここも重要[m
+ [m
+ [m
+ if __name__ == "__main__":[m
+[1mdiff --git a/build_index.py b/build_index.py[m
+[1mindex ca1e51d..78086f6 100644[m
+[1m--- a/build_index.py[m
+[1m+++ b/build_index.py[m
+[36m@@ -60,7 +60,7 @@[m [mdef main():[m
+     # 2) 分割[m
+     # ------------------------------------------------------------[m
+     splitter = RecursiveCharacterTextSplitter([m
+[31m-        chunk_size=500,[m
+[32m+[m[32m        chunk_size=1000,[m
+         chunk_overlap=100,[m
+     )[m
+     splits = splitter.split_documents(docs)[m
+[1mdiff --git a/storage/chroma/7b6f138f-46c5-4204-b48c-916cbd5704c8/data_level0.bin b/storage/chroma/7b6f138f-46c5-4204-b48c-916cbd5704c8/data_level0.bin[m
+[1mindex 1ec8bbf..b2dc815 100644[m
+Binary files a/storage/chroma/7b6f138f-46c5-4204-b48c-916cbd5704c8/data_level0.bin and b/storage/chroma/7b6f138f-46c5-4204-b48c-916cbd5704c8/data_level0.bin differ
+[1mdiff --git a/storage/chroma/7b6f138f-46c5-4204-b48c-916cbd5704c8/length.bin b/storage/chroma/7b6f138f-46c5-4204-b48c-916cbd5704c8/length.bin[m
+[1mindex de0e5a8..c2a081e 100644[m
+Binary files a/storage/chroma/7b6f138f-46c5-4204-b48c-916cbd5704c8/length.bin and b/storage/chroma/7b6f138f-46c5-4204-b48c-916cbd5704c8/length.bin differ
+[1mdiff --git a/storage/chroma/chroma.sqlite3 b/storage/chroma/chroma.sqlite3[m
+[1mindex 92ba744..ad6fc85 100644[m
+Binary files a/storage/chroma/chroma.sqlite3 and b/storage/chroma/chroma.sqlite3 differ

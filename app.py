@@ -12,6 +12,17 @@ from rag.agent import agent_answer
 from rag.ui import render_citations, render_contact_guidance
 
 
+@st.cache_resource(show_spinner=False)
+def get_db(persist_dir: Path):
+    # persist_dir は Path のままでOK（内部で str 化されてもよい）
+    return open_vectorstore(persist_dir)
+
+
+@st.cache_resource(show_spinner=False)
+def get_llm():
+    return ChatOpenAI(model=MODEL_NAME, temperature=TEMPERATURE)
+
+
 def build_followup_questions(user_text: str) -> str:
     return f"""資料だけでは特定できませんでした。次のどれに近いですか？
 
@@ -37,6 +48,7 @@ def main():
     persist_dir = base_dir / "storage" / "chroma"
     user_icon_path = str(base_dir / "images" / "User_アイコン.png")
     ai_icon_path = str(base_dir / "images" / "AI_アイコン.png")
+
     if not persist_dir.exists():
         st.error("ベクトルDBがありません。先に `python build_index.py` を実行してください。")
         st.stop()
@@ -55,10 +67,13 @@ def main():
     st.success("こちらは弊社に関する質問にお答えする生成AIチャットボットです。AIエージェントの利用有無を選択し、画面下部のチャット欄から質問してください。")
     st.warning("具体的に入力したほうが期待通りの回答を得やすいです。")
 
-    # チャット履歴
+    # チャット履歴（無制限に増えるとメモリを食うので上限をつける）
+    MAX_MESSAGES = 20
     if "messages" not in st.session_state:
         st.session_state.messages = []
-    for m in st.session_state.messages:
+
+    # 表示は直近だけ
+    for m in st.session_state.messages[-MAX_MESSAGES:]:
         with st.chat_message(m["role"], avatar=user_icon_path if m["role"] == "user" else ai_icon_path):
             st.markdown(m["content"])
 
@@ -67,32 +82,25 @@ def main():
         return
 
     st.session_state.messages.append({"role": "user", "content": user_text})
+    st.session_state.messages = st.session_state.messages[-MAX_MESSAGES:]  # ここが重要
+
     with st.chat_message("user", avatar=user_icon_path):
         st.markdown(user_text)
 
     with st.chat_message("assistant", avatar=ai_icon_path):
         with st.spinner("PDFから検索して回答中..."):
-            db = open_vectorstore(persist_dir)
+            # 毎回ロードしない（ここが一番効く）
+            db = get_db(persist_dir)
 
             search_query = rewrite_query_for_search(user_text)
             category = guess_category(user_text)
 
-            context, citations, best_score = retrieve_with_score(db, search_query, k=TOP_K, category=category)
+            context, citations, best_score = retrieve_with_score(
+                db, search_query, k=TOP_K, category=category
+            )
 
-            # デバッグ情報の表示
-            with st.expander("🔍 デバッグ情報"):
-                st.write(f"元の質問: {user_text}")
-                st.write(f"改写後クエリ: {search_query}")
-                st.write(f"推測カテゴリ: {category}")
-                st.write(f"取得スコア: {best_score}")
-                st.write(f"スコア閾値: {WEAK_SCORE_THRESHOLD}")
-                st.write(f"コンテキスト長: {len(context) if context else 0}")
-                st.write(f"引用数: {len(citations)}")
-                if context:
-                    st.write("**取得コンテキスト（最初の500文字）:**")
-                    st.code(context[:500])
-
-            llm = ChatOpenAI(model=MODEL_NAME, temperature=TEMPERATURE)
+            # LLM も毎回作らない
+            llm = get_llm()
 
             if not context.strip():
                 answer = "資料に記載がありません。該当するPDF名や用語（例：解約、返金、請求など）を少し具体的に教えてください。"
@@ -129,6 +137,7 @@ def main():
         render_contact_guidance(user_text, citations)
 
     st.session_state.messages.append({"role": "assistant", "content": answer})
+    st.session_state.messages = st.session_state.messages[-MAX_MESSAGES:]  # ここも重要
 
 
 if __name__ == "__main__":

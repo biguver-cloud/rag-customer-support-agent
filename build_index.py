@@ -60,7 +60,7 @@ def main():
     # 2) 分割
     # ------------------------------------------------------------
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=500,
+        chunk_size=1000,
         chunk_overlap=100,
     )
     splits = splitter.split_documents(docs)
