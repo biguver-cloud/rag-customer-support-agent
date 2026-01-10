@@ -1,0 +1,246 @@
+# RAG Customer Support Agent (Streamlit)
+
+## はじめに
+
+このリポジトリは、
+「実務で通用するRAG構成」を、
+**設計・実装・説明まで一貫してできること**を示すためのポートフォリオです。
+
+PDFや社内資料をそのまま活かし、
+検索（Retriever）と生成（LLM）を組み合わせた構成で、
+**再現性のある実装**と**業務に寄せた回答設計**を重視しました。
+
+---
+
+## 🌐 公開デモ
+
+Streamlit Cloud 上で動作するデモはこちら
+👉 [https://rag-customer-support-agent-afisjncrkgflsn7dusecdd.streamlit.app](https://rag-customer-support-agent-afisjncrkgflsn7dusecdd.streamlit.app)
+
+---
+
+## 📌 概要
+
+本プロジェクトは、以下を目的として作成したポートフォリオ用アプリケーションです。
+
+* 社内ドキュメント（PDF）を知識源とした問い合わせ対応
+* ルールベースではなく **検索＋生成（RAG）** による柔軟な回答
+* 実務を想定した「案内に留める」「判断を促す」回答設計
+
+**想定ユースケース**
+
+* SaaS のカスタマーサポート
+* 社内FAQ・業務マニュアル検索
+* AIエージェントの回答制御検証
+
+---
+
+## 🎬 デモ
+
+### デモ動画
+
+* ▶️ [https://YOUR-DEMO-VIDEO-URL](https://YOUR-DEMO-VIDEO-URL)
+
+### 画面イメージ
+
+#### トップ画面
+
+![Top Page](images/top.png)
+
+#### 質問入力と回答例
+
+![Chat Example](images/chat_example.png)
+
+#### 検索結果と回答根拠
+
+![Source Example](images/source_example.png)
+
+※ images フォルダに画像を配置してください。
+
+---
+
+## 🧠 システム構成
+
+* **UI**：Streamlit
+* **LLM**：OpenAI API（via LangChain）
+* **Embedding / Vector DB**：ChromaDB
+* **Document Loader**：PDF（pypdf）
+* **検索方式**：Similarity Search + RAG
+
+処理フロー：
+
+ユーザー質問
+↓
+Retriever（ChromaDB）
+↓
+関連PDFチャンク取得
+↓
+LLM（回答生成）
+
+---
+
+## 📂 ディレクトリ構成
+
+```
+.
+├── app.py            # Streamlit アプリ本体
+├── build_index.py    # PDF → ベクトルDB作成
+├── requirements.txt
+├── .gitignore
+├── data/
+│   ├── company/      # 会社情報（架空）
+│   ├── customer/     # カスタマープロフィール（架空）
+│   └── service/      # 料金・解約・利用ガイド等
+├── rag/
+│   ├── loader.py
+│   ├── retriever.py
+│   └── prompt.py
+├── storage/
+│   └── chroma/       # ChromaDB 永続化データ
+└── images/           # README用画像
+```
+
+※ `data/` 配下のPDFは **すべて架空データ** です。
+
+---
+
+## 🚀 セットアップ手順
+
+### 1. リポジトリをクローン
+
+```bash
+git clone https://github.com/biguver-cloud/rag-customer-support-agent.git
+cd rag-customer-support-agent
+```
+
+### 2. 仮想環境の作成（任意）
+
+```bash
+python -m venv venv
+source venv/bin/activate  # Mac/Linux
+# venv\\Scripts\\activate   # Windows
+```
+
+### 3. 依存関係をインストール
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. 環境変数の設定
+
+`.env` ファイルを作成し、OpenAI APIキーを設定してください。
+
+```env
+OPENAI_API_KEY=your_api_key_here
+```
+
+---
+
+## 📄 PDFインデックスの作成
+
+PDFを差し替えた場合や、初回起動時は以下を実行します。
+
+```bash
+python build_index.py
+```
+
+成功すると `storage/chroma` にベクトルDBが作成されます。
+
+---
+
+## 🖥 アプリ起動
+
+```bash
+streamlit run app.py
+```
+
+ブラウザで以下にアクセスします。
+
+```
+http://localhost:8501
+```
+
+---
+
+## 💬 動作イメージ
+
+* ユーザーが問い合わせを入力
+* 関連するPDF内容を検索
+* 根拠に基づいた回答を生成
+* 判断が必要な内容は「案内」に留める
+
+---
+
+## 💼 クライアント様へ
+
+本プロジェクトは、以下のような案件を想定して設計しています。
+
+* 社内FAQ / 業務マニュアル検索
+* カスタマーサポート自動化
+* RAG構成のPoC / 検証環境構築
+* 既存PDF・マニュアルのAI化
+
+「自社データを使ったAIチャットを作りたい」
+「まずは小さくPoCを作りたい」
+といったご相談にも対応可能です。
+
+---
+
+## ⚠️ 注意事項
+
+* 本プロジェクトは **学習・ポートフォリオ目的** です
+* 実在の企業・人物・サービスは含まれていません
+
+**実運用時に必要な対応**
+
+* 認証・認可
+* ログ管理
+* 個人情報マスキング
+* プロンプト・回答制御の強化
+
+---
+
+## 🧩 今後の改善案
+
+* 回答根拠PDFの明示（引用表示）
+* カテゴリ別検索制御
+* 管理者向けログ・評価UI
+* マルチ言語対応
+* デプロイ（Streamlit Cloud / Render / Cloud Run 等）
+
+---
+
+## 🧑‍💻 Author
+
+GitHub: [https://github.com/biguver-cloud](https://github.com/biguver-cloud)
+Purpose: AI / RAG / カスタマーサポート自動化の検証
+
+---
+
+## 📄 License
+
+This project is for educational and demonstration purposes only.
+
+---
+
+## おわりに
+
+本プロジェクトは、
+「技術を作る」だけでなく、
+「実際の業務でどう使われるか」
+「クライアントや利用者にとって何が嬉しいか」
+を常に意識しながら設計しました。
+
+RAG・生成AI・業務自動化は、
+まだ“正解の形”が固まっていない分野です。
+だからこそ、
+小さく作って、動かして、改善していくことに
+大きな価値があると考えています。
+
+このREADMEやデモをご覧いただいた方が、
+「こんな使い方ができそう」
+「うちの業務にも応用できそう」
+と感じていただけたなら、とても嬉しく思います。
+
+最後までご覧いただき、ありがとうございました。
