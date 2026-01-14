@@ -221,10 +221,13 @@ http://localhost:8501
 
 ---
 
-## 🧑‍💻 Author
+## 👤 Author
 
-GitHub: [https://github.com/biguver-cloud](https://github.com/biguver-cloud)
-Purpose: AI / RAG / カスタマーサポート自動化の検証
+GitHub: https://github.com/biguser-cloud  
+
+Purpose:  
+社内資料を活用した問い合わせ対応AIの設計・実装を通じて、  
+**RAGを用いた業務向けAIエージェント開発スキルを示すためのポートフォリオ**
 
 ---
 
