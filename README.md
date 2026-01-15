@@ -91,7 +91,8 @@ LLM単体ではなく検索＋生成（RAG）構成を採用し、
 
 #### 検索結果と回答根拠
 
-<img width="1022" height="564" alt="image" src="https://github.com/user-attachments/assets/9b57c6b7-ea48-4aff-a844-2c76b6b91b4c" />
+<img width="1019" height="584" alt="image" src="https://github.com/user-attachments/assets/34d83557-42ec-42d3-be38-4dcbc700dafe" />
+
 
 ---
 
