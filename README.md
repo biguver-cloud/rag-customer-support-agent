@@ -77,7 +77,7 @@ LLM単体ではなく検索＋生成（RAG）構成を採用し、
 
 ### デモ動画
 
-* ▶️ [https://YOUR-DEMO-VIDEO-URL](https://YOUR-DEMO-VIDEO-URL)
+* ▶️ Uploading 画面収録 2026-01-16 3.08.39.mov…
 
 ### 実際の画面
 
