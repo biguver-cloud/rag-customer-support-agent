@@ -85,16 +85,15 @@ LLM単体ではなく検索＋生成（RAG）構成を採用し、
 
 #### ◾️トップ画面
 
-<img width="1280" height="700" alt="実際のツール画面" src="https://github.com/user-attachments/assets/c1b5bf38-338c-414e-b674-e177d7e0234a" />
+<img width="1919" height="862" alt="スクリーンショット 2026-01-16 162146" src="https://github.com/user-attachments/assets/bda430b8-1b30-4d56-bbd0-d5c85d4d8229" />
 
 #### ◾️質問入力と回答例
 
-<img width="1004" height="623" alt="image" src="https://github.com/user-attachments/assets/c315135f-4033-487e-b18d-37012feca3ad" />
+<img width="1569" height="775" alt="スクリーンショット 2026-01-16 162338" src="https://github.com/user-attachments/assets/ff93f5cc-f499-4c29-bedf-0930f1fc49c7" />
 
 #### ◾️回答根拠
 
-<img width="1019" height="584" alt="image" src="https://github.com/user-attachments/assets/34d83557-42ec-42d3-be38-4dcbc700dafe" />
-
+<img width="1570" height="666" alt="スクリーンショット 2026-01-16 162406" src="https://github.com/user-attachments/assets/3a9dda95-c1dd-4608-865d-f75beaf4ba42" />
 
 ---
 
