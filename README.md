@@ -224,7 +224,7 @@ http://localhost:8501
 
 ## 👤 Author
 
-GitHub: https://github.com/biguser-cloud  
+GitHub: https://github.com/biguver-cloud
 
 Purpose:  
 社内資料を活用した問い合わせ対応AIの設計・実装を通じて、  
