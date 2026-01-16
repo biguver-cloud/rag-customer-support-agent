@@ -109,13 +109,13 @@ LLM単体ではなく検索＋生成（RAG）構成を採用し、
 
 ## 🖥 使用環境
 
-* OS：Macbook
+* OS：macOS（MacBook環境で開発・動作確認）
 ※ Windows / Linux 環境でも動作可能（仮想環境・依存関係の調整が必要）
 * Python：3.11
 * フレームワーク：Streamlit
 * LLM：OpenAI API（LangChain経由）
 * ベクトルDB：ChromaDB
-* 主なライブラリ：langchain, chromadb, pypdf, streamlit
+* 主なライブラリ：LangChain, ChromaDB, PyPDF, Streamlit
 * デプロイ：Streamlit Cloud
 
 ---
@@ -130,7 +130,7 @@ LLM単体ではなく検索＋生成（RAG）構成を採用し、
 
 ---
 
-##  セットアップ手順
+## セットアップ手順
 
 ### 1. リポジトリをクローン
 
