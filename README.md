@@ -4,7 +4,7 @@
 
 このリポジトリは、
 「実務で通用するRAG構成」を、
-**設計・実装・説明まで一貫してできること**を示すためのポートフォリオです。
+**設計・実装・説明まで一貫して行えること**を示すためのポートフォリオです。
 
 PDFや社内資料をそのまま活かし、
 検索（Retriever）と生成（LLM）を組み合わせた構成で、
@@ -28,8 +28,6 @@ Streamlit Cloud 上で動作するデモはこちら
 **解約・返金・請求などの定型的な問い合わせ**に対し、  
 関連資料を検索した上で、**根拠を明示した補助的な回答**を提供します。
 
----
-
 ### ■ 目的
 
 本ツールの目的は、  
@@ -38,8 +36,6 @@ Streamlit Cloud 上で動作するデモはこちら
 
 LLM単体ではなく検索＋生成（RAG）構成を採用し、  
 実務で安全に使えることを前提に設計しています。
-
----
 
 ### ■ 解決できる課題
 
@@ -77,27 +73,27 @@ LLM単体ではなく検索＋生成（RAG）構成を採用し、
 
 ---
 
-## 🎬 デモ
+## 🎬 デモ動画・実際の画面
 
-### デモ動画
+<video 
+  src="https://github.com/user-attachments/assets/cea48195-ec49-492c-ac43-35b9808abdd4"
+  controls
+  width="800">
+</video>
 
-* ▶️ [https://YOUR-DEMO-VIDEO-URL](https://YOUR-DEMO-VIDEO-URL)
+### 実際の画面
 
-### 画面イメージ
+#### ◾️トップ画面
 
-#### トップ画面
+<img width="1919" height="862" alt="スクリーンショット 2026-01-16 162146" src="https://github.com/user-attachments/assets/bda430b8-1b30-4d56-bbd0-d5c85d4d8229" />
 
-![Top Page](images/top.png)
+#### ◾️質問入力と回答例
 
-#### 質問入力と回答例
+<img width="1569" height="775" alt="スクリーンショット 2026-01-16 162338" src="https://github.com/user-attachments/assets/ff93f5cc-f499-4c29-bedf-0930f1fc49c7" />
 
-![Chat Example](images/chat_example.png)
+#### ◾️回答根拠
 
-#### 検索結果と回答根拠
-
-![Source Example](images/source_example.png)
-
-※ images フォルダに画像を配置してください。
+<img width="1570" height="666" alt="スクリーンショット 2026-01-16 162406" src="https://github.com/user-attachments/assets/3a9dda95-c1dd-4608-865d-f75beaf4ba42" />
 
 ---
 
@@ -113,12 +109,13 @@ LLM単体ではなく検索＋生成（RAG）構成を採用し、
 
 ## 🖥 使用環境
 
-* OS：Windows
+* OS：macOS（MacBook環境で開発・動作確認）
+※ Windows / Linux 環境でも動作可能（仮想環境・依存関係の調整が必要）
 * Python：3.11
 * フレームワーク：Streamlit
 * LLM：OpenAI API（LangChain経由）
 * ベクトルDB：ChromaDB
-* 主なライブラリ：langchain, chromadb, pypdf, streamlit
+* 主なライブラリ：LangChain, ChromaDB, PyPDF, Streamlit
 * デプロイ：Streamlit Cloud
 
 ---
@@ -133,7 +130,7 @@ LLM単体ではなく検索＋生成（RAG）構成を採用し、
 
 ---
 
-##  セットアップ手順
+## セットアップ手順
 
 ### 1. リポジトリをクローン
 
@@ -225,10 +222,13 @@ http://localhost:8501
 
 ---
 
-## 🧑‍💻 Author
+## 👤 Author
 
-GitHub: [https://github.com/biguver-cloud](https://github.com/biguver-cloud)
-Purpose: AI / RAG / カスタマーサポート自動化の検証
+GitHub: https://github.com/biguver-cloud
+
+Purpose:  
+社内資料を活用した問い合わせ対応AIの設計・実装を通じて、  
+**RAGを用いた業務向けAIエージェント開発スキルを示すためのポートフォリオ**
 
 ---
 
