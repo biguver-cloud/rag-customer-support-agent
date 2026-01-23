@@ -243,7 +243,6 @@ This project is for educational and demonstration purposes only.
 ## おわりに
 
 本プロジェクトは、
-「技術を作る」だけでなく、
 「実際の業務でどう使われるか」
 「クライアントや利用者にとって何が嬉しいか」
 を常に意識しながら設計しました。
