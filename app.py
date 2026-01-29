@@ -63,7 +63,7 @@ def main():
     # メイン
     st.markdown("<h1 style='text-align:center; margin-bottom: 0.2em;'>問い合わせ対応自動化AIエージェント</h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align:center; color: #666; margin-top: -10px; margin-bottom: 20px;'><b>社内資料・PDFから問い合わせ対応を自動化するAI</b></p>", unsafe_allow_html=True)
-    st.info("📋 資料に基づいた正確な回答をお届けします。解約・返金・請求など、よくある質問にすぐに対応。")
+    st.info("📋 資料に基づいた正確な回答をお届けします。解約・返金・請求など、よくある質問にすぐに対応いたします。")
 
     # サンプル質問の表示（初回のみ）
     if "messages" not in st.session_state:
