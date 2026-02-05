@@ -9,4 +9,4 @@ TOP_K = 5
 WEAK_SCORE_THRESHOLD = 0.25  # スコアがこれ以下なら補助質問を出す
 
 # Agent設定
-AGENT_ROUNDS = 2
+AGENT_ROUNDS = 1
