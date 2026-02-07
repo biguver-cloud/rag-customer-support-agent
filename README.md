@@ -77,7 +77,11 @@ LLM単体ではなく、
 
 ## 🎬 デモ動画・実際の画面
 
-https://github.com/user-attachments/assets/af65a050-5261-4260-bb91-11f817845291
+<video 
+  src="https://github.com/user-attachments/assets/af65a050-5261-4260-bb91-11f817845291"
+  controls
+  width="800">
+</video>
 
 ### 実際の画面
 
