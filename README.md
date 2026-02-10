@@ -87,15 +87,15 @@ LLM単体ではなく、
 
 #### ◾️トップ画面
 
-<img width="1919" height="862" alt="スクリーンショット 2026-01-16 162146" src="https://github.com/user-attachments/assets/bda430b8-1b30-4d56-bbd0-d5c85d4d8229" />
+<img width="1919" height="869" alt="スクリーンショット 2026-02-10 175615" src="https://github.com/user-attachments/assets/1bc35e9b-c8e6-40f9-9bf8-941886102111" />
 
 #### ◾️質問入力と回答例
 
-<img width="1569" height="775" alt="スクリーンショット 2026-01-16 162338" src="https://github.com/user-attachments/assets/ff93f5cc-f499-4c29-bedf-0930f1fc49c7" />
+<img width="1919" height="866" alt="スクリーンショット 2026-02-10 175541" src="https://github.com/user-attachments/assets/02a04b51-6860-4836-9ce5-6a6ae945c88c" />
 
 #### ◾️回答根拠
 
-<img width="1570" height="666" alt="スクリーンショット 2026-01-16 162406" src="https://github.com/user-attachments/assets/3a9dda95-c1dd-4608-865d-f75beaf4ba42" />
+<img width="1919" height="868" alt="スクリーンショット 2026-02-10 175659" src="https://github.com/user-attachments/assets/dde2aeee-f97c-452e-930d-116dc5a83ad8" />
 
 ---
 
