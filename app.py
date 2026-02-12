@@ -7,7 +7,8 @@ from langchain_openai import ChatOpenAI
 from rag.config import MODEL_NAME, TEMPERATURE, TOP_K, WEAK_SCORE_THRESHOLD, AGENT_ROUNDS
 from rag.prompts import SYSTEM_PROMPT
 from rag.query import guess_category, rewrite_query_for_search
-from rag.vectorstore import open_vectorstore, retrieve_with_score
+from rag.vectorstore import open_vectorstore
+from rag.retriever import retrieve_documents_with_score
 from rag.agent import agent_answer
 from rag.ui import render_citations, render_contact_guidance
 
@@ -95,15 +96,57 @@ def main():
 
     with st.chat_message("assistant", avatar=ai_icon_path):
         with st.spinner("PDFから検索して回答中..."):
-            # 毎回ロードしない（ここが一番効く）
-            db = get_db(persist_dir)
+            try:
+                # 毎回ロードしない（ここが一番効く）
+                db = get_db(persist_dir)
 
-            search_query = rewrite_query_for_search(user_text)
-            category = guess_category(user_text)
+                search_query = rewrite_query_for_search(user_text)
+                category = guess_category(user_text)
 
-            context, citations, best_score = retrieve_with_score(
-                db, search_query, k=TOP_K, category=category
-            )
+                # retriever.pyの関数を使ってスコア付き検索
+                search_results = retrieve_documents_with_score(
+                    vectorstore=db,
+                    query=search_query,
+                    k=TOP_K,
+                    category=category if category != "unknown" else None
+                )
+
+                # コンテキストとcitationsを構築
+                if not search_results:
+                    context = ""
+                    citations = []
+                    best_score = None
+                else:
+                    # Documentとスコアを分離
+                    docs = [doc for doc, _ in search_results]
+                    scores = [score for _, score in search_results]
+                    best_score = min(scores) if scores else None
+
+                    # LLMに渡すコンテキスト（page_contentを結合）
+                    context = "\n\n---\n\n".join([doc.page_content for doc in docs])
+
+                    # UI表示用のcitations（スコアを含める）
+                    citations = []
+                    for doc, score in search_results:
+                        src = doc.metadata.get("source", "")
+                        page = doc.metadata.get("page", None)
+                        cat = doc.metadata.get("category", category if category != "unknown" else "unknown")
+                        text = doc.page_content.strip().replace("\n", " ")
+                        quote = text[:400] + ("..." if len(text) > 400 else "")
+
+                        citations.append({
+                            "category": cat,
+                            "source": src,
+                            "page": (page + 1) if isinstance(page, int) else None,
+                            "quote": quote,
+                            "score": score  # スコアを追加
+                        })
+
+            except Exception as e:
+                st.error(f"検索中にエラーが発生しました: {str(e)}")
+                context = ""
+                citations = []
+                best_score = None
 
             # LLM も毎回作らない
             llm = get_llm()

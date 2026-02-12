@@ -12,9 +12,22 @@ def render_citations(citations: list[dict]):
             page = c.get("page", None)
             cat = c.get("category", "unknown")
             quote = c.get("quote", "")
+            score = c.get("score", None)  # スコアを取得
 
             title = f"[{i}] ({cat}) {src}"
-            meta = f"ページ: {page}" if page else "ページ: 不明"
+            
+            # メタ情報にスコアを追加
+            meta_parts = []
+            if page:
+                meta_parts.append(f"ページ: {page}")
+            else:
+                meta_parts.append("ページ: 不明")
+            
+            if score is not None:
+                # スコアを小数点4桁で表示（Chromaは値が小さいほど類似度が高い）
+                meta_parts.append(f"類似度スコア: {score:.4f}")
+            
+            meta = " / ".join(meta_parts)
 
             with st.container(border=True):
                 st.markdown(f"**{title}**")
