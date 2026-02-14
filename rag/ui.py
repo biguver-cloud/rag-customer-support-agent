@@ -24,8 +24,8 @@ def render_citations(citations: list[dict]):
                 meta_parts.append("ページ: 不明")
             
             if score is not None:
-                # スコアを小数点4桁で表示（Chromaは値が小さいほど類似度が高い）
-                meta_parts.append(f"類似度スコア: {score:.4f}")
+                # スコアを小数点3桁で表示に変更（UI表示のみ丸める）
+                meta_parts.append(f"類似度スコア: {score:.3f}")
             
             meta = " / ".join(meta_parts)
 
