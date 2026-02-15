@@ -84,7 +84,7 @@ def main():
         with st.chat_message(m["role"], avatar=user_icon_path if m["role"] == "user" else ai_icon_path):
             st.markdown(m["content"])
 
-    user_text = st.chat_input("例：解約したい / 返金条件を教えて")
+    user_text = st.chat_input("ここに質問内容をご入力ください")
     if not user_text:
         return
 
