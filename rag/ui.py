@@ -1,6 +1,29 @@
 import re
 from pathlib import Path
 import streamlit as st
+from rag.config import SCORE_TYPE, SHOW_RAW_SCORE
+
+
+def convert_score_to_rating_10(score: float, score_type: str = "distance") -> float:
+    """
+    スコアを10点満点の評価に変換する。
+    
+    Args:
+        score: 元のスコア値
+        score_type: "similarity" (0〜1で大きいほど良い) または "distance" (0に近いほど良い)
+    
+    Returns:
+        10点満点の評価値（小数1桁）
+    """
+    if score_type == "similarity":
+        # 類似度の場合: 単純に10倍
+        rating = round(score * 10, 1)
+    else:  # distance
+        # 距離の場合: 0に近いほど高得点
+        rating = round(10 / (1 + score), 1)
+    
+    # 0〜10の範囲に収める
+    return max(0.0, min(10.0, rating))
 
 def render_citations(citations: list[dict]):
     if not citations:
@@ -24,8 +47,12 @@ def render_citations(citations: list[dict]):
                 meta_parts.append("ページ: 不明")
             
             if score is not None:
-                # スコアを小数点3桁で表示に変更（UI表示のみ丸める）
-                meta_parts.append(f"類似度スコア: {score:.3f}")
+                # スコアを10点満点に変換して表示
+                rating_10 = convert_score_to_rating_10(score, SCORE_TYPE)
+                if SHOW_RAW_SCORE:
+                    meta_parts.append(f"類似度: {rating_10}/10（raw: {score:.3f}）")
+                else:
+                    meta_parts.append(f"類似度: {rating_10}/10")
             
             meta = " / ".join(meta_parts)
 

@@ -24,6 +24,27 @@ def get_llm():
     return ChatOpenAI(model=MODEL_NAME, temperature=TEMPERATURE)
 
 
+def safe_avatar(icon_path: Path) -> str | None:
+    """
+    アバター画像のパスが存在する場合のみ文字列パスを返す。
+    存在しない場合はNoneを返してアプリが落ちないようにする。
+    
+    Args:
+        icon_path: 画像ファイルのPathオブジェクト
+    
+    Returns:
+        存在する場合は str(path)、存在しない場合は None
+    """
+    if icon_path and icon_path.exists():
+        return str(icon_path)
+    else:
+        # 画像が見つからない場合の警告を1回だけ出す
+        if "avatar_warning_shown" not in st.session_state:
+            st.session_state.avatar_warning_shown = True
+            st.warning(f"⚠️ アバター画像が見つかりません: {icon_path.name if icon_path else 'None'}（デフォルトアイコンで表示します）")
+        return None
+
+
 def build_followup_questions(user_text: str) -> str:
     return f"""資料だけでは特定できませんでした。次のどれに近いですか？
 
@@ -45,10 +66,11 @@ def main():
         st.error("OPENAI_API_KEY が .env に設定されていません")
         st.stop()
 
-    base_dir = Path(__file__).parent
-    persist_dir = base_dir / "storage" / "chroma"
-    user_icon_path = str(base_dir / "images" / "User_アイコン.png")
-    ai_icon_path = str(base_dir / "images" / "AI_アイコン.png")
+    # BASE_DIRを絶対パスで固定（相対パスのずれを防ぐ）
+    BASE_DIR = Path(__file__).resolve().parent
+    persist_dir = BASE_DIR / "storage" / "chroma"
+    user_icon_path = BASE_DIR / "images" / "User_アイコン.png"
+    ai_icon_path = BASE_DIR / "images" / "AI_アイコン.png"
 
     if not persist_dir.exists():
         st.error("ベクトルDBがありません。先に `python build_index.py` を実行してください。")
@@ -81,7 +103,8 @@ def main():
 
     # 表示は直近だけ
     for m in st.session_state.messages[-MAX_MESSAGES:]:
-        with st.chat_message(m["role"], avatar=user_icon_path if m["role"] == "user" else ai_icon_path):
+        avatar = safe_avatar(user_icon_path) if m["role"] == "user" else safe_avatar(ai_icon_path)
+        with st.chat_message(m["role"], avatar=avatar):
             st.markdown(m["content"])
 
     user_text = st.chat_input("ここに質問内容をご入力ください")
@@ -91,10 +114,10 @@ def main():
     st.session_state.messages.append({"role": "user", "content": user_text})
     st.session_state.messages = st.session_state.messages[-MAX_MESSAGES:]  # ここが重要
 
-    with st.chat_message("user", avatar=user_icon_path):
+    with st.chat_message("user", avatar=safe_avatar(user_icon_path)):
         st.markdown(user_text)
 
-    with st.chat_message("assistant", avatar=ai_icon_path):
+    with st.chat_message("assistant", avatar=safe_avatar(ai_icon_path)):
         with st.spinner("PDFから検索して回答中..."):
             try:
                 # 毎回ロードしない（ここが一番効く）
