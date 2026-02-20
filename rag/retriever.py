@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import List, Tuple, Dict, Optional
 
 from langchain_openai import OpenAIEmbeddings
+from config import RETRIEVER_K, RETRIEVER_K_DEFAULT
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
 
@@ -9,7 +10,7 @@ from langchain_core.documents import Document
 def get_retriever(
     base_dir: Path,
     collection_name: str = "lumidesk_docs",
-    k: int = 3,
+    k: int = RETRIEVER_K,  # config.py から読み込み
 ):
     """
     storage/chroma に保存された Chroma を開いて retriever を返す
@@ -67,7 +68,7 @@ def get_vectorstore(
 def retrieve_documents_with_score(
     vectorstore: Chroma,
     query: str,
-    k: int = 4,
+    k: int = RETRIEVER_K_DEFAULT,  # config.py から読み込み
     category: Optional[str] = None,
 ) -> List[Tuple[Document, float]]:
     """
@@ -118,7 +119,7 @@ def retrieve_documents_with_score(
 def retrieve_documents(
     vectorstore: Chroma,
     query: str,
-    k: int = 4,
+    k: int = RETRIEVER_K_DEFAULT,  # config.py から読み込み
     category: Optional[str] = None,
 ) -> List[Document]:
     """
@@ -155,7 +156,7 @@ def retrieve_documents(
 def retrieve_with_metadata(
     vectorstore: Chroma,
     query: str,
-    k: int = 4,
+    k: int = RETRIEVER_K_DEFAULT,  # config.py から読み込み
     category: Optional[str] = None,
 ) -> List[Dict]:
     """
