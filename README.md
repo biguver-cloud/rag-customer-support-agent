@@ -56,16 +56,17 @@ LLM単体ではなく、
 .
 ├── app.py            # Streamlit アプリ本体
 ├── build_index.py    # PDF → ベクトルDB作成
-├── requirements.txt
+├── config.py         # アプリ全体の設定値を一元管理
+├── requirements.txt  # 依存ライブラリ一覧
 ├── .gitignore
 ├── data/
 │   ├── company/      # 会社情報（架空）
 │   ├── customer/     # カスタマープロフィール（架空）
 │   └── service/      # 料金・解約・利用ガイド等（架空）
 ├── rag/
-│   ├── loader.py
-│   ├── retriever.py
-│   └── prompt.py
+│   ├── loader.py     # PDFの読み込み処理
+│   ├── retriever.py  # ベクトル検索処理
+│   └── prompt.py     # プロンプト管理
 ├── storage/
 │   └── chroma/       # ChromaDB 永続化データ
 └── images/           # README用画像
