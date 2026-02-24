@@ -92,11 +92,11 @@ def main():
     if "messages" not in st.session_state:
         st.session_state.messages = []
     
-    if len(st.session_state.messages) == 0:
-        st.markdown("---")
-        st.markdown("<p style='text-align:center; color: #999; font-size: 16px;'><b>質問例</b></p>", unsafe_allow_html=True)
-        st.markdown("<p style='text-align:center; color: #aaa; font-size: 15px;'>解約したい　/　返金条件を教えて　/　請求内容を確認したい</p>", unsafe_allow_html=True)
-        st.markdown("---")
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("**質問例**")
+    st.sidebar.markdown("- 解約したい")
+    st.sidebar.markdown("- 返金条件を教えて")
+    st.sidebar.markdown("- 請求内容を確認したい")
 
     # チャット履歴（無制限に増えるとメモリを食うので上限をつける）
     MAX_MESSAGES = 20
@@ -116,6 +116,8 @@ def main():
 
     with st.chat_message("user", avatar=safe_avatar(user_icon_path)):
         st.markdown(user_text)
+
+    # 新しい質問は履歴に追加済みなので履歴ループで表示される
 
     with st.chat_message("assistant", avatar=safe_avatar(ai_icon_path)):
         with st.spinner("PDFから検索して回答中..."):
@@ -208,7 +210,11 @@ def main():
         render_citations(citations)
         render_contact_guidance(user_text, citations)
 
-    st.session_state.messages.append({"role": "assistant", "content": answer})
+        st.session_state.messages.append({
+        "role": "assistant",
+        "content": answer,
+        "citations": citations  # citationsも一緒に保存
+    })
     st.session_state.messages = st.session_state.messages[-MAX_MESSAGES:]  # ここも重要
 
 
