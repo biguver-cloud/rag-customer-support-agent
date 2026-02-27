@@ -88,7 +88,7 @@ LLM単体ではなく、
 
 #### ◾️トップ画面
 
-<img width="1919" height="869" alt="スクリーンショット 2026-02-10 175615" src="https://github.com/user-attachments/assets/1bc35e9b-c8e6-40f9-9bf8-941886102111" />
+<img width="1919" height="867" alt="2026_0207_スクリーンショット 2026-02-27 211447" src="https://github.com/user-attachments/assets/249cd875-d77b-4b87-b37b-3627768ad35d" />
 
 #### ◾️質問入力と回答例
 
