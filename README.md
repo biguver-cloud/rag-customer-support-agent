@@ -92,11 +92,11 @@ LLM単体ではなく、
 
 #### ◾️質問入力と回答例
 
-<img width="1919" height="866" alt="スクリーンショット 2026-02-10 175541" src="https://github.com/user-attachments/assets/02a04b51-6860-4836-9ce5-6a6ae945c88c" />
+<img width="1918" height="866" alt="image" src="https://github.com/user-attachments/assets/aae1a538-874f-4bb4-aac9-367b6294195e" />
 
 #### ◾️回答根拠
 
-<img width="1919" height="868" alt="スクリーンショット 2026-02-10 175659" src="https://github.com/user-attachments/assets/dde2aeee-f97c-452e-930d-116dc5a83ad8" />
+<img width="1918" height="865" alt="image" src="https://github.com/user-attachments/assets/883f2c41-9a84-4a5f-9ec1-76a1b0bd752e" />
 
 ---
 
