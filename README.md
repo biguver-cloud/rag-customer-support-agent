@@ -13,14 +13,6 @@ PDFや社内資料をそのまま活かし、
 
 ---
 
-## 🌐 公開デモ
-
-Streamlit Cloud 上で動作するデモはこちら
-
-👉 [https://rag-customer-support-agent-afisjncrkgflsn7dusecdd.streamlit.app](https://rag-customer-support-agent-afisjncrkgflsn7dusecdd.streamlit.app)
-
----
-
 ## 📌 概要
 
 本ツールは、  
