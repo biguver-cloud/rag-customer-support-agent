@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
 from rag.config import MODEL_NAME, TEMPERATURE, TOP_K, WEAK_SCORE_THRESHOLD, AGENT_ROUNDS
-from rag.prompts import SYSTEM_PROMPT
+from rag.prompts import SYSTEM_PROMPT, get_mode_prompt
 from rag.query import guess_category, rewrite_query_for_search
 from rag.vectorstore import open_vectorstore
 from rag.retriever import retrieve_documents_with_score
@@ -76,6 +76,21 @@ def main():
         st.error("ベクトルDBがありません。先に `python build_index.py` を実行してください。")
         st.stop()
 
+    # モード管理の session_state 初期化
+    if "last_answer" not in st.session_state:
+        st.session_state.last_answer = None
+    if "display_mode" not in st.session_state:
+        st.session_state.display_mode = None
+    if "formatted_answers" not in st.session_state:
+        st.session_state.formatted_answers = {}
+
+    # モードボタンのコールバック
+    def _set_call_mode():
+        st.session_state.display_mode = "call"
+
+    def _set_chat_mode():
+        st.session_state.display_mode = "chat"
+
     # サイドバー
     st.sidebar.markdown("## AIエージェント機能")
     agent_mode = st.sidebar.selectbox("利用有無", ["利用する", "利用しない"], index=0)
@@ -101,11 +116,49 @@ def main():
     # チャット履歴（無制限に増えるとメモリを食うので上限をつける）
     MAX_MESSAGES = 20
 
+    # モードボタンが押された場合：整形処理 → メッセージに追加 → 再描画
+    if st.session_state.display_mode and st.session_state.last_answer:
+        mode = st.session_state.display_mode
+        if mode not in st.session_state.formatted_answers:
+            llm = get_llm()
+            prompt = get_mode_prompt(mode, st.session_state.last_answer)
+            with st.spinner("整形中..."):
+                formatted = llm.invoke([
+                    {"role": "user", "content": prompt}
+                ]).content
+            st.session_state.formatted_answers[mode] = formatted
+            label = "📞 コールモード" if mode == "call" else "💬 チャットモード"
+            st.session_state.messages.append({
+                "role": "assistant",
+                "content": f"**【{label}】**\n\n{formatted}",
+            })
+            st.session_state.messages = st.session_state.messages[-MAX_MESSAGES:]
+        st.session_state.display_mode = None
+        st.rerun()
+
     # 表示は直近だけ
-    for m in st.session_state.messages[-MAX_MESSAGES:]:
+    messages_to_show = st.session_state.messages[-MAX_MESSAGES:]
+    # citations を持つ最後の assistant メッセージのインデックスを特定
+    last_rag_idx = next(
+        (i for i, m in reversed(list(enumerate(messages_to_show)))
+         if m["role"] == "assistant" and "citations" in m),
+        None
+    )
+    for i, m in enumerate(messages_to_show):
         avatar = safe_avatar(user_icon_path) if m["role"] == "user" else safe_avatar(ai_icon_path)
         with st.chat_message(m["role"], avatar=avatar):
             st.markdown(m["content"])
+            if i == last_rag_idx:
+                render_citations(m.get("citations", []))
+                render_contact_guidance(m.get("user_text", ""), m.get("citations", []))
+
+    # モードボタン（チャット入力欄の直上に固定表示）
+    if st.session_state.last_answer:
+        col1, col2 = st.columns(2)
+        with col1:
+            st.button("📞 コールモード", use_container_width=True, on_click=_set_call_mode)
+        with col2:
+            st.button("💬 チャットモード", use_container_width=True, on_click=_set_chat_mode)
 
     user_text = st.chat_input("ここに質問内容をご入力ください")
     if not user_text:
@@ -206,16 +259,19 @@ def main():
                          {"role": "user", "content": prompt}]
                     ).content
 
-        st.markdown(answer)
-        render_citations(citations)
-        render_contact_guidance(user_text, citations)
-
-        st.session_state.messages.append({
+    st.session_state.messages.append({
         "role": "assistant",
         "content": answer,
-        "citations": citations  # citationsも一緒に保存
+        "citations": citations,
+        "user_text": user_text,
     })
-    st.session_state.messages = st.session_state.messages[-MAX_MESSAGES:]  # ここも重要
+    st.session_state.messages = st.session_state.messages[-MAX_MESSAGES:]
+
+    # 新規回答を last_answer に保存し、整形キャッシュをリセット
+    st.session_state.last_answer = answer
+    st.session_state.formatted_answers = {}
+    # ボタンを即座に表示するために再描画
+    st.rerun()
 
 
 if __name__ == "__main__":
