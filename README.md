@@ -70,25 +70,7 @@ LLM単体ではなく、
 
 ## 🎬 デモ動画・実際の画面
 
-<video 
-  src="https://github.com/user-attachments/assets/af65a050-5261-4260-bb91-11f817845291"
-  controls
-  width="800">
-</video>
-
-### 実際の画面
-
-#### ◾️トップ画面
-
-<img width="1919" height="867" alt="2026_0207_スクリーンショット 2026-02-27 211447" src="https://github.com/user-attachments/assets/249cd875-d77b-4b87-b37b-3627768ad35d" />
-
-#### ◾️質問入力と回答例
-
-<img width="1918" height="866" alt="image" src="https://github.com/user-attachments/assets/aae1a538-874f-4bb4-aac9-367b6294195e" />
-
-#### ◾️回答根拠
-
-<img width="1918" height="865" alt="image" src="https://github.com/user-attachments/assets/883f2c41-9a84-4a5f-9ec1-76a1b0bd752e" />
+https://github.com/user-attachments/assets/fab3ba78-6f24-4ad4-87ab-eae319b41c08
 
 ---
 
