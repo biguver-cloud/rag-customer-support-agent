@@ -101,7 +101,7 @@ LLM単体ではなく、
 
 ## 🎬 デモ動画
 
-https://github.com/user-attachments/assets/fab3ba78-6f24-4ad4-87ab-eae319b41c08
+https://github.com/user-attachments/assets/891a50f0-a908-47d6-b82d-7496fa31d8d2
 
 ---
 
