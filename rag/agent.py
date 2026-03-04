@@ -1,7 +1,51 @@
+import json
+import re
 import time
 from typing import Callable, Optional
 import tiktoken
 from .prompts import SYSTEM_PROMPT
+
+
+def _self_evaluate(llm, question: str, context_excerpt: str, answer: str) -> dict:
+    """
+    LLMに回答の正確性・網羅性を自己評価させ、0〜100のスコアを返す。
+
+    Returns:
+        {"accuracy": int, "completeness": int}  ※失敗時は {"accuracy": 0, "completeness": 0}
+    """
+    eval_prompt = f"""あなたは回答品質を評価するレビュアーです。
+以下の質問・参照資料・回答のセットを評価し、JSONのみを出力してください。
+
+[質問]
+{question}
+
+[参照した資料（抜粋）]
+{context_excerpt}
+
+[生成した回答]
+{answer}
+
+評価基準:
+- accuracy  (正確性 0〜100): 回答が参照資料の内容に忠実か。資料に根拠のある記述が多いほど高い。
+- completeness (網羅性 0〜100): 質問に対して必要な情報を過不足なく含んでいるか。
+
+出力形式（JSON のみ、説明文は不要）:
+{{"accuracy": <整数>, "completeness": <整数>}}"""
+
+    try:
+        response = llm.invoke([{"role": "user", "content": eval_prompt}]).content
+        match = re.search(r'\{[^}]+\}', response)
+        if match:
+            data = json.loads(match.group())
+            return {
+                "accuracy": max(0, min(100, int(data.get("accuracy", 0)))),
+                "completeness": max(0, min(100, int(data.get("completeness", 0)))),
+                "_prompt": eval_prompt,
+            }
+    except Exception as e:
+        print(f"[Agent] 自己評価失敗: {e}")
+
+    return {"accuracy": 0, "completeness": 0, "_prompt": eval_prompt}
 
 
 def summarize_context(llm, context: str, question: str) -> str:
@@ -38,28 +82,42 @@ def agent_answer(
     context: str,
     rounds: int = 0,
     progress: Optional[Callable[[str, int, int], None]] = None,
-) -> str:
+) -> dict:
     """
     高速化版agent_answer:
     - contextが短い場合（1500トークン未満）は要約をスキップ
     - 改善ラウンドはデフォルト0（本番では無効化推奨）
     - 改善時はcontextを再送せず会話履歴のみ使用
     - LLM呼び出し回数を最小化（1〜2回で完結）
+
+    Returns:
+        dict: {answer, loops, tokens}
     """
     start_time = time.time()
-    
+    total_tokens = 0
+
     # contextの長さをトークン数で判定
     try:
         encoding = tiktoken.encoding_for_model("gpt-4")
         context_tokens = len(encoding.encode(context))
-    except:
-        # フォールバック: 1文字=約0.5トークンと仮定
+    except Exception:
+        encoding = None
         context_tokens = len(context) // 2
-    
+
+    def _tok(text: str) -> int:
+        """テキストのトークン数を推定する。"""
+        if encoding is not None:
+            try:
+                return len(encoding.encode(text))
+            except Exception:
+                pass
+        return len(text) // 4
+
     # 1500トークン未満なら要約をスキップ
     needs_summary = context_tokens > 1500
-    
-    total_steps = (1 if needs_summary else 0) + 1 + rounds
+
+    # ステップ数: [圧縮?] + 初回回答 + 改善rounds + 自己評価
+    total_steps = (1 if needs_summary else 0) + 1 + rounds + 1
     step = 0
 
     def tick(label: str, elapsed: float = None):
@@ -76,7 +134,9 @@ def agent_answer(
         tick("コンテキストを圧縮中...")
         context_slim = summarize_context(llm, context, question)
         elapsed = time.time() - step_start
-        print(f"[Agent] コンテキスト圧縮: {elapsed:.2f}秒, {context_tokens}→{len(encoding.encode(context_slim))}トークン")
+        slim_tokens = _tok(context_slim)
+        total_tokens += context_tokens + slim_tokens
+        print(f"[Agent] コンテキスト圧縮: {elapsed:.2f}秒, {context_tokens}→{slim_tokens}トークン")
     else:
         context_slim = context
         print(f"[Agent] コンテキスト圧縮スキップ: {context_tokens}トークン")
@@ -92,10 +152,12 @@ def agent_answer(
 
 [回答]
 """
+    total_tokens += _tok(SYSTEM_PROMPT) + _tok(base_prompt)
     answer = llm.invoke(
         [{"role": "system", "content": SYSTEM_PROMPT},
          {"role": "user", "content": base_prompt}]
     ).content
+    total_tokens += _tok(answer)
     elapsed = time.time() - step_start
     print(f"[Agent] 初回回答: {elapsed:.2f}秒")
 
@@ -103,8 +165,7 @@ def agent_answer(
     for i in range(rounds):
         step_start = time.time()
         tick(f"回答を改善中...({i+1}/{rounds})")
-        
-        # 改善プロンプト（contextは送らず、初回の要点を参照）
+
         unified_prompt = f"""次の回答を自己レビューし、改善点を見つけて書き直してください。
 
 必須ルール:
@@ -121,14 +182,32 @@ def agent_answer(
 
 [改善後の回答]
 """
+        total_tokens += _tok(SYSTEM_PROMPT) + _tok(unified_prompt)
         answer = llm.invoke(
             [{"role": "system", "content": SYSTEM_PROMPT},
              {"role": "user", "content": unified_prompt}]
         ).content
+        total_tokens += _tok(answer)
         elapsed = time.time() - step_start
         print(f"[Agent] 改善ラウンド{i+1}: {elapsed:.2f}秒")
 
+    # 自己評価ステップ
+    step_start = time.time()
+    tick("回答の品質を自己評価中...")
+    context_excerpt = context_slim[:800]  # 評価用に先頭800字を使用
+    eval_result = _self_evaluate(llm, question, context_excerpt, answer)
+    eval_prompt = eval_result.pop("_prompt", "")
+    total_tokens += _tok(eval_prompt) + 20  # 出力JSONは短いので固定で加算
+    elapsed = time.time() - step_start
+    print(f"[Agent] 自己評価: {elapsed:.2f}秒, accuracy={eval_result['accuracy']}, completeness={eval_result['completeness']}")
+
     total_time = time.time() - start_time
-    print(f"[Agent] 合計処理時間: {total_time:.2f}秒")
-    
-    return answer
+    print(f"[Agent] 合計処理時間: {total_time:.2f}秒, 推定トークン: {total_tokens}")
+
+    return {
+        "answer": answer,
+        "loops": rounds,
+        "tokens": total_tokens,
+        "accuracy": eval_result["accuracy"],
+        "completeness": eval_result["completeness"],
+    }

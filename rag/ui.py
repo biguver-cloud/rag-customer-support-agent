@@ -79,6 +79,71 @@ def extract_contact_info_from_citations(citations: list[dict]) -> list[dict]:
 
     return emails
 
+def render_agent_log(agent_log: dict | None) -> None:
+    """
+    サイドバーのエージェント思考ログパネルを描画する。
+
+    agent_log の構造:
+        {
+            "steps": [{"icon": str, "label": str, "status": "pending"|"running"|"done"}],
+            "is_processing": bool,
+            "self_eval": {"accuracy": int, "completeness": int},   # 0-100
+            "exec_meta": {"loops": int, "tokens": int},
+        }
+    """
+    st.markdown("### 🧠 推論ステータス")
+
+    if agent_log is None:
+        st.caption("質問を入力すると、AIの推論プロセスが表示されます。")
+        return
+
+    st.divider()
+
+    # --- 思考ステップ ---
+    for step in agent_log.get("steps", []):
+        status = step.get("status", "pending")
+        label = step.get("label", "")
+        icon = step.get("icon", "⬜")
+
+        if status == "done":
+            st.markdown(f"✅&nbsp; {label}")
+        elif status == "running":
+            st.markdown(f"⏳&nbsp; **{label}**")
+        else:
+            st.markdown(
+                f"<span style='color:#999'>⬜&nbsp; {label}</span>",
+                unsafe_allow_html=True,
+            )
+
+    if agent_log.get("is_processing", True):
+        return  # 処理中はスコアを非表示
+
+    # --- 自己評価スコア ---
+    self_eval = agent_log.get("self_eval")
+    if self_eval is not None:
+        st.divider()
+        st.markdown("### 📊 自己評価スコア")
+
+        accuracy = self_eval.get("accuracy", 0)
+        completeness = self_eval.get("completeness", 0)
+
+        st.caption("正確性 (Accuracy)")
+        st.progress(accuracy / 100, text=f"{accuracy}%")
+        st.caption("網羅性 (Completeness)")
+        st.progress(completeness / 100, text=f"{completeness}%")
+
+    # --- 実行メタデータ ---
+    exec_meta = agent_log.get("exec_meta")
+    if exec_meta is not None:
+        st.divider()
+        st.markdown("### ⚙️ 実行メタデータ")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric("反復回数", f"{exec_meta.get('loops', 0)} 回")
+        with col2:
+            st.metric("トークン数", f"~{exec_meta.get('tokens', 0):,}")
+
+
 def render_contact_guidance(user_text: str, citations: list[dict]):
     trigger_keywords = ["返金", "申請", "請求", "解約", "アカウント", "不具合", "障害", "サポート", "問い合わせ"]
     if not any(k in user_text for k in trigger_keywords):

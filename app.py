@@ -5,12 +5,60 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
 from rag.config import MODEL_NAME, TEMPERATURE, TOP_K, WEAK_SCORE_THRESHOLD, AGENT_ROUNDS
-from rag.prompts import SYSTEM_PROMPT, get_mode_prompt
+from rag.prompts import get_mode_prompt
 from rag.query import guess_category, rewrite_query_for_search
 from rag.vectorstore import open_vectorstore
 from rag.retriever import retrieve_documents_with_score
 from rag.agent import agent_answer
-from rag.ui import render_citations, render_contact_guidance
+from rag.ui import render_citations, render_contact_guidance, render_agent_log
+
+
+# ── 思考ステップの定義 ──────────────────────────────────────────────────────
+THINKING_STEPS: list[tuple[str, str]] = [
+    ("🔍", "質問の意図を分析中..."),
+    ("📄", "関連ドキュメントを検索中..."),
+    ("⚖️", "回答の妥当性を自己検閲中..."),
+    ("✅", "最終回答を生成しました"),
+]
+
+
+def _make_steps(done: int, running: int | None = None) -> list[dict]:
+    """思考ステップのリストを生成する。
+
+    Args:
+        done:    完了済みステップ数（0-indexed: done=2 → steps[0], [1] が done）
+        running: 現在実行中のステップインデックス（None = 実行中なし）
+    """
+    result = []
+    for i, (icon, label) in enumerate(THINKING_STEPS):
+        if i < done:
+            result.append({"icon": "✅", "label": label, "status": "done"})
+        elif i == running:
+            result.append({"icon": icon, "label": label, "status": "running"})
+        else:
+            result.append({"icon": icon, "label": label, "status": "pending"})
+    return result
+
+
+def _show_sidebar(
+    placeholder,
+    done: int,
+    running: int | None = None,
+    is_processing: bool = True,
+    self_eval: dict | None = None,
+    exec_meta: dict | None = None,
+) -> None:
+    """サイドバープレースホルダーを指定状態で更新する。"""
+    data: dict = {"steps": _make_steps(done, running), "is_processing": is_processing}
+    if self_eval is not None:
+        data["self_eval"] = self_eval
+    if exec_meta is not None:
+        data["exec_meta"] = exec_meta
+    with placeholder.container():
+        render_agent_log(data)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
 
 
 @st.cache_resource(show_spinner=False)
@@ -83,6 +131,8 @@ def main():
         st.session_state.display_mode = None
     if "formatted_answers" not in st.session_state:
         st.session_state.formatted_answers = {}
+    if "agent_log" not in st.session_state:
+        st.session_state.agent_log = None
 
     # モードボタンのコールバック
     def _set_call_mode():
@@ -91,27 +141,27 @@ def main():
     def _set_chat_mode():
         st.session_state.display_mode = "chat"
 
-    # サイドバー
-    st.sidebar.markdown("## AIエージェント機能")
-    agent_mode = st.sidebar.selectbox("利用有無", ["利用する", "利用しない"], index=0)
+    # ── サイドバー ────────────────────────────────────────────────────────────
+    with st.sidebar:
+        # 思考ログパネル（プレースホルダー経由でリアルタイム更新）
+        agent_log_placeholder = st.empty()
+        with agent_log_placeholder.container():
+            render_agent_log(st.session_state.agent_log)
 
-    with st.sidebar.expander("⚙️ 詳細", expanded=False):
-        st.markdown("**AIエージェントとは**  \n自己評価・改善を繰り返して、より正確な回答を生成する機能です。\n\n⚠️ 処理時間が長くなる可能性があります。")
+        st.divider()
+        st.markdown("**質問例**")
+        st.markdown("- 解約したい")
+        st.markdown("- 返金条件を教えて")
+        st.markdown("- 請求内容を確認したい")
+    # ─────────────────────────────────────────────────────────────────────────
 
-    # メイン
+    # ── メイン ───────────────────────────────────────────────────────────────
     st.markdown("<h1 style='text-align:center; margin-bottom: 0.2em;'>問い合わせ対応自動化AIエージェント</h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align:center; color: #666; margin-top: -10px; margin-bottom: 20px;'><b>社内資料・PDFから問い合わせ対応を自動化するAI</b></p>", unsafe_allow_html=True)
     st.info("📋 資料に基づいた正確な回答をお届けします。解約・返金・請求など、よくある質問にすぐに対応いたします。")
 
-    # サンプル質問の表示（初回のみ）
     if "messages" not in st.session_state:
         st.session_state.messages = []
-    
-    st.sidebar.markdown("---")
-    st.sidebar.markdown("**質問例**")
-    st.sidebar.markdown("- 解約したい")
-    st.sidebar.markdown("- 返金条件を教えて")
-    st.sidebar.markdown("- 請求内容を確認したい")
 
     # チャット履歴（無制限に増えるとメモリを食うので上限をつける）
     MAX_MESSAGES = 20
@@ -172,16 +222,20 @@ def main():
 
     # 新しい質問は履歴に追加済みなので履歴ループで表示される
 
+    # Step 0: 質問の意図を分析中
+    _show_sidebar(agent_log_placeholder, done=0, running=0)
+
     with st.chat_message("assistant", avatar=safe_avatar(ai_icon_path)):
         with st.spinner("PDFから検索して回答中..."):
             try:
-                # 毎回ロードしない（ここが一番効く）
                 db = get_db(persist_dir)
 
                 search_query = rewrite_query_for_search(user_text)
                 category = guess_category(user_text)
 
-                # retriever.pyの関数を使ってスコア付き検索
+                # Step 1: 関連ドキュメントを検索中
+                _show_sidebar(agent_log_placeholder, done=1, running=1)
+
                 search_results = retrieve_documents_with_score(
                     vectorstore=db,
                     query=search_query,
@@ -189,21 +243,17 @@ def main():
                     category=category if category != "unknown" else None
                 )
 
-                # コンテキストとcitationsを構築
                 if not search_results:
                     context = ""
                     citations = []
                     best_score = None
                 else:
-                    # Documentとスコアを分離
                     docs = [doc for doc, _ in search_results]
                     scores = [score for _, score in search_results]
                     best_score = min(scores) if scores else None
 
-                    # LLMに渡すコンテキスト（page_contentを結合）
                     context = "\n\n---\n\n".join([doc.page_content for doc in docs])
 
-                    # UI表示用のcitations（スコアを含める）
                     citations = []
                     for doc, score in search_results:
                         src = doc.metadata.get("source", "")
@@ -211,13 +261,12 @@ def main():
                         cat = doc.metadata.get("category", category if category != "unknown" else "unknown")
                         text = doc.page_content.strip().replace("\n", " ")
                         quote = text[:400] + ("..." if len(text) > 400 else "")
-
                         citations.append({
                             "category": cat,
                             "source": src,
                             "page": (page + 1) if isinstance(page, int) else None,
                             "quote": quote,
-                            "score": score  # スコアを追加
+                            "score": score,
                         })
 
             except Exception as e:
@@ -226,8 +275,13 @@ def main():
                 citations = []
                 best_score = None
 
-            # LLM も毎回作らない
             llm = get_llm()
+
+            # スコア・メタを初期化
+            accuracy = 0
+            completeness = 0
+            agent_loops = 0
+            agent_tokens = 0
 
             if not context.strip():
                 answer = "資料に記載がありません。該当するPDF名や用語（例：解約、返金、請求など）を少し具体的に教えてください。"
@@ -235,29 +289,39 @@ def main():
             elif best_score is not None and best_score < WEAK_SCORE_THRESHOLD:
                 answer = build_followup_questions(user_text)
             else:
-                if agent_mode == "利用する":
-                    status = st.status("AIエージェント実行中...", expanded=True)
-                    prog = st.progress(0)
+                # Step 2: 回答の妥当性を自己検閲中
+                _show_sidebar(agent_log_placeholder, done=2, running=2)
 
-                    def on_progress(label: str, step: int, total: int):
-                        status.update(label=label, state="running")
-                        prog.progress(int(step / total * 100))
+                agent_status = st.status("AIエージェント実行中...", expanded=True)
+                agent_prog = st.progress(0)
 
-                    answer = agent_answer(llm, user_text, context, rounds=AGENT_ROUNDS, progress=on_progress)
-                    status.update(label="完了", state="complete")
-                else:
-                    prompt = f"""[コンテキスト]
-{context}
+                def on_progress(label: str, step: int, total: int):
+                    agent_status.update(label=label, state="running")
+                    agent_prog.progress(int(step / total * 100))
 
-[質問]
-{user_text}
+                result = agent_answer(
+                    llm, user_text, context, rounds=AGENT_ROUNDS, progress=on_progress
+                )
+                agent_status.update(label="完了", state="complete")
 
-[回答]
-"""
-                    answer = llm.invoke(
-                        [{"role": "system", "content": SYSTEM_PROMPT},
-                         {"role": "user", "content": prompt}]
-                    ).content
+                answer = result["answer"]
+                agent_loops = result["loops"]
+                agent_tokens = result["tokens"]
+
+                # LLMによる自己評価スコアを取得
+                accuracy = result["accuracy"]
+                completeness = result["completeness"]
+
+            # Step 3: 全ステップ完了 → サイドバーを最終状態に更新
+            final_log = {
+                "steps": _make_steps(len(THINKING_STEPS)),
+                "is_processing": False,
+                "self_eval": {"accuracy": accuracy, "completeness": completeness},
+                "exec_meta": {"loops": agent_loops, "tokens": agent_tokens},
+            }
+            with agent_log_placeholder.container():
+                render_agent_log(final_log)
+            st.session_state.agent_log = final_log
 
     st.session_state.messages.append({
         "role": "assistant",
@@ -267,10 +331,8 @@ def main():
     })
     st.session_state.messages = st.session_state.messages[-MAX_MESSAGES:]
 
-    # 新規回答を last_answer に保存し、整形キャッシュをリセット
     st.session_state.last_answer = answer
     st.session_state.formatted_answers = {}
-    # ボタンを即座に表示するために再描画
     st.rerun()
 
 
