@@ -115,6 +115,62 @@ https://github.com/user-attachments/assets/891a50f0-a908-47d6-b82d-7496fa31d8d2
 
 ---
 
+## 🏗️ システムアーキテクチャ
+
+```mermaid
+flowchart TD
+    A([👤 ユーザー\n自然言語で質問入力]) --> B
+
+    subgraph FRONTEND ["🖥️ Frontend — app.py"]
+        B[Streamlit\nチャットUI・思考ログ表示]
+    end
+
+    B --> C
+
+    subgraph RAG ["⚙️ RAG Engine"]
+        C[Query Rewriter\n自然言語 → 検索ワードに変換\nrag/query.py]
+        C --> D[Retriever\nベクトル検索 + スコア判定\nrag/retriever.py]
+        D --> E{スコア判定}
+        E -->|スコア低\n一致度不足| F[追加質問を返す\n誤案内防止]
+        E -->|スコア高\n一致度OK| G[Agent\n回答生成 + 自己評価\nrag/agent.py]
+    end
+
+    subgraph DATA ["🗄️ Data Layer"]
+        H[(ChromaDB\nベクトルDB\nstorage/chroma/)]
+        I[OpenAI API\nGPT-4 / Embedding]
+        J[📁 PDF Documents\ndata/ directory\n会社情報・料金・解約・利用ガイド]
+    end
+
+    D <-->|類似度検索| H
+    G <-->|回答生成| I
+    J -->|build_index.py\nPDF読込・ベクトル化| H
+
+    G --> K[引用元付き回答\n+ 自己評価スコア表示]
+    F --> K
+    K --> B
+```
+
+## 🔄 処理フロー
+
+| ステップ | 処理内容 |
+|---|---|
+| ① | ユーザーが自然言語で質問を入力 |
+| ② | Query Rewriterが検索ワードに変換・カテゴリ推定 |
+| ③ | ChromaDBでベクトル類似度検索を実行 |
+| ④ | スコアが低い場合は追加質問を返す（誤案内防止） |
+| ⑤ | スコアが高い場合はAgentが回答を生成 |
+| ⑥ | AIが回答の精度・完全性を自己評価してスコア表示 |
+| ⑦ | 引用元ドキュメント・ページ番号付きで回答を返却 |
+
+## 🎯 精度改善の工夫
+
+- **クエリ書き換え** — 口語的な質問を検索に適した形に自動変換し検索精度を向上
+- **スコア足切り** — 一致度が低い場合は回答せず追加質問を返すことで誤案内を防止
+- **AI自己評価** — 回答の精度・完全性を0〜100でスコアリングして可視化
+- **引用元の明示** — 参照したドキュメント名・ページ番号を回答に付与
+```
+---
+
 ## 🖥 使用環境
 
 * OS：macOS（MacBook環境で開発・動作確認）／Windows・Linux も対応可（仮想環境・依存関係の調整が必要）
