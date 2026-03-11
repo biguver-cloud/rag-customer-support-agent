@@ -1,6 +1,8 @@
 import re
+import json
 from pathlib import Path
 import streamlit as st
+import streamlit.components.v1 as components
 from rag.config import SCORE_TYPE, SHOW_RAW_SCORE
 
 
@@ -24,6 +26,40 @@ def convert_score_to_rating_10(score: float, score_type: str = "distance") -> fl
     
     # 0〜10の範囲に収める
     return max(0.0, min(10.0, rating))
+
+def render_copy_button(text: str) -> None:
+    """チャットモード用のクリップボードコピーボタンを描画する。"""
+    safe_text = json.dumps(text)  # JS変数に安全に埋め込む（クォート衝突を回避）
+    components.html(
+        f"""
+        <style>
+        button {{
+            background-color: #f0f2f6;
+            border: 1px solid #d0d2d6;
+            border-radius: 6px;
+            padding: 6px 16px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #333;
+        }}
+        button:hover {{ background-color: #e0e2e6; }}
+        </style>
+        <button id="copyBtn">📋 文章をコピー</button>
+        <script>
+        var copyText = {safe_text};
+        document.getElementById('copyBtn').addEventListener('click', function() {{
+            navigator.clipboard.writeText(copyText).then(function() {{
+                document.getElementById('copyBtn').innerText = '✅ コピーしました';
+                setTimeout(function() {{
+                    document.getElementById('copyBtn').innerText = '📋 文章をコピー';
+                }}, 2000);
+            }});
+        }});
+        </script>
+        """,
+        height=50,
+    )
+
 
 def render_citations(citations: list[dict]):
     if not citations:

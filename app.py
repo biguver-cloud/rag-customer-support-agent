@@ -10,7 +10,7 @@ from rag.query import guess_category, rewrite_query_for_search
 from rag.vectorstore import open_vectorstore
 from rag.retriever import retrieve_documents_with_score
 from rag.agent import agent_answer
-from rag.ui import render_citations, render_contact_guidance, render_agent_log
+from rag.ui import render_citations, render_contact_guidance, render_agent_log, render_copy_button
 
 
 # ── 思考ステップの定義 ──────────────────────────────────────────────────────
@@ -181,6 +181,8 @@ def main():
             st.session_state.messages.append({
                 "role": "assistant",
                 "content": f"**【{label}】**\n\n{formatted}",
+                "mode": mode,
+                "formatted_text": formatted,
             })
             st.session_state.messages = st.session_state.messages[-MAX_MESSAGES:]
         st.session_state.display_mode = None
@@ -198,6 +200,8 @@ def main():
         avatar = safe_avatar(user_icon_path) if m["role"] == "user" else safe_avatar(ai_icon_path)
         with st.chat_message(m["role"], avatar=avatar):
             st.markdown(m["content"])
+            if m.get("mode") == "chat":
+                render_copy_button(m["formatted_text"])
             if i == last_rag_idx:
                 render_citations(m.get("citations", []))
                 render_contact_guidance(m.get("user_text", ""), m.get("citations", []))
