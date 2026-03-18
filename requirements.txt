@@ -8,3 +8,4 @@ langchain-text-splitters
 python-dotenv
 streamlit
 tiktoken
+rank_bm25

@@ -9,38 +9,40 @@ from langchain_openai import ChatOpenAI
 from rag.config import MODEL_NAME, TEMPERATURE, TOP_K, WEAK_SCORE_THRESHOLD, AGENT_ROUNDS
 from rag.prompts import get_mode_prompt
 from rag.query import guess_category, rewrite_query_for_search
-from rag.vectorstore import open_vectorstore
-from rag.retriever import retrieve_documents_with_score
+from rag.vectorstore import open_vectorstore, hybrid_retrieve_with_score
 from rag.agent import agent_answer
-from rag.ui import render_citations, render_contact_guidance, render_agent_log, render_copy_button
+from rag.ui import render_citations, render_agent_log, render_copy_button
 
 
-LOG_PATH = Path(__file__).resolve().parent / "logs" / "chat_log.csv"
+def _log_path() -> Path:
+    filename = datetime.now().strftime("チャットログ_%Y_%m_%d.csv")
+    return Path(__file__).resolve().parent / "logs" / filename
 LOG_HEADERS = [
-    "timestamp", "question", "answer", "category",
-    "best_score", "accuracy", "completeness",
-    "agent_loops", "agent_tokens", "sources",
+    "日時", "質問", "回答", "カテゴリ",
+    "最高スコア", "正確性", "完全性",
+    "エージェント実行回数", "使用トークン数", "参照資料",
 ]
 
 
 def save_log(question: str, answer: str, category: str, best_score, accuracy: int,
              completeness: int, agent_loops: int, agent_tokens: int, citations: list) -> None:
-    LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
-    write_header = not LOG_PATH.exists()
+    log_path = _log_path()
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    write_header = not log_path.exists()
     sources = "; ".join({c["source"] for c in citations if c.get("source")})
     row = {
-        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "question": question,
-        "answer": answer,
-        "category": category,
-        "best_score": round(best_score, 4) if best_score is not None else "",
-        "accuracy": accuracy,
-        "completeness": completeness,
-        "agent_loops": agent_loops,
-        "agent_tokens": agent_tokens,
-        "sources": sources,
+        "日時": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "質問": question,
+        "回答": answer,
+        "カテゴリ": category,
+        "最高スコア": round(best_score, 4) if best_score is not None else "",
+        "正確性": accuracy,
+        "完全性": completeness,
+        "エージェント実行回数": agent_loops,
+        "使用トークン数": agent_tokens,
+        "参照資料": sources,
     }
-    with open(LOG_PATH, "a", newline="", encoding="utf-8-sig") as f:
+    with open(log_path, "a", newline="", encoding="utf-8-sig") as f:
         writer = csv.DictWriter(f, fieldnames=LOG_HEADERS)
         if write_header:
             writer.writeheader()
@@ -190,12 +192,13 @@ def main():
 
         st.divider()
         st.markdown("**ログ出力**")
-        if LOG_PATH.exists():
-            with open(LOG_PATH, "rb") as f:
+        log_path = _log_path()
+        if log_path.exists():
+            with open(log_path, "rb") as f:
                 st.download_button(
                     label="📥 CSVダウンロード",
                     data=f,
-                    file_name="chat_log.csv",
+                    file_name=log_path.name,
                     mime="text/csv",
                     use_container_width=True,
                 )
@@ -252,7 +255,7 @@ def main():
                 render_copy_button(m["formatted_text"])
             if i == last_rag_idx:
                 render_citations(m.get("citations", []))
-                render_contact_guidance(m.get("user_text", ""), m.get("citations", []))
+                # render_contact_guidance(m.get("user_text", ""), m.get("citations", []))
 
     # モードボタン（チャット入力欄の直上に固定表示）
     if st.session_state.last_answer:
@@ -289,18 +292,19 @@ def main():
         with st.spinner("PDFから検索して回答中..."):
             try:
                 db = get_db(persist_dir)
+                llm = get_llm()
 
-                search_query = rewrite_query_for_search(user_text)
-                category = guess_category(user_text)
+                search_query = rewrite_query_for_search(user_text, llm=llm)
+                category = guess_category(user_text, llm=llm)
 
                 # Step 1: 関連ドキュメントを検索中
                 _show_sidebar(agent_log_placeholder, done=1, running=1)
 
-                search_results = retrieve_documents_with_score(
-                    vectorstore=db,
+                search_results = hybrid_retrieve_with_score(
+                    db=db,
                     query=search_query,
                     k=TOP_K,
-                    category=category if category != "unknown" else None
+                    category=category,
                 )
 
                 if not search_results:
@@ -330,12 +334,12 @@ def main():
                         })
 
             except Exception as e:
-                st.error(f"検索中にエラーが発生しました: {str(e)}")
+                import traceback
+                st.error(f"検索中にエラーが発生しました: {type(e).__name__}: {str(e)}")
+                st.code(traceback.format_exc())
                 context = ""
                 citations = []
                 best_score = None
-
-            llm = get_llm()
 
             if not context.strip():
                 answer = "資料に記載がありません。該当するPDF名や用語（例：解約、返金、請求など）を少し具体的に教えてください。"
