@@ -1,4 +1,6 @@
 ﻿import os
+import csv
+from datetime import datetime
 from pathlib import Path
 import streamlit as st
 from dotenv import load_dotenv
@@ -11,6 +13,38 @@ from rag.vectorstore import open_vectorstore
 from rag.retriever import retrieve_documents_with_score
 from rag.agent import agent_answer
 from rag.ui import render_citations, render_contact_guidance, render_agent_log, render_copy_button
+
+
+LOG_PATH = Path(__file__).resolve().parent / "logs" / "chat_log.csv"
+LOG_HEADERS = [
+    "timestamp", "question", "answer", "category",
+    "best_score", "accuracy", "completeness",
+    "agent_loops", "agent_tokens", "sources",
+]
+
+
+def save_log(question: str, answer: str, category: str, best_score, accuracy: int,
+             completeness: int, agent_loops: int, agent_tokens: int, citations: list) -> None:
+    LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+    write_header = not LOG_PATH.exists()
+    sources = "; ".join({c["source"] for c in citations if c.get("source")})
+    row = {
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "question": question,
+        "answer": answer,
+        "category": category,
+        "best_score": round(best_score, 4) if best_score is not None else "",
+        "accuracy": accuracy,
+        "completeness": completeness,
+        "agent_loops": agent_loops,
+        "agent_tokens": agent_tokens,
+        "sources": sources,
+    }
+    with open(LOG_PATH, "a", newline="", encoding="utf-8-sig") as f:
+        writer = csv.DictWriter(f, fieldnames=LOG_HEADERS)
+        if write_header:
+            writer.writeheader()
+        writer.writerow(row)
 
 
 # ── 思考ステップの定義 ──────────────────────────────────────────────────────
@@ -153,6 +187,20 @@ def main():
         st.markdown("- 解約したい")
         st.markdown("- 返金条件を教えて")
         st.markdown("- 請求内容を確認したい")
+
+        st.divider()
+        st.markdown("**ログ出力**")
+        if LOG_PATH.exists():
+            with open(LOG_PATH, "rb") as f:
+                st.download_button(
+                    label="📥 CSVダウンロード",
+                    data=f,
+                    file_name="chat_log.csv",
+                    mime="text/csv",
+                    use_container_width=True,
+                )
+        else:
+            st.caption("まだログがありません")
     # ─────────────────────────────────────────────────────────────────────────
 
     # ── メイン ───────────────────────────────────────────────────────────────
@@ -226,6 +274,14 @@ def main():
 
     # 新しい質問は履歴に追加済みなので履歴ループで表示される
 
+    category = ""
+    best_score = None
+    accuracy = 0
+    completeness = 0
+    agent_loops = 0
+    agent_tokens = 0
+    citations = []
+
     # Step 0: 質問の意図を分析中
     _show_sidebar(agent_log_placeholder, done=0, running=0)
 
@@ -281,12 +337,6 @@ def main():
 
             llm = get_llm()
 
-            # スコア・メタを初期化
-            accuracy = 0
-            completeness = 0
-            agent_loops = 0
-            agent_tokens = 0
-
             if not context.strip():
                 answer = "資料に記載がありません。該当するPDF名や用語（例：解約、返金、請求など）を少し具体的に教えてください。"
                 citations = []
@@ -326,6 +376,18 @@ def main():
             with agent_log_placeholder.container():
                 render_agent_log(final_log)
             st.session_state.agent_log = final_log
+
+    save_log(
+        question=user_text,
+        answer=answer,
+        category=category,
+        best_score=best_score,
+        accuracy=accuracy,
+        completeness=completeness,
+        agent_loops=agent_loops,
+        agent_tokens=agent_tokens,
+        citations=citations,
+    )
 
     st.session_state.messages.append({
         "role": "assistant",

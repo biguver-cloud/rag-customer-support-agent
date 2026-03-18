@@ -1,0 +1,11 @@
+﻿timestamp,question,answer,category,best_score,accuracy,completeness,agent_loops,agent_tokens,sources
+2026-03-18 14:13:31,解約したい,"解約は管理画面からのみ受け付けています。以下の手順で手続きを行ってください。
+
+【手順】
+1. 管理画面にログイン
+2. 「契約情報」または「プラン管理」画面を開く
+3. 「解約する」を選択し、画面の案内に従って手続きを完了
+
+注意点:
+- 電話・メールでの解約受付は行っていません。
+- 解約完了後、登録メールアドレス宛に確認メールが送信されます。",service,0.891,100,100,0,2570,C:\Users\User\Desktop\portfolio\data\service\解約について.pdf
