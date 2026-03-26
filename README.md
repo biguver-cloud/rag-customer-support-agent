@@ -85,8 +85,13 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、
 
 ## 🎬 デモ動画
 
-[https://github.com/user-attachments/assets/51b4a34a-98df-40b0-8c7f-5d52059c8ebb](https://github.com/user-attachments/assets/a58e3821-5bd1-4628-abd2-e75b483e95a1
-)
+▼質問 → 回答フロー
+
+https://github.com/user-attachments/assets/09b27d8c-bafe-4760-8d4e-d2710fd66f32
+
+▼モード別機能
+
+https://github.com/user-attachments/assets/a8828b2f-cff0-4631-8615-f3369f0e04f4
 
 ---
 
