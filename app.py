@@ -244,7 +244,7 @@ def main():
     # citations を持つ最後の assistant メッセージのインデックスを特定
     last_rag_idx = next(
         (i for i, m in reversed(list(enumerate(messages_to_show)))
-         if m["role"] == "assistant" and "citations" in m),
+            if m["role"] == "assistant" and "citations" in m),
         None
     )
     for i, m in enumerate(messages_to_show):
@@ -344,7 +344,7 @@ def main():
             if not context.strip():
                 answer = "資料に記載がありません。該当するPDF名や用語（例：解約、返金、請求など）を少し具体的に教えてください。"
                 citations = []
-            elif best_score is not None and best_score < WEAK_SCORE_THRESHOLD:
+            elif best_score is not None and best_score > WEAK_SCORE_THRESHOLD:
                 answer = build_followup_questions(user_text)
             else:
                 # Step 2: 回答の妥当性を自己検閲中
