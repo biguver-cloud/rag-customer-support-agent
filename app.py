@@ -250,9 +250,18 @@ def main():
     for i, m in enumerate(messages_to_show):
         avatar = safe_avatar(user_icon_path) if m["role"] == "user" else safe_avatar(ai_icon_path)
         with st.chat_message(m["role"], avatar=avatar):
-            st.markdown(m["content"])
-            if m.get("mode") == "chat":
+            if m.get("mode") == "call":
+                st.markdown("**【📞 コールモード】**")
+                formatted_html = m["formatted_text"].replace("\n", "<br>")
+                st.markdown(
+                    f'<div style="font-size:0.875rem; line-height:1.8; color:inherit">{formatted_html}</div>',
+                    unsafe_allow_html=True,
+                )
+            elif m.get("mode") == "chat":
+                st.markdown(m["content"])
                 render_copy_button(m["formatted_text"])
+            else:
+                st.markdown(m["content"])
             if i == last_rag_idx:
                 render_citations(m.get("citations", []))
                 # render_contact_guidance(m.get("user_text", ""), m.get("citations", []))

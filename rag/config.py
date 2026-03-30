@@ -5,7 +5,7 @@ MODEL_NAME = "gpt-4o-mini"
 TEMPERATURE = 0.0
 
 # 検索設定
-TOP_K = 5
+TOP_K = 8
 WEAK_SCORE_THRESHOLD = 1.2  # スコアがこれ以上なら補助質問を出す（距離ベース: 大きいほど無関係）
 
 # スコア変換設定

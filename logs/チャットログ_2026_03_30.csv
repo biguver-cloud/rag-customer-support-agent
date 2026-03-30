@@ -1,0 +1,67 @@
+﻿日時,質問,回答,カテゴリ,最高スコア,正確性,完全性,エージェント実行回数,使用トークン数,参照資料
+2026-03-30 15:58:26,返金条件を教えて,"返金条件については以下の通りです。
+
+- 返金は行わない（既に支払済みの料金について）。
+- 返金可否の判断は契約状況や利用履歴に依存。 
+
+資料に記載がありません。",service,1.067,80,70,0,3452,c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\アカウント.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\問い合わせ対応方針.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\請求.pdf
+2026-03-30 16:02:09,返金条件を教えて,"返金条件については以下の通りです。
+
+- 返金は行わない（既に支払済みの料金について）。
+- 返金可否の判断は契約状況や利用履歴に依存。 
+
+資料に記載がありません。",service,1.0671,80,70,0,3452,c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\請求.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\アカウント.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\問い合わせ対応方針.pdf
+2026-03-30 16:07:25,返金条件を教えて,"返金条件は以下の通りです。
+
+- 原則として返金は行わない。
+- 既に支払済みの料金については返金しない。
+- 解約による残り期間分の返金はない。
+- 利用していない月でも返金は行わない。
+- ダウングレードによる返金は行わない。
+- 返金対象となる例外ケース:
+  - 重大なシステム障害
+  - 明らかな請求処理上の不備
+- 返金申請は管理画面内の問い合わせフォームまたはメールで行う。",service,0.9568,100,100,0,5177,c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\料金プラン.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\アカウント.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\請求.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\問い合わせ対応方針.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\返金ポリシー.pdf
+2026-03-30 16:08:16,解約したい,解約は契約者本人による手続きが必要です。管理画面から手続きを行ってください。解約はいつでも申請可能で、次回更新日から適用されます。解約手続き完了後も契約期間の終了日まではサービスを利用できます。電話やメールでの解約は受け付けていませんのでご注意ください。,service,0.826,90,80,0,4907,c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\解約について.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\問い合わせ対応方針.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\サービス機能概要.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\アカウント.pdf
+2026-03-30 16:13:09,解約したい,解約は契約者本人による手続きが必要です。管理画面から手続きを行ってください。電話やメールでの解約は受け付けていません。解約手続き完了後も契約期間の終了日まではサービスを利用可能です。,service,0.826,100,80,0,4783,c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\サービス機能概要.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\アカウント.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\解約について.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\問い合わせ対応方針.pdf
+2026-03-30 16:24:51,解約したい,"1. **結論**：解約は契約者本人が管理画面から手続きする必要があります。
+2. **詳細**：
+   - 解約は契約者本人による手続きが必要。
+   - 解約はいつでも申請可能。
+   - 解約手続き完了後も契約期間の終了日まではサービス利用可能。
+   - 解約は次回更新日から適用される。
+   - 日割りでの解約は行っていない。
+   - 無料トライアル期間中はいつでも解約可能で、トライアル内に解約すれば料金は発生しない。
+   - 解約後は管理画面へのログインができなくなる。
+   - 解約理由の入力は任意。
+   - 解約は管理画面からのみ受け付け、電話・メールでの解約は不可。
+   - 解約完了後、確認メールが送信される。
+3. ※ 解約手続きの具体的な方法については資料に記載がありません。",service,0.826,100,90,0,5418,c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\サービス機能概要.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\解約について.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\問い合わせ対応方針.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\アカウント.pdf
+2026-03-30 16:27:30,解約方法を教えて下さい。,"1. **結論**：解約は契約者本人が管理画面から手続きする必要があります。
+2. **詳細**：
+   - 解約は契約者本人による手続きが必要。
+   - 解約は管理画面からのみ受け付け。
+   - 解約申請後も契約期間の終了日まではサービス利用可能。
+   - 解約は次回更新日から適用される。
+   - 日割りでの解約は行っていない。
+   - 無料トライアル期間中はいつでも解約可能で、料金は発生しない。
+   - 解約後は管理画面へのログインができなくなる。
+   - 解約理由の入力は任意。
+   - 解約完了後、確認メールが送信される。
+3. ※ 解約手続きの具体的な手順については資料に記載がありません。",service,0.8184,100,90,0,5224,c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\アカウント.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\解約について.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\問い合わせ対応方針.pdf
+2026-03-30 16:30:27,解約したい,"解約手続きは契約者本人が管理画面から行う必要があります。手順は以下の通りです。
+
+1. 管理画面にログインする。
+2. 解約手続きのメニューを選択する。
+3. 解約理由を入力（任意）し、手続きを完了させる。
+
+※解約はいつでも申請可能ですが、次回更新日から適用されます。解約後は管理画面へのログインができなくなります。",service,0.826,100,100,0,4983,c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\アカウント.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\問い合わせ対応方針.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\解約について.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\サービス機能概要.pdf
+2026-03-30 16:30:57,返金条件を教えて,"返金は原則として契約期間途中での解約によるものは行われません。返金対象外のケースは以下の通りです。
+
+1. 契約期間途中での解約
+2. 日割り計算による返金の要望
+3. 利用開始後の操作ミスや利用頻度の低下
+4. お客様都合による利用中止
+5. プラン変更（ダウングレード）に伴う差額返金
+
+返金対象となる例外は、SampleDesk側の重大なシステム障害や請求処理上の不備です。返金申請は管理画面内の問い合わせフォームまたはメール（support@sampledesk.example）で行ってください。※返金の自動処理は行っていません。",service,0.8662,100,100,0,5597,c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\返金ポリシー.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\問い合わせ対応方針.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\請求.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\アカウント.pdf
