@@ -1,0 +1,14 @@
+﻿日時,質問,回答,カテゴリ,最高スコア,正確性,完全性,エージェント実行回数,使用トークン数,参照資料
+2026-03-31 16:29:00,解約したい,"解約手続きは契約者本人による申請が必要です。以下の手順で解約を行ってください。
+
+1. 解約申請を行う。
+2. 解約理由の入力は任意ですが、必要に応じて記入してください。
+
+※解約手続き完了後も契約期間の終了日まではサービスを利用可能です。また、解約後は管理画面へのログインができなくなりますので、必要なデータは事前に保存してください。",service,0.826,90,80,0,5149,c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\問い合わせ対応方針.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\サービス機能概要.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\アカウント.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\解約について.pdf
+2026-03-31 16:31:10,解約方法を教えて下さい。,"解約は契約者本人が管理画面から手続きする必要があります。手順は以下の通りです。
+
+1. 管理画面にログインする。
+2. 解約手続きのメニューを選択する。
+3. 解約理由を入力（任意）し、手続きを完了する。
+
+※解約申請後も契約期間の終了日まではサービスを利用可能です。解約後は管理画面へのログインができなくなります。",service,0.8183,100,100,0,4941,c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\アカウント.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\解約について.pdf; c:\Users\User\Desktop\portfolio\rag-customer-support-agent\data\service\問い合わせ対応方針.pdf
