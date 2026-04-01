@@ -15,7 +15,7 @@ from rag.ui import render_citations, render_agent_log, render_copy_button
 
 
 def _log_path() -> Path:
-    filename = datetime.now().strftime("チャットログ_%Y_%m_%d.csv")
+    filename = datetime.now().strftime("chat_log_%Y_%m_%d.csv")
     return Path(__file__).resolve().parent / "logs" / filename
 LOG_HEADERS = [
     "日時", "質問", "回答", "カテゴリ",
