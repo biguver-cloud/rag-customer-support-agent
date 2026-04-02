@@ -135,38 +135,7 @@ https://github.com/user-attachments/assets/a8828b2f-cff0-4631-8615-f3369f0e04f4
 
 ## 🏗️ システムアーキテクチャ
 
-```mermaid
-flowchart TD
-    A([👤 ユーザー\n自然言語で質問入力]) --> B
-
-    subgraph FRONTEND ["🖥️ Frontend — app.py"]
-        B[Streamlit\nチャットUI・思考ログ表示]
-    end
-
-    B --> C
-
-    subgraph RAG ["⚙️ RAG Engine"]
-        C[Query Rewriter\n自然言語 → 検索ワードに変換\nrag/query.py]
-        C --> D[Retriever\nベクトル検索 + スコア判定\nrag/retriever.py]
-        D --> E{スコア判定}
-        E -->|スコア低\n一致度不足| F[追加質問を返す\n誤案内防止]
-        E -->|スコア高\n一致度OK| G[Agent\n回答生成 + 自己評価\nrag/agent.py]
-    end
-
-    subgraph DATA ["🗄️ Data Layer"]
-        H[(ChromaDB\nベクトルDB\nstorage/chroma/)]
-        I[OpenAI API\nGPT-4 / Embedding]
-        J[📁 PDF Documents\ndata/ directory\n会社情報・料金・解約・利用ガイド]
-    end
-
-    D <-->|類似度検索| H
-    G <-->|回答生成| I
-    J -->|build_index.py\nPDF読込・ベクトル化| H
-
-    G --> K[引用元付き回答\n+ 自己評価スコア表示]
-    F --> K
-    K --> B
-```
+<img width="1408" height="768" alt="Gemini_Generated_Image_16h6no16h6no16h6" src="https://github.com/user-attachments/assets/cfdee332-3491-43af-a0b1-7fd9b2de9b5a" />
 
 ### 🔄 処理フロー
 
