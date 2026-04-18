@@ -88,22 +88,30 @@ https://github.com/user-attachments/assets/a8828b2f-cff0-4631-8615-f3369f0e04f4
 
 ```
 .
-├── app.py            # Streamlit アプリ本体
-├── build_index.py    # PDF → ベクトルDB作成
-├── config.py         # アプリ全体の設定値を一元管理
-├── requirements.txt  # 依存ライブラリ一覧
+├── app.py              # Streamlit アプリ本体
+├── build_index.py      # PDF → ベクトルDB作成
+├── config.py           # アプリ全体の設定値を一元管理
+├── requirements.txt    # 依存ライブラリ一覧
+├── Dockerfile          # Docker イメージビルド定義
+├── docker-compose.yml  # コンテナ起動設定
+├── .dockerignore       # Docker ビルド除外ファイル
 ├── .gitignore
 ├── data/
-│   ├── company/      # 会社情報（架空）
-│   ├── customer/     # カスタマープロフィール（架空）
-│   └── service/      # 料金・解約・利用ガイド等（架空）
+│   ├── company/        # 会社情報（架空）
+│   ├── customer/       # カスタマープロフィール（架空）
+│   └── service/        # 料金・解約・利用ガイド等（架空）
 ├── rag/
-│   ├── loader.py     # PDFの読み込み処理
-│   ├── retriever.py  # ベクトル検索処理
-│   └── prompt.py     # プロンプト管理
+│   ├── agent.py        # LLM回答生成・自己改善ループ
+│   ├── config.py       # RAGモジュール設定値
+│   ├── loader.py       # PDF読み込み処理
+│   ├── prompts.py      # プロンプトテンプレート管理
+│   ├── query.py        # クエリ前処理・カテゴリ推定
+│   ├── retriever.py    # ベクトル検索処理
+│   ├── ui.py           # Streamlit UIヘルパー
+│   └── vectorstore.py  # ハイブリッド検索（BM25 + ベクトル）
 ├── storage/
-│   └── chroma/       # ChromaDB 永続化データ
-└── images/           # README用画像
+│   └── chroma/         # ChromaDB 永続化データ
+└── images/             # README用画像
 ```
 
 ※ `data/` 配下のPDFは **すべて架空データ** です。
@@ -149,6 +157,7 @@ https://github.com/user-attachments/assets/a8828b2f-cff0-4631-8615-f3369f0e04f4
 - ベクトルDB：ChromaDB
 - 主なライブラリ：LangChain, ChromaDB, PyPDF, Streamlit
 - デプロイ：Streamlit Cloud
+- コンテナ：Docker / Docker Compose
 
 ---
 
@@ -161,7 +170,47 @@ git clone https://github.com/biguver-cloud/rag-customer-support-agent.git
 cd rag-customer-support-agent
 ```
 
-### 2. 仮想環境の作成（任意）
+### 2. 環境変数の設定
+
+`.env` ファイルを作成し、OpenAI APIキーを設定してください。
+
+```env
+OPENAI_API_KEY=your_api_key_here
+```
+
+---
+
+## 🐳 Docker を使った起動（推奨）
+
+### 1. インデックスを作成
+
+```bash
+python build_index.py
+```
+
+### 2. コンテナをビルド＆起動
+
+```bash
+docker compose up --build
+```
+
+ブラウザで以下にアクセスします。
+
+```
+http://localhost:8501
+```
+
+### 停止
+
+```bash
+docker compose down
+```
+
+---
+
+## 💻 ローカルで直接起動する場合
+
+### 1. 仮想環境の作成（任意）
 
 ```bash
 python -m venv venv
@@ -169,18 +218,10 @@ source venv/bin/activate  # Mac/Linux
 # venv\Scripts\activate   # Windows
 ```
 
-### 3. 依存関係をインストール
+### 2. 依存関係をインストール
 
 ```bash
 pip install -r requirements.txt
-```
-
-### 4. 環境変数の設定
-
-`.env` ファイルを作成し、OpenAI APIキーを設定してください。
-
-```env
-OPENAI_API_KEY=your_api_key_here
 ```
 
 ---
@@ -208,6 +249,8 @@ streamlit run app.py
 ```
 http://localhost:8501
 ```
+
+> Docker を使う場合は上記「🐳 Docker を使った起動」を参照してください。
 ---
 
 ## ⚠️ 注意事項
