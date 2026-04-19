@@ -132,7 +132,41 @@ https://github.com/user-attachments/assets/a8828b2f-cff0-4631-8615-f3369f0e04f4
 
 ## 🏗️ システムアーキテクチャ
 
-<img width="1408" height="768" alt="Gemini_Generated_Image_16h6no16h6no16h6" src="https://github.com/user-attachments/assets/cfdee332-3491-43af-a0b1-7fd9b2de9b5a" />
+```mermaid
+graph TD
+    User["👤 ユーザー"]
+
+    subgraph Docker["🐳 Docker コンテナ"]
+        UI["Streamlit UI\napp.py"]
+
+        subgraph RAG["RAG モジュール"]
+            Q["① クエリ前処理\nquery.py\nカテゴリ推定 / クエリリライト"]
+            S["② ハイブリッド検索\nvectorstore.py\nBM25 + ベクトル検索（RRF）"]
+            E["③ 検索結果評価\nretriever.py\nスコア判定 / 低精度フォールバック"]
+            A["④ 回答生成\nagent.py\nコンテキスト圧縮 / 自己改善ループ"]
+            P["⑤ マルチモード出力\nprompts.py\nコールモード / チャットモード"]
+        end
+
+        DB[("ChromaDB\nstorage/chroma")]
+    end
+
+    OAI["☁️ OpenAI API\nGPT-4o-mini\ntext-embedding-3-small"]
+    PDF["📄 PDFデータ\ndata/"]
+
+    User -->|質問入力| UI
+    UI --> Q
+    Q --> S
+    S <-->|ベクトル検索| DB
+    S --> E
+    E --> A
+    A --> P
+    P -->|回答・引用表示| UI
+    UI -->|回答| User
+
+    A <-->|LLM呼び出し| OAI
+    Q <-->|カテゴリ推定| OAI
+    PDF -->|build_index.py| DB
+```
 
 ### 🔄 処理フロー
 
