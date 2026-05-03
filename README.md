@@ -95,6 +95,7 @@ https://github.com/user-attachments/assets/a8828b2f-cff0-4631-8615-f3369f0e04f4
 ├── Dockerfile          # Docker イメージビルド定義
 ├── docker-compose.yml  # コンテナ起動設定
 ├── .dockerignore       # Docker ビルド除外ファイル
+├── .env.example        # 環境変数のテンプレート
 ├── .gitignore
 ├── data/
 │   ├── company/        # 会社情報（架空）
@@ -206,7 +207,11 @@ cd rag-customer-support-agent
 
 ### 2. 環境変数の設定
 
-`.env` ファイルを作成し、OpenAI APIキーを設定してください。
+`.env.example` をコピーして `.env` を作成し、OpenAI APIキーを設定してください。
+
+```bash
+cp .env.example .env
+```
 
 ```env
 OPENAI_API_KEY=your_api_key_here
