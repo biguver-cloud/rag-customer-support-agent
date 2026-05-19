@@ -1,0 +1,18 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        docker build \
+          --build-arg OPENAI_API_KEY=$$OPENAI_API_KEY \
+          -t gcr.io/$PROJECT_ID/rag-support-agent .
+    secretEnv: ['OPENAI_API_KEY']
+
+images:
+  - gcr.io/$PROJECT_ID/rag-support-agent
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/$PROJECT_ID/secrets/OPENAI_API_KEY/versions/latest
+      env: 'OPENAI_API_KEY'

@@ -1,0 +1,13 @@
+.git
+.gitignore
+.env
+.DS_Store
+Thumbs.db
+__pycache__
+*.pyc
+*.pyo
+.venv
+venv
+logs
+GITHUB_RULES.md
+docker-compose.yml
