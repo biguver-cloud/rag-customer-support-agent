@@ -58,6 +58,7 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 ├── requirements.txt    # 依存ライブラリ一覧
 ├── Dockerfile          # Docker イメージビルド定義
 ├── docker-compose.yml  # コンテナ起動設定
+├── cloudbuild.yaml     # Cloud Build 設定（Cloud Run デプロイ用）
 ├── .dockerignore       # Docker ビルド除外ファイル
 ├── .env.example        # 環境変数のテンプレート
 ├── .gitignore
@@ -93,6 +94,8 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 | Document Loader | PDF（pypdf） |
 | 検索方式 | BM25 + ベクトル検索（ハイブリッド） |
 | コンテナ | Docker / Docker Compose |
+| デプロイ | Google Cloud Run |
+| CI/CD | Google Cloud Build |
 
 ---
 
@@ -194,6 +197,38 @@ streamlit run app.py
 
 ブラウザで `http://localhost:8501` にアクセスして利用できます。
 
+### 5. Cloud Run へのデプロイ（GCP）
+
+> Google Cloud SDK（`gcloud`）のインストール・認証が必要です。
+
+**Cloud Build を使ってビルド＆デプロイ（推奨）**
+
+```bash
+# プロジェクトIDを設定
+gcloud config set project YOUR_PROJECT_ID
+
+# Secret Manager に OpenAI API キーを登録（初回のみ）
+echo -n "your_api_key_here" | gcloud secrets create OPENAI_API_KEY --data-file=-
+
+# Cloud Build でイメージをビルドして Container Registry に push
+gcloud builds submit --config cloudbuild.yaml
+
+# Cloud Run へデプロイ
+gcloud run deploy rag-support-agent \
+  --image gcr.io/YOUR_PROJECT_ID/rag-support-agent \
+  --platform managed \
+  --region asia-northeast1 \
+  --allow-unauthenticated \
+  --set-secrets OPENAI_API_KEY=OPENAI_API_KEY:latest
+```
+
+**ポート差異について**
+
+| 環境 | ポート |
+|:---|:---|
+| ローカル（docker compose） | `8501` |
+| Cloud Run | `8080` |
+
 ---
 
 ## 🚀 使い方
@@ -217,6 +252,7 @@ https://github.com/user-attachments/assets/a8828b2f-cff0-4631-8615-f3369f0e04f4
 - ベクトルDB：ChromaDB
 - 主なライブラリ：LangChain, ChromaDB, PyPDF, Streamlit
 - コンテナ：Docker / Docker Compose
+- クラウド：Google Cloud Run / Cloud Build
 
 ---
 
@@ -225,7 +261,6 @@ https://github.com/user-attachments/assets/a8828b2f-cff0-4631-8615-f3369f0e04f4
 - 多言語対応（日本語 / 英語）
 - 認証・利用制限機能の追加
 - 音声通話対応（音声入力 / 音声読み上げ / 通話UI）
-- デプロイ（Cloud Run 等）
 
 ---
 
