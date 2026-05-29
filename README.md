@@ -72,7 +72,7 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 │   ├── loader.py       # PDF読み込み処理
 │   ├── prompts.py      # プロンプトテンプレート管理
 │   ├── query.py        # クエリ前処理・カテゴリ推定
-│   ├── retriever.py    # ベクトル検索処理
+│   ├── retriever.py    # 検索結果評価・スコア判定・フォールバック処理
 │   ├── ui.py           # Streamlit UIヘルパー
 │   └── vectorstore.py  # ハイブリッド検索（BM25 + ベクトル）
 ├── storage/
@@ -109,11 +109,12 @@ graph TD
         UI["Streamlit UI\napp.py"]
 
         subgraph RAG["RAG モジュール"]
-            Q["① クエリ前処理\nquery.py\nカテゴリ推定 / クエリリライト"]
-            S["② ハイブリッド検索\nvectorstore.py\nBM25 + ベクトル検索（RRF）"]
-            E["③ 検索結果評価\nretriever.py\nスコア判定 / 低精度フォールバック"]
-            A["④ 回答生成\nagent.py\nコンテキスト圧縮 / 自己改善ループ"]
-            P["⑤ マルチモード出力\nprompts.py\nコールモード / チャットモード"]
+            Q["② クエリ前処理\nquery.py\nカテゴリ推定 / クエリリライト"]
+            S["③ ハイブリッド検索\nvectorstore.py\nBM25 + ベクトル検索（RRF）"]
+            E["④ 検索結果評価\nretriever.py\nスコア判定 / 低精度フォールバック"]
+            A["⑤ 回答生成\nagent.py\nコンテキスト圧縮 / 自己改善ループ"]
+            SC["⑥ 自己採点\nagent.py\n正確性 / 網羅性スコア"]
+            P["⑦ マルチモード出力\nprompts.py\nコールモード / チャットモード"]
         end
 
         DB[("ChromaDB\nstorage/chroma")]
@@ -128,7 +129,8 @@ graph TD
     S <-->|ベクトル検索| DB
     S --> E
     E --> A
-    A --> P
+    A --> SC
+    SC --> P
     P -->|回答・引用表示| UI
     UI -->|回答| User
 
