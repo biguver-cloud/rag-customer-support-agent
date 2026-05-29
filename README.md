@@ -9,6 +9,33 @@
 
 ---
 
+## 🌐 デモ
+
+**👉 [https://rag-support-agent-498951365205.asia-northeast1.run.app](https://rag-support-agent-498951365205.asia-northeast1.run.app)**
+
+> Google Cloud Run にデプロイ済みです。ブラウザからそのまま動作を確認できます。  
+> ※ 初回アクセス時はコンテナ起動のため、数秒〜十数秒かかる場合があります。  
+> ※ 使用データはすべて架空のサンプルデータです。
+
+**試しに入力できる質問例**
+- `解約したい`
+- `返金条件を教えて`
+- `請求内容を確認したい`
+
+---
+
+## 🚀 使い方
+
+▼質問 → 回答フロー
+
+https://github.com/user-attachments/assets/09b27d8c-bafe-4760-8d4e-d2710fd66f32
+
+▼モード別機能
+
+https://github.com/user-attachments/assets/a8828b2f-cff0-4631-8615-f3369f0e04f4
+
+---
+
 ## 🎓 目的
 
 **一次対応をAIに任せ、業務効率と回答品質を両立させること**が目的です。
@@ -197,7 +224,10 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-ブラウザで `http://localhost:8501` にアクセスして利用できます。
+ブラウザでアクセスして利用できます。
+
+- Docker：`http://localhost:8080`
+- ローカル：`http://localhost:8501`
 
 ### 5. Cloud Run へのデプロイ（GCP）
 
@@ -230,18 +260,6 @@ gcloud run deploy rag-support-agent \
 |:---|:---|
 | ローカル（docker compose） | `8501` |
 | Cloud Run | `8080` |
-
----
-
-## 🚀 使い方
-
-▼質問 → 回答フロー
-
-https://github.com/user-attachments/assets/09b27d8c-bafe-4760-8d4e-d2710fd66f32
-
-▼モード別機能
-
-https://github.com/user-attachments/assets/a8828b2f-cff0-4631-8615-f3369f0e04f4
 
 ---
 
