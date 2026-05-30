@@ -129,16 +129,13 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 ## 🏗️ アーキテクチャ図
 
 ```mermaid
-graph LR
+graph TD
     User["👤 ユーザー"]
 
     subgraph Docker["🐳 Docker コンテナ"]
-        direction TB
         UI["Streamlit UI\napp.py"]
-        DB[("ChromaDB\nstorage/chroma")]
 
         subgraph RAG["RAG モジュール"]
-            direction TB
             Q["② クエリ前処理\nquery.py\nカテゴリ推定 / クエリリライト"]
             S["③ ハイブリッド検索\nvectorstore.py\nBM25 + ベクトル検索（RRF）"]
             E["④ 検索結果評価\nretriever.py\nスコア判定 / 低精度フォールバック"]
@@ -146,6 +143,8 @@ graph LR
             SC["⑥ 自己採点\nagent.py\n正確性 / 網羅性スコア"]
             P["⑦ マルチモード出力\nprompts.py\nコールモード / チャットモード"]
         end
+
+        DB[("ChromaDB\nstorage/chroma")]
     end
 
     OAI["☁️ OpenAI API\nGPT-4o-mini\ntext-embedding-3-small"]
@@ -162,8 +161,8 @@ graph LR
     P -->|回答・引用表示| UI
     UI -->|回答| User
 
-    Q <-->|カテゴリ推定| OAI
-    A <-->|LLM呼び出し| OAI
+    Q -->|カテゴリ推定| OAI
+    A -->|LLM呼び出し| OAI
     PDF -->|build_index.py| DB
 ```
 
