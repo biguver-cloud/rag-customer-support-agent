@@ -85,7 +85,7 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 ├── requirements.txt    # 依存ライブラリ一覧
 ├── Dockerfile          # Docker イメージビルド定義
 ├── docker-compose.yml  # コンテナ起動設定
-├── cloudbuild.yaml     # Cloud Build 設定（Cloud Run デプロイ用）
+├── cloudbuild.yaml     # Cloud Build 設定（イメージビルド・GCRプッシュ用）
 ├── .dockerignore       # Docker ビルド除外ファイル
 ├── .env.example        # 環境変数のテンプレート
 ├── .gitignore
@@ -270,7 +270,8 @@ gcloud run deploy rag-support-agent \
 
 | 環境 | ポート |
 |:---|:---|
-| ローカル（docker compose） | `8501` |
+| ローカル（docker compose） | `8080` |
+| ローカル（直接起動） | `8501` |
 | Cloud Run | `8080` |
 
 ---
