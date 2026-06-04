@@ -6,7 +6,7 @@ TEMPERATURE = 0.0
 
 # 検索設定
 TOP_K = 8
-WEAK_SCORE_THRESHOLD = 1.2  # スコアがこれ以上なら補助質問を出す（距離ベース: 大きいほど無関係）
+WEAK_SCORE_THRESHOLD = 1.5  # スコアがこれ以上なら補助質問を出す（距離ベース: 大きいほど無関係）
 
 # スコア変換設定
 # "similarity": スコアが0〜1で大きいほど良い場合（類似度）
