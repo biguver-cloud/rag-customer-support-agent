@@ -149,6 +149,7 @@ def main():
     if not os.getenv("OPENAI_API_KEY"):
         st.error("OPENAI_API_KEY が .env に設定されていません")
         st.stop()
+    os.environ["OPENAI_API_KEY"] = os.environ["OPENAI_API_KEY"].strip()
 
     # BASE_DIRを絶対パスで固定（相対パスのずれを防ぐ）
     BASE_DIR = Path(__file__).resolve().parent
