@@ -9,11 +9,12 @@ from rag.query import guess_category, rewrite_query_for_search
 class TestGuessCategoryKeyword:
     """キーワード判定（LLM不使用）"""
 
-    def test_service_解約(self):
-        assert guess_category("解約したい") == "service"
+    def test_unknown_解約(self):
+        # 解約・返金ポリシーは company カテゴリのため全カテゴリ検索
+        assert guess_category("解約したい") == "unknown"
 
-    def test_service_返金(self):
-        assert guess_category("返金してほしい") == "service"
+    def test_unknown_返金(self):
+        assert guess_category("返金してほしい") == "unknown"
 
     def test_service_請求(self):
         assert guess_category("今月の請求を確認したい") == "service"
@@ -40,10 +41,10 @@ class TestGuessCategoryKeyword:
         assert guess_category("今日の天気は？") == "unknown"
 
     def test_keyword_wins_over_llm(self):
-        """キーワードで判定できる場合はLLMを呼ばない"""
+        """解約はunknownで返り、LLMを呼ばない"""
         mock_llm = MagicMock()
         result = guess_category("解約したい", llm=mock_llm)
-        assert result == "service"
+        assert result == "unknown"
         mock_llm.invoke.assert_not_called()
 
 

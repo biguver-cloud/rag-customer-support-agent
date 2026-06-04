@@ -7,7 +7,11 @@ def guess_category(question: str, llm=None) -> str:
     if any(k in q for k in ["プロフィール", "顧客", "カスタマー", "ユーザー情報"]):
         return "customer"
 
-    if any(k in q for k in ["解約", "返金", "請求", "支払い", "アカウント", "ログイン", "料金", "プラン", "機能", "利用開始"]):
+    # 解約・返金は company/解約・返金ポリシー.pdf が正源のため全カテゴリを検索
+    if any(k in q for k in ["解約", "返金"]):
+        return "unknown"
+
+    if any(k in q for k in ["請求", "支払い", "アカウント", "ログイン", "料金", "プラン", "機能", "利用開始"]):
         return "service"
 
     if any(k in q for k in ["会社", "概要", "所在地", "沿革", "企業", "問い合わせ対応方針"]):
