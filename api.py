@@ -14,6 +14,10 @@ from rag.vectorstore import open_vectorstore, hybrid_retrieve_with_score
 
 load_dotenv()
 
+# Secret Manager 経由で注入されるキーに改行が混入する場合があるため除去
+if os.getenv("OPENAI_API_KEY"):
+    os.environ["OPENAI_API_KEY"] = os.environ["OPENAI_API_KEY"].strip()
+
 BASE_DIR = Path(__file__).resolve().parent
 persist_dir = BASE_DIR / "storage" / "chroma"
 
