@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 ARG OPENAI_API_KEY
-RUN OPENAI_API_KEY=$(printf '%s' "$OPENAI_API_KEY" | tr -d '\r') python build_index.py
+RUN OPENAI_API_KEY=$(printf '%s' "$OPENAI_API_KEY" | tr -d '\r\n') python build_index.py
 
 ENV PORT=8080
 EXPOSE $PORT
