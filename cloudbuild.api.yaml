@@ -7,6 +7,9 @@ steps:
         docker build -f Dockerfile.api --build-arg "OPENAI_API_KEY=$$OPENAI_API_KEY" -t gcr.io/$PROJECT_ID/rag-support-api .
     secretEnv: ['OPENAI_API_KEY']
 
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/rag-support-api']
+
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - run
