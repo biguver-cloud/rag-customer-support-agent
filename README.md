@@ -126,8 +126,7 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 | 検索方式 | BM25 + ベクトル検索（ハイブリッド） |
 | コンテナ | Docker / Docker Compose |
 | デプロイ | Google Cloud Run |
-| CI（自動テスト） | GitHub Actions（push 時に pytest を自動実行） |
-| CD（自動デプロイ） | Google Cloud Build トリガー（main push で自動デプロイ） |
+| CI/CD | Google Cloud Build |
 | テスト | pytest |
 
 ---
