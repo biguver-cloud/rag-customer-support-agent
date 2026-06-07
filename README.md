@@ -80,15 +80,12 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 ```
 .
 ├── app.py                  # Streamlit アプリ本体
-├── api.py                  # FastAPI エンドポイント（POST /chat）
 ├── build_index.py          # PDF → ベクトルDB作成
 ├── config.py               # アプリ全体の設定値を一元管理
 ├── requirements.txt        # 依存ライブラリ一覧
-├── Dockerfile              # Streamlit 用 Docker イメージ定義
-├── Dockerfile.api          # FastAPI 用 Docker イメージ定義
+├── Dockerfile              # Docker イメージビルド定義
 ├── docker-compose.yml      # コンテナ起動設定
-├── cloudbuild.yaml         # Cloud Build 設定（Streamlit：ビルド→デプロイ）
-├── cloudbuild.api.yaml     # Cloud Build 設定（FastAPI：ビルド→デプロイ）
+├── cloudbuild.yaml         # Cloud Build 設定（ビルド→デプロイ）
 ├── .dockerignore           # Docker ビルド除外ファイル
 ├── .env.example            # 環境変数のテンプレート
 ├── .gitignore
@@ -123,7 +120,6 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 | 役割 | 技術 |
 |---|---|
 | UI | Streamlit |
-| API | FastAPI + uvicorn |
 | LLM | OpenAI API（via LangChain） |
 | Embedding / Vector DB | ChromaDB |
 | Document Loader | PDF（pypdf） |
@@ -140,26 +136,22 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 ```mermaid
 graph TD
     User["👤 ユーザー"]
-    APIClient["🔌 API クライアント"]
 
-    subgraph CR1["☁️ Cloud Run：Streamlit"]
+    subgraph Docker["🐳 Docker コンテナ"]
         UI["Streamlit UI\napp.py"]
+
+        subgraph Phase1["フェーズ1：RAG回答生成（自動）"]
+            Q["① クエリ前処理\nquery.py\nカテゴリ推定 / クエリリライト"]
+            S["② ハイブリッド検索\nvectorstore.py\nBM25 + ベクトル検索（RRF）"]
+            E["③ 検索結果評価\nretriever.py\nスコア判定 / 低精度フォールバック"]
+            A["④ 回答生成\nagent.py\nコンテキスト圧縮 / 自己改善ループ"]
+            SC["⑤ 自己採点\nagent.py\n正確性 / 網羅性スコア"]
+        end
 
         subgraph Phase2["フェーズ2：モード整形（ユーザー任意選択）"]
             P["⑥ 整形プロンプト生成\nprompts.py\nコールモード / チャットモード"]
         end
-    end
 
-    subgraph CR2["☁️ Cloud Run：FastAPI"]
-        FAPI["FastAPI\napi.py\nPOST /chat  |  GET /docs"]
-    end
-
-    subgraph Phase1["フェーズ1：RAG回答生成（Streamlit・FastAPI 共通）"]
-        Q["① クエリ前処理\nquery.py\nカテゴリ推定 / クエリリライト"]
-        S["② ハイブリッド検索\nvectorstore.py\nBM25 + ベクトル検索（RRF）"]
-        E["③ 検索結果評価\nretriever.py\nスコア判定 / 低精度フォールバック"]
-        A["④ 回答生成\nagent.py\nコンテキスト圧縮 / 自己改善ループ"]
-        SC["⑤ 自己採点\nagent.py\n正確性 / 網羅性スコア"]
         DB[("ChromaDB\nstorage/chroma")]
     end
 
@@ -167,23 +159,16 @@ graph TD
     PDF["📄 PDFデータ\ndata/"]
 
     User -->|質問入力| UI
-    APIClient -->|POST /chat| FAPI
-
     UI --> Q
-    FAPI --> Q
     Q --> S
     S <-->|ベクトル検索| DB
     S --> E
     E --> A
     A --> SC
-
     SC -->|RAG回答 + 引用表示| UI
-    SC -->|JSON レスポンス| FAPI
-
     UI -->|モードボタン選択| P
     P -->|整形済み回答表示| UI
     UI -->|回答| User
-    FAPI -->|回答 JSON| APIClient
 
     A <-->|LLM呼び出し①| OAI
     Q <-->|カテゴリ推定| OAI
@@ -265,7 +250,7 @@ streamlit run app.py
 
 > Google Cloud SDK（`gcloud`）のインストール・認証が必要です。
 
-**Streamlit アプリ（ビルド → デプロイまで自動）**
+**ビルド → デプロイまで自動（CI/CD）**
 
 ```bash
 # Secret Manager に OpenAI API キーを登録（初回のみ）
@@ -275,13 +260,7 @@ echo -n "your_api_key_here" | gcloud secrets create OPENAI_API_KEY --data-file=-
 gcloud builds submit --config cloudbuild.yaml
 ```
 
-**FastAPI（ビルド → デプロイまで自動）**
-
-```bash
-gcloud builds submit --config cloudbuild.api.yaml
-```
-
-> `cloudbuild.yaml` / `cloudbuild.api.yaml` には ビルド・Container Registry へのプッシュ・Cloud Run へのデプロイ が1コマンドで完結するよう設定済みです（CI/CD）。
+> `cloudbuild.yaml` にはビルド・Container Registry へのプッシュ・Cloud Run へのデプロイが1コマンドで完結するよう設定済みです（CI/CD）。
 
 **ポート差異について**
 
@@ -291,13 +270,6 @@ gcloud builds submit --config cloudbuild.api.yaml
 | ローカル（直接起動） | `8501` |
 | Cloud Run | `8080` |
 
-**FastAPI エンドポイント**
-
-| URL | 説明 |
-|:---|:---|
-| `GET  /` | ヘルスチェック |
-| `POST /chat` | 問い合わせ回答（RAGパイプライン） |
-| `GET  /docs` | Swagger UI（APIドキュメント・動作確認） |
 
 ---
 
