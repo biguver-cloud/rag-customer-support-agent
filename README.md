@@ -121,7 +121,8 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 |---|---|
 | UI | Streamlit |
 | LLM | OpenAI API（via LangChain） |
-| Embedding / Vector DB | ChromaDB |
+| Embedding | OpenAI text-embedding-3-small |
+| Vector DB | ChromaDB |
 | Document Loader | PDF（pypdf） |
 | 検索方式 | BM25 + ベクトル検索（ハイブリッド） |
 | コンテナ | Docker / Docker Compose |
