@@ -126,7 +126,8 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 | 検索方式 | BM25 + ベクトル検索（ハイブリッド） |
 | コンテナ | Docker / Docker Compose |
 | デプロイ | Google Cloud Run |
-| CI/CD | Google Cloud Build |
+| CI（自動テスト） | GitHub Actions（push 時に pytest を自動実行） |
+| CD（自動デプロイ） | Google Cloud Build トリガー（main push で自動デプロイ） |
 | テスト | pytest |
 
 ---
@@ -250,17 +251,26 @@ streamlit run app.py
 
 > Google Cloud SDK（`gcloud`）のインストール・認証が必要です。
 
-**ビルド → デプロイまで自動（CI/CD）**
+**初回のみ：Secret Manager に OpenAI API キーを登録**
 
 ```bash
-# Secret Manager に OpenAI API キーを登録（初回のみ）
 echo -n "your_api_key_here" | gcloud secrets create OPENAI_API_KEY --data-file=-
-
-# Cloud Build でビルド・プッシュ・デプロイを一括実行
-gcloud builds submit --config cloudbuild.yaml
 ```
 
-> `cloudbuild.yaml` にはビルド・Container Registry へのプッシュ・Cloud Run へのデプロイが1コマンドで完結するよう設定済みです（CI/CD）。
+**CI/CD（自動化済み）**
+
+| トリガー | 自動実行内容 | 設定ファイル |
+|:---|:---|:---|
+| 任意ブランチへの push | pytest を自動実行（CI） | `.github/workflows/ci.yml` |
+| main への push | ビルド → Cloud Run へ自動デプロイ（CD） | `cloudbuild.yaml` |
+
+> Cloud Build トリガー（`deploy-on-push-to-main`）が main への push を検知し、ビルド・プッシュ・デプロイを自動実行します。
+
+**手動デプロイ（初回または任意のタイミング）**
+
+```bash
+gcloud builds submit --config cloudbuild.yaml
+```
 
 **ポート差異について**
 
