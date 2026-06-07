@@ -79,32 +79,39 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 
 ```
 .
-├── app.py              # Streamlit アプリ本体
-├── build_index.py      # PDF → ベクトルDB作成
-├── config.py           # アプリ全体の設定値を一元管理
-├── requirements.txt    # 依存ライブラリ一覧
-├── Dockerfile          # Docker イメージビルド定義
-├── docker-compose.yml  # コンテナ起動設定
-├── cloudbuild.yaml     # Cloud Build 設定（イメージビルド・GCRプッシュ用）
-├── .dockerignore       # Docker ビルド除外ファイル
-├── .env.example        # 環境変数のテンプレート
+├── app.py                  # Streamlit アプリ本体
+├── api.py                  # FastAPI エンドポイント（POST /chat）
+├── build_index.py          # PDF → ベクトルDB作成
+├── config.py               # アプリ全体の設定値を一元管理
+├── requirements.txt        # 依存ライブラリ一覧
+├── Dockerfile              # Streamlit 用 Docker イメージ定義
+├── Dockerfile.api          # FastAPI 用 Docker イメージ定義
+├── docker-compose.yml      # コンテナ起動設定
+├── cloudbuild.yaml         # Cloud Build 設定（Streamlit：ビルド→デプロイ）
+├── cloudbuild.api.yaml     # Cloud Build 設定（FastAPI：ビルド→デプロイ）
+├── .dockerignore           # Docker ビルド除外ファイル
+├── .env.example            # 環境変数のテンプレート
 ├── .gitignore
 ├── data/
-│   ├── company/        # 会社情報（架空）
-│   ├── customer/       # カスタマープロフィール（架空）
-│   └── service/        # 料金・解約・利用ガイド等（架空）
+│   ├── company/            # 会社情報（架空）
+│   ├── customer/           # カスタマープロフィール（架空）
+│   └── service/            # 料金・解約・利用ガイド等（架空）
 ├── rag/
-│   ├── agent.py        # LLM回答生成・自己改善ループ
-│   ├── config.py       # RAGモジュール設定値
-│   ├── loader.py       # PDF読み込み処理
-│   ├── prompts.py      # プロンプトテンプレート管理
-│   ├── query.py        # クエリ前処理・カテゴリ推定
-│   ├── retriever.py    # 検索結果評価・スコア判定・フォールバック処理
-│   ├── ui.py           # Streamlit UIヘルパー
-│   └── vectorstore.py  # ハイブリッド検索（BM25 + ベクトル）
+│   ├── agent.py            # LLM回答生成・自己改善ループ
+│   ├── config.py           # RAGモジュール設定値
+│   ├── loader.py           # PDF読み込み処理
+│   ├── prompts.py          # プロンプトテンプレート管理
+│   ├── query.py            # クエリ前処理・カテゴリ推定
+│   ├── retriever.py        # 検索結果評価・スコア判定・フォールバック処理
+│   ├── ui.py               # Streamlit UIヘルパー
+│   └── vectorstore.py      # ハイブリッド検索（BM25 + ベクトル）
+├── tests/
+│   ├── conftest.py         # テスト設定
+│   ├── test_query.py       # query.py のユニットテスト
+│   └── test_prompts.py     # prompts.py のユニットテスト
 ├── storage/
-│   └── chroma/         # ChromaDB 永続化データ
-└── images/             # README用画像
+│   └── chroma/             # ChromaDB 永続化データ
+└── images/                 # README用画像
 ```
 
 ※ `data/` 配下のPDFは **すべて架空データ** です。
@@ -116,6 +123,7 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 | 役割 | 技術 |
 |---|---|
 | UI | Streamlit |
+| API | FastAPI + uvicorn |
 | LLM | OpenAI API（via LangChain） |
 | Embedding / Vector DB | ChromaDB |
 | Document Loader | PDF（pypdf） |
@@ -123,6 +131,7 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 | コンテナ | Docker / Docker Compose |
 | デプロイ | Google Cloud Run |
 | CI/CD | Google Cloud Build |
+| テスト | pytest |
 
 ---
 
@@ -245,26 +254,23 @@ streamlit run app.py
 
 > Google Cloud SDK（`gcloud`）のインストール・認証が必要です。
 
-**Cloud Build を使ってビルド＆デプロイ（推奨）**
+**Streamlit アプリ（ビルド → デプロイまで自動）**
 
 ```bash
-# プロジェクトIDを設定
-gcloud config set project YOUR_PROJECT_ID
-
 # Secret Manager に OpenAI API キーを登録（初回のみ）
 echo -n "your_api_key_here" | gcloud secrets create OPENAI_API_KEY --data-file=-
 
-# Cloud Build でイメージをビルドして Container Registry に push
+# Cloud Build でビルド・プッシュ・デプロイを一括実行
 gcloud builds submit --config cloudbuild.yaml
-
-# Cloud Run へデプロイ
-gcloud run deploy rag-support-agent \
-  --image gcr.io/YOUR_PROJECT_ID/rag-support-agent \
-  --platform managed \
-  --region asia-northeast1 \
-  --allow-unauthenticated \
-  --set-secrets OPENAI_API_KEY=OPENAI_API_KEY:latest
 ```
+
+**FastAPI（ビルド → デプロイまで自動）**
+
+```bash
+gcloud builds submit --config cloudbuild.api.yaml
+```
+
+> `cloudbuild.yaml` / `cloudbuild.api.yaml` には ビルド・Container Registry へのプッシュ・Cloud Run へのデプロイ が1コマンドで完結するよう設定済みです（CI/CD）。
 
 **ポート差異について**
 
@@ -273,6 +279,14 @@ gcloud run deploy rag-support-agent \
 | ローカル（docker compose） | `8080` |
 | ローカル（直接起動） | `8501` |
 | Cloud Run | `8080` |
+
+**FastAPI エンドポイント**
+
+| URL | 説明 |
+|:---|:---|
+| `GET  /` | ヘルスチェック |
+| `POST /chat` | 問い合わせ回答（RAGパイプライン） |
+| `GET  /docs` | Swagger UI（APIドキュメント・動作確認） |
 
 ---
 
