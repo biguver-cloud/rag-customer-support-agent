@@ -140,22 +140,26 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 ```mermaid
 graph TD
     User["👤 ユーザー"]
+    APIClient["🔌 API クライアント"]
 
-    subgraph Docker["🐳 Docker コンテナ"]
+    subgraph CR1["☁️ Cloud Run：Streamlit"]
         UI["Streamlit UI\napp.py"]
-
-        subgraph Phase1["フェーズ1：RAG回答生成（自動）"]
-            Q["① クエリ前処理\nquery.py\nカテゴリ推定 / クエリリライト"]
-            S["② ハイブリッド検索\nvectorstore.py\nBM25 + ベクトル検索（RRF）"]
-            E["③ 検索結果評価\nretriever.py\nスコア判定 / 低精度フォールバック"]
-            A["④ 回答生成\nagent.py\nコンテキスト圧縮 / 自己改善ループ"]
-            SC["⑤ 自己採点\nagent.py\n正確性 / 網羅性スコア"]
-        end
 
         subgraph Phase2["フェーズ2：モード整形（ユーザー任意選択）"]
             P["⑥ 整形プロンプト生成\nprompts.py\nコールモード / チャットモード"]
         end
+    end
 
+    subgraph CR2["☁️ Cloud Run：FastAPI"]
+        FAPI["FastAPI\napi.py\nPOST /chat  |  GET /docs"]
+    end
+
+    subgraph Phase1["フェーズ1：RAG回答生成（Streamlit・FastAPI 共通）"]
+        Q["① クエリ前処理\nquery.py\nカテゴリ推定 / クエリリライト"]
+        S["② ハイブリッド検索\nvectorstore.py\nBM25 + ベクトル検索（RRF）"]
+        E["③ 検索結果評価\nretriever.py\nスコア判定 / 低精度フォールバック"]
+        A["④ 回答生成\nagent.py\nコンテキスト圧縮 / 自己改善ループ"]
+        SC["⑤ 自己採点\nagent.py\n正確性 / 網羅性スコア"]
         DB[("ChromaDB\nstorage/chroma")]
     end
 
@@ -163,16 +167,23 @@ graph TD
     PDF["📄 PDFデータ\ndata/"]
 
     User -->|質問入力| UI
+    APIClient -->|POST /chat| FAPI
+
     UI --> Q
+    FAPI --> Q
     Q --> S
     S <-->|ベクトル検索| DB
     S --> E
     E --> A
     A --> SC
+
     SC -->|RAG回答 + 引用表示| UI
+    SC -->|JSON レスポンス| FAPI
+
     UI -->|モードボタン選択| P
     P -->|整形済み回答表示| UI
     UI -->|回答| User
+    FAPI -->|回答 JSON| APIClient
 
     A <-->|LLM呼び出し①| OAI
     Q <-->|カテゴリ推定| OAI
