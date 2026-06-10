@@ -14,11 +14,10 @@ COPY . .
 ARG OPENAI_API_KEY
 RUN OPENAI_API_KEY=$(printf '%s' "$OPENAI_API_KEY" | tr -d '\r\n') python build_index.py
 
+# Windows で編集した場合の CRLF を除去して実行権限を付与
+RUN sed -i 's/\r//' start.sh && chmod +x start.sh
+
 ENV PORT=8080
 EXPOSE $PORT
 
-CMD streamlit run app.py \
-    --server.port=$PORT \
-    --server.address=0.0.0.0 \
-    --server.enableCORS=false \
-    --server.enableWebsocketCompression=false
+CMD ["./start.sh"]
