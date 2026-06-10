@@ -1,4 +1,4 @@
-# RAG Customer Support Agent (Streamlit)
+# RAG Customer Support Agent
 
 ## 🎯 概要
 
@@ -79,16 +79,23 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 
 ```
 .
-├── app.py                  # Streamlit アプリ本体
+├── app.py                  # Streamlit フロントエンド（FastAPI クライアント）
 ├── build_index.py          # PDF → ベクトルDB作成
 ├── config.py               # アプリ全体の設定値を一元管理
 ├── requirements.txt        # 依存ライブラリ一覧
-├── Dockerfile              # Docker イメージビルド定義
-├── docker-compose.yml      # コンテナ起動設定
+├── Dockerfile.api          # FastAPI コンテナ（uvicorn port 8000）
+├── Dockerfile.streamlit    # Streamlit コンテナ（port 8080）
+├── docker-compose.yml      # 2サービス構成（api + streamlit）
 ├── cloudbuild.yaml         # Cloud Build 設定（ビルド→デプロイ）
 ├── .dockerignore           # Docker ビルド除外ファイル
 ├── .env.example            # 環境変数のテンプレート
 ├── .gitignore
+├── api/
+│   ├── main.py             # FastAPI アプリ本体（CORS 設定）
+│   ├── schemas.py          # Pydantic リクエスト / レスポンス型定義
+│   └── routers/
+│       ├── chat.py         # POST /api/chat（RAG処理・ログ保存）
+│       └── logs.py         # GET /api/logs, GET /api/logs/{filename}
 ├── data/
 │   ├── company/            # 会社情報（架空）
 │   ├── customer/           # カスタマープロフィール（架空）
@@ -119,7 +126,8 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 
 | 役割 | 技術 |
 |---|---|
-| UI | Streamlit |
+| フロントエンド | Streamlit |
+| バックエンド API | FastAPI + uvicorn |
 | LLM | OpenAI API（via LangChain） |
 | Embedding | OpenAI text-embedding-3-small |
 | Vector DB | ChromaDB |
@@ -138,38 +146,47 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 graph TD
     User["👤 ユーザー"]
 
-    subgraph Docker["🐳 Docker コンテナ"]
-        UI["Streamlit UI\napp.py"]
+    subgraph DockerCompose["🐳 Docker Compose"]
+        subgraph StreamlitContainer["Streamlit コンテナ（port 8080）"]
+            UI["Streamlit UI\napp.py\n質問入力 / 回答表示 / モード整形"]
+        end
 
-        subgraph Phase1["フェーズ1：RAG回答生成（自動）"]
-            Q["① クエリ前処理\nquery.py\nカテゴリ推定 / クエリリライト"]
-            S["② ハイブリッド検索\nvectorstore.py\nBM25 + ベクトル検索（RRF）"]
-            E["③ 検索結果評価\nretriever.py\nスコア判定 / 低精度フォールバック"]
-            A["④ 回答生成\nagent.py\nコンテキスト圧縮 / 自己改善ループ"]
-            SC["⑤ 自己採点\nagent.py\n正確性 / 網羅性スコア"]
+        subgraph FastAPIContainer["FastAPI コンテナ（port 8000）"]
+            API["FastAPI\napi/main.py\nPOST /api/chat\nGET  /api/logs"]
+
+            subgraph Phase1["フェーズ1：RAG回答生成（自動）"]
+                Q["① クエリ前処理\nquery.py\nカテゴリ推定 / クエリリライト"]
+                S["② ハイブリッド検索\nvectorstore.py\nBM25 + ベクトル検索（RRF）"]
+                E["③ 検索結果評価\nretriever.py\nスコア判定 / 低精度フォールバック"]
+                A["④ 回答生成\nagent.py\nコンテキスト圧縮 / 自己改善ループ"]
+                SC["⑤ 自己採点\nagent.py\n正確性 / 網羅性スコア"]
+            end
+
+            DB[("ChromaDB\nstorage/chroma")]
         end
 
         subgraph Phase2["フェーズ2：モード整形（ユーザー任意選択）"]
             P["⑥ 整形プロンプト生成\nprompts.py\nコールモード / チャットモード"]
         end
-
-        DB[("ChromaDB\nstorage/chroma")]
     end
 
     OAI["☁️ OpenAI API\nGPT-4o-mini\ntext-embedding-3-small"]
     PDF["📄 PDFデータ\ndata/"]
 
     User -->|質問入力| UI
-    UI --> Q
+    UI -->|"POST /api/chat\n(HTTP)"| API
+    API --> Q
     Q --> S
     S <-->|ベクトル検索| DB
     S --> E
     E --> A
     A --> SC
-    SC -->|RAG回答 + 引用表示| UI
+    SC -->|JSON レスポンス| API
+    API -->|回答 + 引用情報| UI
+    UI -->|RAG回答 + 引用表示| User
+
     UI -->|モードボタン選択| P
     P -->|整形済み回答表示| UI
-    UI -->|回答| User
 
     A <-->|LLM呼び出し①| OAI
     Q <-->|カテゴリ推定| OAI
@@ -196,6 +213,17 @@ graph TD
 | ⑥ | **モード選択**: ユーザーが「📞 コールモード」または「💬 チャットモード」ボタンを選択 |
 | ⑦ | **整形出力**: 選択モードに応じたプロンプトでLLMを再呼び出しし、用途に最適化された文章を生成 |
 
+### 🌐 API エンドポイント一覧
+
+| メソッド | パス | 説明 |
+|:---:|:---|:---|
+| `GET` | `/health` | ヘルスチェック |
+| `POST` | `/api/chat` | 質問を受け取りRAG回答を返す |
+| `GET` | `/api/logs` | ログファイル一覧を返す |
+| `GET` | `/api/logs/{filename}` | 指定ログファイルをCSVダウンロード |
+
+> FastAPI の自動生成ドキュメントは `http://localhost:8000/docs` で確認できます。
+
 ---
 
 ## ⚙️ セットアップ手順
@@ -221,33 +249,45 @@ cp .env.example .env
 OPENAI_API_KEY=your_api_key_here
 ```
 
-### 3. インデックスの作成
-
-```bash
-python build_index.py
-```
-
-### 4. アプリの起動
+### 3. アプリの起動
 
 **Docker（推奨）**
+
+`api` コンテナがビルド時に自動で `build_index.py` を実行するため、別途インデックス作成は不要です。
 
 ```bash
 docker compose up --build
 ```
 
-**ローカル**
+| サービス | URL |
+|:---|:---|
+| Streamlit UI | `http://localhost:8080` |
+| FastAPI ドキュメント | `http://localhost:8000/docs` |
+
+**ローカル（Docker なし）**
 
 ```bash
 pip install -r requirements.txt
+
+# 1. ベクトルDBを作成
+python build_index.py
+
+# 2. FastAPI バックエンドを起動（ターミナル1）
+uvicorn api.main:app --reload
+
+# 3. Streamlit フロントエンドを起動（ターミナル2）
 streamlit run app.py
 ```
 
-ブラウザでアクセスして利用できます。
+| サービス | URL |
+|:---|:---|
+| Streamlit UI | `http://localhost:8501` |
+| FastAPI ドキュメント | `http://localhost:8000/docs` |
 
-- Docker：`http://localhost:8080`
-- ローカル：`http://localhost:8501`
+> ローカル実行時は Streamlit が `API_URL=http://localhost:8000` をデフォルトで使用します。  
+> 別ホストに変更する場合は `.env` に `API_URL=http://<host>:<port>` を追記してください。
 
-### 5. Cloud Run へのデプロイ（GCP）
+### 4. Cloud Run へのデプロイ（GCP）
 
 > Google Cloud SDK（`gcloud`）のインストール・認証が必要です。
 
@@ -272,14 +312,13 @@ echo -n "your_api_key_here" | gcloud secrets create OPENAI_API_KEY --data-file=-
 gcloud builds submit --config cloudbuild.yaml
 ```
 
-**ポート差異について**
+**ポート一覧**
 
-| 環境 | ポート |
-|:---|:---|
-| ローカル（docker compose） | `8080` |
-| ローカル（直接起動） | `8501` |
-| Cloud Run | `8080` |
-
+| 環境 | Streamlit | FastAPI |
+|:---|:---|:---|
+| ローカル（docker compose） | `8080` | `8000` |
+| ローカル（直接起動） | `8501` | `8000` |
+| Cloud Run | `8080` | — |
 
 ---
 
@@ -287,10 +326,11 @@ gcloud builds submit --config cloudbuild.yaml
 
 - OS：Windows 11（Windows環境で開発・動作確認）／macOS・Linux も対応可
 - Python：3.11
-- フレームワーク：Streamlit
+- フロントエンド：Streamlit
+- バックエンド：FastAPI + uvicorn
 - LLM：OpenAI API（LangChain経由）
 - ベクトルDB：ChromaDB
-- 主なライブラリ：LangChain, ChromaDB, PyPDF, Streamlit
+- 主なライブラリ：LangChain, ChromaDB, PyPDF, FastAPI, httpx
 - コンテナ：Docker / Docker Compose
 - クラウド：Google Cloud Run / Cloud Build
 
