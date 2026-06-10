@@ -194,6 +194,10 @@ graph TD
     PDF -->|build_index.py| DB
 ```
 
+> **環境別の構成について**
+> - **ローカル（`docker compose`）**：上図のとおり Streamlit と FastAPI を別コンテナで起動
+> - **Cloud Run**：`start.sh` により1コンテナ内で uvicorn（port 8000）と Streamlit（port 8080）を同時起動。外部には Streamlit の port のみ公開し、FastAPI はコンテナ内部で通信
+
 ### 🔄 処理フロー
 
 **フェーズ1：RAG回答生成（自動）**
