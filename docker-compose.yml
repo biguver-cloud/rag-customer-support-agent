@@ -1,11 +1,30 @@
 services:
-  app:
-    build: .
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        OPENAI_API_KEY: ${OPENAI_API_KEY}
     ports:
-      - "8080:8080"
+      - "8000:8000"
     env_file:
       - .env
     volumes:
       - ./storage:/app/storage
       - ./logs:/app/logs
       - ./data:/app/data
+
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      - API_URL=http://api:8000
+    volumes:
+      - ./logs:/app/logs
+    depends_on:
+      - api

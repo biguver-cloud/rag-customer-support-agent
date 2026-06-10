@@ -1,55 +1,18 @@
-﻿import os
-import csv
+import os
 from datetime import datetime
 from pathlib import Path
+
+import httpx
 import streamlit as st
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
-from rag.config import MODEL_NAME, TEMPERATURE, TOP_K, WEAK_SCORE_THRESHOLD, AGENT_ROUNDS
+from rag.config import MODEL_NAME, TEMPERATURE
 from rag.prompts import get_mode_prompt
-from rag.query import guess_category, rewrite_query_for_search
-from rag.vectorstore import open_vectorstore, hybrid_retrieve_with_score
-from rag.agent import agent_answer
 from rag.ui import render_citations, render_agent_log, render_copy_button
 
+API_URL = os.getenv("API_URL", "http://localhost:8000")
 
-def _log_path() -> Path:
-    filename = datetime.now().strftime("chat_log_%Y_%m_%d.csv")
-    return Path(__file__).resolve().parent / "logs" / filename
-LOG_HEADERS = [
-    "日時", "質問", "回答", "カテゴリ",
-    "最高スコア", "正確性", "完全性",
-    "エージェント実行回数", "使用トークン数", "参照資料",
-]
-
-
-def save_log(question: str, answer: str, category: str, best_score, accuracy: int,
-             completeness: int, agent_loops: int, agent_tokens: int, citations: list) -> None:
-    log_path = _log_path()
-    log_path.parent.mkdir(parents=True, exist_ok=True)
-    write_header = not log_path.exists()
-    sources = "; ".join({c["source"] for c in citations if c.get("source")})
-    row = {
-        "日時": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "質問": question,
-        "回答": answer,
-        "カテゴリ": category,
-        "最高スコア": round(best_score, 4) if best_score is not None else "",
-        "正確性": accuracy,
-        "完全性": completeness,
-        "エージェント実行回数": agent_loops,
-        "使用トークン数": agent_tokens,
-        "参照資料": sources,
-    }
-    with open(log_path, "a", newline="", encoding="utf-8-sig") as f:
-        writer = csv.DictWriter(f, fieldnames=LOG_HEADERS)
-        if write_header:
-            writer.writeheader()
-        writer.writerow(row)
-
-
-# ── 思考ステップの定義 ──────────────────────────────────────────────────────
 THINKING_STEPS: list[tuple[str, str]] = [
     ("🔍", "質問の意図を分析中..."),
     ("📄", "関連ドキュメントを検索中..."),
@@ -58,13 +21,12 @@ THINKING_STEPS: list[tuple[str, str]] = [
 ]
 
 
-def _make_steps(done: int, running: int | None = None) -> list[dict]:
-    """思考ステップのリストを生成する。
+def _log_path() -> Path:
+    filename = datetime.now().strftime("chat_log_%Y_%m_%d.csv")
+    return Path(__file__).resolve().parent / "logs" / filename
 
-    Args:
-        done:    完了済みステップ数（0-indexed: done=2 → steps[0], [1] が done）
-        running: 現在実行中のステップインデックス（None = 実行中なし）
-    """
+
+def _make_steps(done: int, running: int | None = None) -> list[dict]:
     result = []
     for i, (icon, label) in enumerate(THINKING_STEPS):
         if i < done:
@@ -84,7 +46,6 @@ def _show_sidebar(
     self_eval: dict | None = None,
     exec_meta: dict | None = None,
 ) -> None:
-    """サイドバープレースホルダーを指定状態で更新する。"""
     data: dict = {"steps": _make_steps(done, running), "is_processing": is_processing}
     if self_eval is not None:
         data["self_eval"] = self_eval
@@ -94,52 +55,38 @@ def _show_sidebar(
         render_agent_log(data)
 
 
-# ──────────────────────────────────────────────────────────────────────────────
-
-
-@st.cache_resource(show_spinner=False)
-def get_db(persist_dir: Path):
-    # persist_dir は Path のままでOK（内部で str 化されてもよい）
-    return open_vectorstore(persist_dir)
-
-
 @st.cache_resource(show_spinner=False)
 def get_llm():
     return ChatOpenAI(model=MODEL_NAME, temperature=TEMPERATURE)
 
 
 def safe_avatar(icon_path: Path) -> str | None:
-    """
-    アバター画像のパスが存在する場合のみ文字列パスを返す。
-    存在しない場合はNoneを返してアプリが落ちないようにする。
-    
-    Args:
-        icon_path: 画像ファイルのPathオブジェクト
-    
-    Returns:
-        存在する場合は str(path)、存在しない場合は None
-    """
     if icon_path and icon_path.exists():
         return str(icon_path)
-    else:
-        # 画像が見つからない場合の警告を1回だけ出す
-        if "avatar_warning_shown" not in st.session_state:
-            st.session_state.avatar_warning_shown = True
-            st.warning(f"⚠️ アバター画像が見つかりません: {icon_path.name if icon_path else 'None'}（デフォルトアイコンで表示します）")
-        return None
+    if "avatar_warning_shown" not in st.session_state:
+        st.session_state.avatar_warning_shown = True
+        st.warning(f"⚠️ アバター画像が見つかりません: {icon_path.name if icon_path else 'None'}（デフォルトアイコンで表示します）")
+    return None
 
 
-def build_followup_questions(user_text: str) -> str:
-    return f"""資料だけでは特定できませんでした。次のどれに近いですか？
-
-1) 解約したい（いつ解約が有効になるか知りたい）
-2) 返金できるか知りたい（返金条件を確認したい）
-3) 請求・支払いについて知りたい
-4) アカウント/ログインについて知りたい
-5) その他（状況をもう少し具体的に教えてください）
-
-たとえば「2) 返金。契約開始日が○月○日で、今○日目です」のように書いてください。
-"""
+def call_chat_api(question: str) -> dict:
+    try:
+        resp = httpx.post(
+            f"{API_URL}/api/chat",
+            json={"question": question},
+            timeout=120.0,
+        )
+        resp.raise_for_status()
+        return resp.json()
+    except httpx.HTTPStatusError as e:
+        detail = ""
+        try:
+            detail = e.response.json().get("detail", "")
+        except Exception:
+            detail = e.response.text
+        raise RuntimeError(f"API エラー ({e.response.status_code}): {detail}") from e
+    except httpx.RequestError as e:
+        raise RuntimeError(f"API への接続に失敗しました: {e}") from e
 
 
 def main():
@@ -151,17 +98,10 @@ def main():
         st.stop()
     os.environ["OPENAI_API_KEY"] = os.environ["OPENAI_API_KEY"].strip()
 
-    # BASE_DIRを絶対パスで固定（相対パスのずれを防ぐ）
     BASE_DIR = Path(__file__).resolve().parent
-    persist_dir = BASE_DIR / "storage" / "chroma"
     user_icon_path = BASE_DIR / "images" / "User_アイコン.png"
     ai_icon_path = BASE_DIR / "images" / "AI_アイコン.png"
 
-    if not persist_dir.exists():
-        st.error("ベクトルDBがありません。先に `python build_index.py` を実行してください。")
-        st.stop()
-
-    # モード管理の session_state 初期化
     if "last_answer" not in st.session_state:
         st.session_state.last_answer = None
     if "display_mode" not in st.session_state:
@@ -171,7 +111,6 @@ def main():
     if "agent_log" not in st.session_state:
         st.session_state.agent_log = None
 
-    # モードボタンのコールバック
     def _set_call_mode():
         st.session_state.display_mode = "call"
 
@@ -180,7 +119,6 @@ def main():
 
     # ── サイドバー ────────────────────────────────────────────────────────────
     with st.sidebar:
-        # 思考ログパネル（プレースホルダー経由でリアルタイム更新）
         agent_log_placeholder = st.empty()
         with agent_log_placeholder.container():
             render_agent_log(st.session_state.agent_log)
@@ -207,7 +145,6 @@ def main():
             st.caption("まだログがありません")
     # ─────────────────────────────────────────────────────────────────────────
 
-    # ── メイン ───────────────────────────────────────────────────────────────
     st.markdown("<h1 style='text-align:center; margin-bottom: 0.2em;'>問い合わせ対応支援RAGエージェント</h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align:center; color: #666; margin-top: -10px; margin-bottom: 20px;'><b>社内資料・PDFを知識源として問い合わせ回答を支援するAI</b></p>", unsafe_allow_html=True)
     st.info("📋 資料に基づいた正確な回答をお届けします。解約・返金・請求など、よくある質問にすぐに対応いたします。")
@@ -215,19 +152,15 @@ def main():
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
-    # チャット履歴（無制限に増えるとメモリを食うので上限をつける）
     MAX_MESSAGES = 20
 
-    # モードボタンが押された場合：整形処理 → メッセージに追加 → 再描画
     if st.session_state.display_mode and st.session_state.last_answer:
         mode = st.session_state.display_mode
         if mode not in st.session_state.formatted_answers:
             llm = get_llm()
             prompt = get_mode_prompt(mode, st.session_state.last_answer)
             with st.spinner("整形中..."):
-                formatted = llm.invoke([
-                    {"role": "user", "content": prompt}
-                ]).content
+                formatted = llm.invoke([{"role": "user", "content": prompt}]).content
             st.session_state.formatted_answers[mode] = formatted
             label = "📞 コールモード" if mode == "call" else "💬 チャットモード"
             st.session_state.messages.append({
@@ -240,13 +173,11 @@ def main():
         st.session_state.display_mode = None
         st.rerun()
 
-    # 表示は直近だけ
     messages_to_show = st.session_state.messages[-MAX_MESSAGES:]
-    # citations を持つ最後の assistant メッセージのインデックスを特定
     last_rag_idx = next(
         (i for i, m in reversed(list(enumerate(messages_to_show)))
-            if m["role"] == "assistant" and "citations" in m),
-        None
+         if m["role"] == "assistant" and "citations" in m),
+        None,
     )
     for i, m in enumerate(messages_to_show):
         avatar = safe_avatar(user_icon_path) if m["role"] == "user" else safe_avatar(ai_icon_path)
@@ -265,9 +196,7 @@ def main():
                 st.markdown(m["content"])
             if i == last_rag_idx:
                 render_citations(m.get("citations", []))
-                # render_contact_guidance(m.get("user_text", ""), m.get("citations", []))
 
-    # モードボタン（チャット入力欄の直上に固定表示）
     if st.session_state.last_answer:
         col1, col2 = st.columns(2)
         with col1:
@@ -280,128 +209,41 @@ def main():
         return
 
     st.session_state.messages.append({"role": "user", "content": user_text})
-    st.session_state.messages = st.session_state.messages[-MAX_MESSAGES:]  # ここが重要
+    st.session_state.messages = st.session_state.messages[-MAX_MESSAGES:]
 
     with st.chat_message("user", avatar=safe_avatar(user_icon_path)):
         st.markdown(user_text)
 
-    # 新しい質問は履歴に追加済みなので履歴ループで表示される
-
-    category = ""
-    best_score = None
-    accuracy = 0
-    completeness = 0
-    agent_loops = 0
-    agent_tokens = 0
-    citations = []
-
-    # Step 0: 質問の意図を分析中
-    _show_sidebar(agent_log_placeholder, done=0, running=0)
+    # サイドバー: 処理中状態を表示
+    _show_sidebar(agent_log_placeholder, done=0, running=0, is_processing=True)
 
     with st.chat_message("assistant", avatar=safe_avatar(ai_icon_path)):
         with st.spinner("PDFから検索して回答中..."):
             try:
-                db = get_db(persist_dir)
-                llm = get_llm()
+                data = call_chat_api(user_text)
+            except RuntimeError as e:
+                st.error(str(e))
+                return
 
-                search_query = rewrite_query_for_search(user_text, llm=llm)
-                category = guess_category(user_text, llm=llm)
+        answer = data["answer"]
+        citations = [dict(c) for c in data.get("citations", [])]
+        accuracy = data.get("accuracy", 0)
+        completeness = data.get("completeness", 0)
+        agent_loops = data.get("agent_loops", 0)
+        agent_tokens = data.get("agent_tokens", 0)
 
-                # Step 1: 関連ドキュメントを検索中
-                _show_sidebar(agent_log_placeholder, done=1, running=1)
+        st.markdown(answer)
 
-                search_results = hybrid_retrieve_with_score(
-                    db=db,
-                    query=search_query,
-                    k=TOP_K,
-                    category=category,
-                )
-
-                if not search_results:
-                    context = ""
-                    citations = []
-                    best_score = None
-                else:
-                    docs = [doc for doc, _ in search_results]
-                    scores = [score for _, score in search_results]
-                    best_score = min(scores) if scores else None
-
-                    context = "\n\n---\n\n".join([doc.page_content for doc in docs])
-
-                    citations = []
-                    for doc, score in search_results:
-                        src = doc.metadata.get("source", "")
-                        page = doc.metadata.get("page", None)
-                        cat = doc.metadata.get("category", category if category != "unknown" else "unknown")
-                        text = doc.page_content.strip().replace("\n", " ")
-                        quote = text[:400] + ("..." if len(text) > 400 else "")
-                        citations.append({
-                            "category": cat,
-                            "source": src,
-                            "page": (page + 1) if isinstance(page, int) else None,
-                            "quote": quote,
-                            "score": score,
-                        })
-
-            except Exception as e:
-                import traceback
-                st.error(f"検索中にエラーが発生しました: {type(e).__name__}: {str(e)}")
-                st.code(traceback.format_exc())
-                context = ""
-                citations = []
-                best_score = None
-
-            if not context.strip():
-                answer = "資料に記載がありません。該当するPDF名や用語（例：解約、返金、請求など）を少し具体的に教えてください。"
-                citations = []
-            elif best_score is not None and best_score > WEAK_SCORE_THRESHOLD:
-                answer = build_followup_questions(user_text)
-            else:
-                # Step 2: 回答の妥当性を自己検閲中
-                _show_sidebar(agent_log_placeholder, done=2, running=2)
-
-                agent_status = st.status("AIエージェント実行中...", expanded=True)
-                agent_prog = st.progress(0)
-
-                def on_progress(label: str, step: int, total: int):
-                    agent_status.update(label=label, state="running")
-                    agent_prog.progress(int(step / total * 100))
-
-                result = agent_answer(
-                    llm, user_text, context, rounds=AGENT_ROUNDS, progress=on_progress
-                )
-                agent_status.update(label="完了", state="complete")
-
-                answer = result["answer"]
-                agent_loops = result["loops"]
-                agent_tokens = result["tokens"]
-
-                # LLMによる自己評価スコアを取得
-                accuracy = result["accuracy"]
-                completeness = result["completeness"]
-
-            # Step 3: 全ステップ完了 → サイドバーを最終状態に更新
-            final_log = {
-                "steps": _make_steps(len(THINKING_STEPS)),
-                "is_processing": False,
-                "self_eval": {"accuracy": accuracy, "completeness": completeness},
-                "exec_meta": {"loops": agent_loops, "tokens": agent_tokens},
-            }
-            with agent_log_placeholder.container():
-                render_agent_log(final_log)
-            st.session_state.agent_log = final_log
-
-    save_log(
-        question=user_text,
-        answer=answer,
-        category=category,
-        best_score=best_score,
-        accuracy=accuracy,
-        completeness=completeness,
-        agent_loops=agent_loops,
-        agent_tokens=agent_tokens,
-        citations=citations,
-    )
+    # サイドバー: 全ステップ完了 → 最終状態に更新
+    final_log = {
+        "steps": _make_steps(len(THINKING_STEPS)),
+        "is_processing": False,
+        "self_eval": {"accuracy": accuracy, "completeness": completeness},
+        "exec_meta": {"loops": agent_loops, "tokens": agent_tokens},
+    }
+    with agent_log_placeholder.container():
+        render_agent_log(final_log)
+    st.session_state.agent_log = final_log
 
     st.session_state.messages.append({
         "role": "assistant",
