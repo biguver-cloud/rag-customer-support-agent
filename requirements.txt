@@ -9,6 +9,7 @@ python-dotenv
 streamlit
 tiktoken
 rank_bm25
+janome
 fastapi
 uvicorn[standard]
 httpx

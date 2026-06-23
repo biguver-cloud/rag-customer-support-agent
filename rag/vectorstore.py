@@ -96,10 +96,19 @@ def hybrid_retrieve_with_score(
 
         n = len(all_contents)
 
-        # BM25 検索（日本語: 文字単位のトークナイズ）
-        tokenized_corpus = [re.findall(r'\w+', doc) for doc in all_contents]
+        # BM25 検索（日本語: Janome 形態素解析によるトークナイズ）
+        try:
+            from janome.tokenizer import Tokenizer as JanomeTokenizer
+            _jt = JanomeTokenizer()
+            def _tokenize(text: str) -> list[str]:
+                return [t.surface for t in _jt.tokenize(text)]
+        except ImportError:
+            def _tokenize(text: str) -> list[str]:
+                return re.findall(r'\w+', text)
+
+        tokenized_corpus = [_tokenize(doc) for doc in all_contents]
         bm25 = BM25Okapi(tokenized_corpus)
-        bm25_scores = bm25.get_scores(re.findall(r'\w+', query))
+        bm25_scores = bm25.get_scores(_tokenize(query))
         bm25_rank = {
             all_contents[idx]: rank
             for rank, idx in enumerate(sorted(range(n), key=lambda i: bm25_scores[i], reverse=True))
