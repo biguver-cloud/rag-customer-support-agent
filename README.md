@@ -92,14 +92,21 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 ├── .gitignore
 ├── api/
 │   ├── main.py             # FastAPI アプリ本体（CORS 設定）
+│   ├── config.py           # CORS・セキュリティ設定
 │   ├── schemas.py          # Pydantic リクエスト / レスポンス型定義
 │   └── routers/
 │       ├── chat.py         # POST /api/chat（RAG処理・ログ保存）
-│       └── logs.py         # GET /api/logs, GET /api/logs/{filename}
+│       └── logs.py         # GET /api/logs, GET /api/logs/{filename}（API Key認証）
 ├── data/
 │   ├── company/            # 会社情報（架空）
 │   ├── customer/           # カスタマープロフィール（架空）
 │   └── service/            # 料金・解約・利用ガイド等（架空）
+├── eval/
+│   ├── run_eval.py         # 精度評価スクリプト（ベクトル vs ハイブリッド）
+│   ├── generate_dataset.py # 評価用データセット生成
+│   ├── metrics.py          # 評価指標（LLM judge・文字類似度）
+│   ├── dataset.json        # 評価用データセット
+│   └── results/            # 評価結果CSV
 ├── rag/
 │   ├── agent.py            # LLM回答生成・自己改善ループ
 │   ├── config.py           # RAGモジュール設定値
@@ -108,11 +115,16 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 │   ├── query.py            # クエリ前処理・カテゴリ推定
 │   ├── retriever.py        # 検索結果評価・スコア判定・フォールバック処理
 │   ├── ui.py               # Streamlit UIヘルパー
-│   └── vectorstore.py      # ハイブリッド検索（BM25 + ベクトル）
+│   └── vectorstore.py      # ハイブリッド検索（BM25 + Janome + ベクトル）
 ├── tests/
 │   ├── conftest.py         # テスト設定
 │   ├── test_query.py       # query.py のユニットテスト
-│   └── test_prompts.py     # prompts.py のユニットテスト
+│   ├── test_prompts.py     # prompts.py のユニットテスト
+│   └── test_api/
+│       ├── test_chat.py    # チャットAPIのテスト
+│       ├── test_health.py  # ヘルスチェックのテスト
+│       ├── test_logs.py    # ログAPI認証のテスト
+│       └── test_cors.py    # CORS設定のテスト
 ├── storage/
 │   └── chroma/             # ChromaDB 永続化データ
 └── images/                 # README用画像
@@ -326,24 +338,9 @@ gcloud builds submit --config cloudbuild.yaml
 
 ---
 
-## 🖥️ 使用環境
-
-- OS：Windows 11（Windows環境で開発・動作確認）／macOS・Linux も対応可
-- Python：3.11
-- フロントエンド：Streamlit
-- バックエンド：FastAPI + uvicorn
-- LLM：OpenAI API（LangChain経由）
-- ベクトルDB：ChromaDB
-- 主なライブラリ：LangChain, ChromaDB, PyPDF, FastAPI, httpx
-- コンテナ：Docker / Docker Compose
-- クラウド：Google Cloud Run / Cloud Build
-
----
-
 ## 🔮 今後の拡張予定
 
 - 多言語対応（日本語 / 英語）
-- 認証・利用制限機能の追加
 - 音声通話対応（音声入力 / 音声読み上げ / 通話UI）
 
 ---
