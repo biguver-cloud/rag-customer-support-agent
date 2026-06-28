@@ -24,6 +24,14 @@ def infer_category_from_source(source: str) -> str:
         return "customer"
     if "/service/" in s:
         return "service"
+    if "/technical/" in s:
+        return "technical"
+    if "/legal/" in s:
+        return "legal"
+    if "/security/" in s:
+        return "security"
+    if "/release/" in s:
+        return "release"
     return "unknown"
 
 
