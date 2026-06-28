@@ -25,10 +25,9 @@ OUTPUT_PATH = Path(__file__).resolve().parent / "dataset.json"
 
 # カテゴリとPDFの対応
 CATEGORY_MAP = {
-    "unknown": [
-        DATA_DIR / "company" / "解約・返金ポリシー.pdf",
-    ],
     "service": [
+        DATA_DIR / "service" / "解約・返金ポリシー.pdf",
+        DATA_DIR / "service" / "問い合わせ対応方針.pdf",
         DATA_DIR / "service" / "料金プラン.pdf",
         DATA_DIR / "service" / "請求について.pdf",
         DATA_DIR / "service" / "アカウント.pdf",
@@ -37,10 +36,25 @@ CATEGORY_MAP = {
     ],
     "company": [
         DATA_DIR / "company" / "会社概要.pdf",
-        DATA_DIR / "company" / "問い合わせ対応方針.pdf",
     ],
     "customer": [
         DATA_DIR / "customer" / "カスタマープロフィール.pdf",
+    ],
+    "technical": [
+        DATA_DIR / "technical" / "トラブルシューティングガイド.pdf",
+        DATA_DIR / "technical" / "よくある不具合と対処法.pdf",
+    ],
+    "legal": [
+        DATA_DIR / "legal" / "利用規約.pdf",
+        DATA_DIR / "legal" / "プライバシーポリシー.pdf",
+    ],
+    "security": [
+        DATA_DIR / "security" / "セキュリティポリシー.pdf",
+        DATA_DIR / "security" / "アクセス制御ガイドライン.pdf",
+    ],
+    "release": [
+        DATA_DIR / "release" / "リリースノート.pdf",
+        DATA_DIR / "release" / "新機能ガイド.pdf",
     ],
 }
 
@@ -58,12 +72,13 @@ def extract_qa_from_pdf(pdf_path: Path, category: str, llm) -> list[dict]:
     content = "\n".join(p.page_content for p in pages)[:3000]
 
     prompt = f"""以下のPDF内容から、カスタマーサポートで実際に問い合わせが来そうな
-質問と、その正確な回答を2〜3セット生成してください。
+質問と、その正確な回答を10〜13セット生成してください。
 
 ルール：
 - 質問はPDFに書かれていることのみに基づく
 - 回答はPDFの記載内容を忠実にまとめた100〜200文字程度の文章
 - 推測や創作は禁止
+- 同じ意味の質問を言い回しだけ変えて重複させない
 
 [PDF内容]
 {content}
