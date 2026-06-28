@@ -75,7 +75,6 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 .
 ├── app.py                  # Streamlit フロントエンド（FastAPI クライアント）
 ├── build_index.py          # PDF → ベクトルDB作成
-├── create_pdfs.py          # サンプルPDF生成スクリプト
 ├── requirements.txt        # 依存ライブラリ一覧
 ├── Dockerfile.api          # FastAPI コンテナ（uvicorn port 8000）
 ├── Dockerfile.streamlit    # Streamlit コンテナ（port 8080）
