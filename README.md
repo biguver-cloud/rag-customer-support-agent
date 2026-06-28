@@ -5,7 +5,7 @@
 このリポジトリは、**実務で通用するRAG構成を設計・実装・説明まで一貫して示すポートフォリオ**です。
 
 社内資料やPDFを知識源として、問い合わせ対応を自動化・効率化するAIエージェントです。  
-解約・返金・請求などの定型問い合わせに対し、関連資料を検索した上で、**根拠を明示した補助回答**を提示します。
+料金・解約・請求・トラブル対応・規約・セキュリティなど幅広い問い合わせに対し、関連資料を検索した上で、**根拠を明示した補助回答**を提示します。
 
 ---
 
@@ -81,8 +81,6 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 ├── Dockerfile.streamlit    # Streamlit コンテナ（port 8080）
 ├── docker-compose.yml      # 2サービス構成（api + streamlit）
 ├── Dockerfile              # Cloud Run 用単一コンテナ
-├── cloudbuild.yaml         # Cloud Build 設定（ビルド→デプロイ）
-├── start.sh                # Cloud Run 用起動スクリプト
 ├── .dockerignore           # Docker ビルド除外ファイル
 ├── .env.example            # 環境変数のテンプレート
 ├── .gitignore
