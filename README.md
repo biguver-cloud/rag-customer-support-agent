@@ -68,12 +68,6 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 
 ---
 
-## GitHub運用ルール
-
-チーム開発を想定した運用ルールを定めています。
-詳細は [GITHUB_RULES.md](./GITHUB_RULES.md) をご参照ください。
-
----
 
 ## 📁 ディレクトリ構成
 
@@ -81,12 +75,14 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 .
 ├── app.py                  # Streamlit フロントエンド（FastAPI クライアント）
 ├── build_index.py          # PDF → ベクトルDB作成
-├── config.py               # アプリ全体の設定値を一元管理
+├── create_pdfs.py          # サンプルPDF生成スクリプト
 ├── requirements.txt        # 依存ライブラリ一覧
 ├── Dockerfile.api          # FastAPI コンテナ（uvicorn port 8000）
 ├── Dockerfile.streamlit    # Streamlit コンテナ（port 8080）
 ├── docker-compose.yml      # 2サービス構成（api + streamlit）
+├── Dockerfile              # Cloud Run 用単一コンテナ
 ├── cloudbuild.yaml         # Cloud Build 設定（ビルド→デプロイ）
+├── start.sh                # Cloud Run 用起動スクリプト
 ├── .dockerignore           # Docker ビルド除外ファイル
 ├── .env.example            # 環境変数のテンプレート
 ├── .gitignore
@@ -100,12 +96,16 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 ├── data/
 │   ├── company/            # 会社情報（架空）
 │   ├── customer/           # カスタマープロフィール（架空）
-│   └── service/            # 料金・解約・利用ガイド等（架空）
+│   ├── service/            # 料金・解約・利用ガイド等（架空）
+│   ├── technical/          # トラブルシューティング・不具合対処法（架空）
+│   ├── legal/              # 利用規約・プライバシーポリシー（架空）
+│   ├── security/           # セキュリティポリシー・アクセス制御（架空）
+│   └── release/            # リリースノート・新機能ガイド（架空）
 ├── eval/
 │   ├── run_eval.py         # 精度評価スクリプト（ベクトル vs ハイブリッド）
 │   ├── generate_dataset.py # 評価用データセット生成
 │   ├── metrics.py          # 評価指標（LLM judge・文字類似度）
-│   ├── dataset.json        # 評価用データセット
+│   ├── dataset.json        # 評価用データセット（202問）
 │   └── results/            # 評価結果CSV
 ├── rag/
 │   ├── agent.py            # LLM回答生成・自己改善ループ
@@ -116,15 +116,6 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 │   ├── retriever.py        # 検索結果評価・スコア判定・フォールバック処理
 │   ├── ui.py               # Streamlit UIヘルパー
 │   └── vectorstore.py      # ハイブリッド検索（BM25 + Janome + ベクトル）
-├── tests/
-│   ├── conftest.py         # テスト設定
-│   ├── test_query.py       # query.py のユニットテスト
-│   ├── test_prompts.py     # prompts.py のユニットテスト
-│   └── test_api/
-│       ├── test_chat.py    # チャットAPIのテスト
-│       ├── test_health.py  # ヘルスチェックのテスト
-│       ├── test_logs.py    # ログAPI認証のテスト
-│       └── test_cors.py    # CORS設定のテスト
 ├── storage/
 │   └── chroma/             # ChromaDB 永続化データ
 └── images/                 # README用画像
@@ -143,12 +134,9 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 | LLM | OpenAI API（via LangChain） |
 | Embedding | OpenAI text-embedding-3-small |
 | Vector DB | ChromaDB |
-| Document Loader | PDF（pypdf） |
 | 検索方式 | BM25 + ベクトル検索（ハイブリッド） |
 | コンテナ | Docker / Docker Compose |
 | デプロイ | Google Cloud Run |
-| CI/CD | Google Cloud Build |
-| テスト | pytest |
 
 ---
 
@@ -302,39 +290,6 @@ streamlit run app.py
 
 > ローカル実行時は Streamlit が `API_URL=http://localhost:8000` をデフォルトで使用します。  
 > 別ホストに変更する場合は `.env` に `API_URL=http://<host>:<port>` を追記してください。
-
-### 4. Cloud Run へのデプロイ（GCP）
-
-> Google Cloud SDK（`gcloud`）のインストール・認証が必要です。
-
-**初回のみ：Secret Manager に OpenAI API キーを登録**
-
-```bash
-echo -n "your_api_key_here" | gcloud secrets create OPENAI_API_KEY --data-file=-
-```
-
-**CI/CD（自動化済み）**
-
-| トリガー | 自動実行内容 | 設定ファイル |
-|:---|:---|:---|
-| 任意ブランチへの push | pytest を自動実行（CI） | `.github/workflows/ci.yml` |
-| main への push | ビルド → Cloud Run へ自動デプロイ（CD） | `cloudbuild.yaml` |
-
-> Cloud Build トリガー（`deploy-on-push-to-main`）が main への push を検知し、ビルド・プッシュ・デプロイを自動実行します。
-
-**手動デプロイ（初回または任意のタイミング）**
-
-```bash
-gcloud builds submit --config cloudbuild.yaml
-```
-
-**ポート一覧**
-
-| 環境 | Streamlit | FastAPI |
-|:---|:---|:---|
-| ローカル（docker compose） | `8080` | `8000` |
-| ローカル（直接起動） | `8501` | `8000` |
-| Cloud Run | `8080` | — |
 
 ---
 
