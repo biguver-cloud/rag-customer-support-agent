@@ -29,6 +29,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from rag.config import MODEL_NAME, TEMPERATURE, TOP_K, AGENT_ROUNDS
 from rag.vectorstore import open_vectorstore, hybrid_retrieve_with_score, _vector_only_search
 from rag.agent import agent_answer
+from rag.query import rewrite_query_for_search
 from eval.metrics import text_similarity, llm_judge
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -57,18 +58,25 @@ def _generate_answer(search_results: list, question: str, llm) -> str:
 def run():
     parser = argparse.ArgumentParser()
     parser.add_argument("--temperature", type=float, default=TEMPERATURE)
+    parser.add_argument("--rewrite", action="store_true", help="クエリリライトを有効にする")
+    parser.add_argument("--dataset", type=str, default=None, help="使用するデータセットファイル名（eval/配下）")
     args = parser.parse_args()
     temperature = args.temperature
+    use_rewrite = args.rewrite
 
     load_dotenv()
+
+    dataset_path = Path(__file__).resolve().parent / args.dataset if args.dataset else DATASET_PATH
 
     print("=" * 55)
     print("📊 RAG 精度評価：ベクトル検索 vs ハイブリッド検索")
     print(f"   Temperature: {temperature}")
+    print(f"   クエリリライト: {'あり' if use_rewrite else 'なし'}")
+    print(f"   データセット: {dataset_path.name}")
     print("=" * 55)
 
     # データセット読み込み
-    with open(DATASET_PATH, encoding="utf-8") as f:
+    with open(dataset_path, encoding="utf-8") as f:
         dataset = json.load(f)
 
     # expected_answer が空のものを除外
@@ -85,7 +93,9 @@ def run():
     llm = ChatOpenAI(model=MODEL_NAME, temperature=temperature)
 
     RESULTS_DIR.mkdir(exist_ok=True)
-    results_path = RESULTS_DIR / f"eval_{datetime.now().strftime('%Y%m%d_%H%M%S')}_temp{temperature}.csv"
+    rewrite_label = "_rewrite" if use_rewrite else ""
+    dataset_label = f"_{dataset_path.stem}" if args.dataset else ""
+    results_path = RESULTS_DIR / f"eval_{datetime.now().strftime('%Y%m%d_%H%M%S')}_temp{temperature}{dataset_label}{rewrite_label}.csv"
 
     rows = []
 
@@ -97,14 +107,18 @@ def run():
 
         print(f"[{i}/{len(valid)}] {question}")
 
+        search_query = rewrite_query_for_search(question, llm=llm) if use_rewrite else question
+        if use_rewrite:
+            print(f"  ✏️  リライト: {search_query}")
+
         # ── ベクトル検索 ──────────────────────────────────
         print("  🔍 ベクトル検索...")
-        vec_results = _vector_only_search(db, question, k=TOP_K, category=category)
+        vec_results = _vector_only_search(db, search_query, k=TOP_K, category=category)
         vec_answer  = _generate_answer(vec_results, question, llm)
 
         # ── ハイブリッド検索 ──────────────────────────────
         print("  🔍 ハイブリッド検索...")
-        hyb_results = hybrid_retrieve_with_score(db, question, k=TOP_K, category=category)
+        hyb_results = hybrid_retrieve_with_score(db, search_query, k=TOP_K, category=category)
         hyb_answer  = _generate_answer(hyb_results, question, llm)
 
         # ── ② LLM as a Judge ─────────────────────────────
