@@ -1,0 +1,1416 @@
+[
+  {
+    "category": "service",
+    "question": "解約手続きはどのように行いますか？",
+    "expected_answer": "解約手続きは管理画面にログインし、「契約情報」画面から実施します。電話やメールでの解約は受け付けていません。",
+    "id": "q001",
+    "question_original": "解約手続きはどのように行いますか？"
+  },
+  {
+    "category": "service",
+    "question": "解約申請した後って、いつまでサービス使えるんでしょうか？",
+    "expected_answer": "解約申請後も契約期間の終了日まではサービスを利用可能です。解約は次回更新日から有効となります。",
+    "id": "q002",
+    "question_original": "解約申請後、いつまでサービスを利用できますか？"
+  },
+  {
+    "category": "service",
+    "question": "無料トライアル中に解約したいんですけど、どうすればいいでしょうか？",
+    "expected_answer": "無料トライアル期間中はいつでも解約が可能で、トライアル期間内に解約が完了すれば料金は発生しません。",
+    "id": "q003",
+    "question_original": "無料トライアル中に解約するにはどうすればいいですか？"
+  },
+  {
+    "category": "service",
+    "question": "途中で解約しちゃった場合って、返金されることってあるんでしょうかね？",
+    "expected_answer": "原則として、契約期間途中での解約による返金は行っていません。",
+    "id": "q004",
+    "question_original": "途中で解約した場合、返金は受けられますか？"
+  },
+  {
+    "category": "service",
+    "question": "解約したのに請求が来ちゃったんですけど、どうしたらいいですかね？",
+    "expected_answer": "解約は次回更新日から有効となるため、更新日前の請求は発生します。",
+    "id": "q005",
+    "question_original": "解約後に請求が来た場合、どうすればいいですか？"
+  },
+  {
+    "category": "service",
+    "question": "トライアルが終わった後に解約を忘れちゃった場合って、どうなっちゃうんでしょうか？",
+    "expected_answer": "トライアル終了日までに解約が行われない場合、自動的に有料プランへ移行します。",
+    "id": "q006",
+    "question_original": "トライアル終了後に解約を忘れた場合、どうなりますか？"
+  },
+  {
+    "category": "service",
+    "question": "プランを変更したときに、返金とかってあるんでしょうか？",
+    "expected_answer": "プラン変更時、アップグレードの場合は差額を日割りで請求しますが、返金は発生しません。",
+    "id": "q007",
+    "question_original": "プラン変更時の返金はありますか？"
+  },
+  {
+    "category": "service",
+    "question": "ダウングレードしたら、返金ってあるんでしょうか？",
+    "expected_answer": "ダウングレードは次回更新日から適用され、既に支払済みの料金について返金は行われません。",
+    "id": "q008",
+    "question_original": "ダウングレードした場合、返金はありますか？"
+  },
+  {
+    "category": "service",
+    "question": "解約手続きって、結局誰がやらなきゃいけないんでしょうか？",
+    "expected_answer": "解約手続きは必ず契約者本人が行う必要があります。",
+    "id": "q009",
+    "question_original": "解約手続きは誰が行う必要がありますか？"
+  },
+  {
+    "category": "service",
+    "question": "解約した後って、アカウントの情報ってどうなるんでしょうか？",
+    "expected_answer": "解約完了後、一定期間を経てアカウント情報は削除されます。",
+    "id": "q010",
+    "question_original": "解約後にアカウント情報はどうなりますか？"
+  },
+  {
+    "category": "service",
+    "question": "返金の対象になっちゃう例外って、どんなのがあるんでしょうかね？",
+    "expected_answer": "返金対象となる例外は、重大なシステム障害や二重請求など、明らかな請求処理上の不備が確認された場合です。",
+    "id": "q011",
+    "question_original": "返金対象となる例外は何ですか？"
+  },
+  {
+    "category": "service",
+    "question": "解約する前に、何か確認しておいた方がいいことってありますかね？",
+    "expected_answer": "解約前に必要なデータ（対応履歴・CSV等）は必ず事前にダウンロードしておく必要があります。",
+    "id": "q012",
+    "question_original": "解約前に何を確認しておくべきですか？"
+  },
+  {
+    "category": "service",
+    "question": "SampleDeskのサービスって、基本的にどんな機能があるんですかね？",
+    "expected_answer": "SampleDeskのサービスは、顧客からの問い合わせに対して一貫した品質と適切な対応を行うための機能を提供しています。具体的な機能については公式ドキュメントをご参照ください。",
+    "id": "q013",
+    "question_original": "SampleDeskのサービスの基本的な機能について教えてください。"
+  },
+  {
+    "category": "service",
+    "question": "料金プランの詳しいことって教えてもらえるかな？",
+    "expected_answer": "料金プランの内容や一般的な課金ルールについては、公式サイトにて詳細をご確認いただけます。",
+    "id": "q014",
+    "question_original": "料金プランの詳細を教えてもらえますか？"
+  },
+  {
+    "category": "service",
+    "question": "解約の手続きってどうやってやればいいんでしょうか？",
+    "expected_answer": "解約方法および手続きの流れについては、公式ドキュメントに記載されていますので、そちらをご確認ください。",
+    "id": "q015",
+    "question_original": "解約手続きはどのように行いますか？"
+  },
+  {
+    "category": "service",
+    "question": "急に返金ポリシーについて知りたくなったんですが、詳しく教えてもらえますか？",
+    "expected_answer": "返金ポリシーに関する一般的な説明は公式サイトに記載されていますので、そちらをご覧ください。",
+    "id": "q016",
+    "question_original": "返金ポリシーについて教えてください。"
+  },
+  {
+    "category": "service",
+    "question": "操作方法についてちょっと聞きたいんですけど、どこに問い合わせればいいんでしょうか？",
+    "expected_answer": "操作方法に関する一般的な質問については、公式ドキュメントを参照することをお勧めします。",
+    "id": "q017",
+    "question_original": "操作方法についての一般的な質問はどこに問い合わせればいいですか？"
+  },
+  {
+    "category": "service",
+    "question": "契約の状況についてちょっと聞きたいんですけど、どうやって問い合わせたらいいでしょうか？",
+    "expected_answer": "契約状況や利用履歴に依存する内容については、サポート窓口にて個別に確認が必要です。",
+    "id": "q018",
+    "question_original": "契約状況に関する問い合わせはどのように行いますか？"
+  },
+  {
+    "category": "service",
+    "question": "返金ができるかどうかって、どんな感じで判断されるんでしょうか？",
+    "expected_answer": "返金可否の判断が必要なケースについては、サポート窓口での確認が必要です。",
+    "id": "q019",
+    "question_original": "返金が可能かどうかはどのように判断されますか？"
+  },
+  {
+    "category": "service",
+    "question": "請求内容についてちょっと確認したいんですけど、どこに聞けばいいでしょうか？",
+    "expected_answer": "請求内容に関する個別確認が必要な場合は、サポート窓口にお問い合わせください。",
+    "id": "q020",
+    "question_original": "請求内容に関する確認はどこにすればいいですか？"
+  },
+  {
+    "category": "service",
+    "question": "急にシステムに不具合が出たんですけど、こういう時ってどうしたらいいんでしょうか？",
+    "expected_answer": "システム障害や不具合が疑われる場合は、サポート窓口にご連絡いただく必要があります。",
+    "id": "q021",
+    "question_original": "システム障害が疑われる場合はどうすればいいですか？"
+  },
+  {
+    "category": "service",
+    "question": "法的な質問って、どんな感じで対応してるんですかね？",
+    "expected_answer": "法的判断を伴う内容については、明確な回答を行わず、サポート窓口への誘導に留めます。",
+    "id": "q022",
+    "question_original": "法的な質問にはどのように対応していますか？"
+  },
+  {
+    "category": "service",
+    "question": "他のサービスと比べてどうなんですかね？教えてもらえると嬉しいんですが。",
+    "expected_answer": "他社サービスとの優劣比較や断定的な評価についてはお答えできません。",
+    "id": "q023",
+    "question_original": "他社サービスとの比較について教えてもらえますか？"
+  },
+  {
+    "category": "service",
+    "question": "将来の機能追加について、どこで情報を見れるのか教えてもらえますかね？",
+    "expected_answer": "将来の機能追加や開発計画に関する断定的な説明は行っておりませんので、ご了承ください。",
+    "id": "q024",
+    "question_original": "将来の機能追加についての情報はどこで得られますか？"
+  },
+  {
+    "category": "service",
+    "question": "急にお伺いしたいんですが、SampleDeskの料金ってどんな感じになってるんでしょうか？",
+    "expected_answer": "SampleDeskは月額課金のサブスクリプション方式で提供され、1契約（ワークスペース）あたりの料金が適用されます。",
+    "id": "q025",
+    "question_original": "SampleDeskの料金体系はどのようになっていますか？"
+  },
+  {
+    "category": "service",
+    "question": "無料トライアルって、どうやって利用すればいいんですかね？",
+    "expected_answer": "初回登録のお客様は30日間の無料トライアルを利用でき、トライアル期間中に解約すれば料金は発生しません。",
+    "id": "q026",
+    "question_original": "無料トライアルはどのように利用できますか？"
+  },
+  {
+    "category": "service",
+    "question": "トライアル期間中に解約しなかったら、どうなっちゃうんでしょうか？",
+    "expected_answer": "トライアル終了日までに解約しない場合、自動的に有料プランへ移行します。",
+    "id": "q027",
+    "question_original": "トライアル期間中に解約しなかった場合はどうなりますか？"
+  },
+  {
+    "category": "service",
+    "question": "各プランって、利用できるユーザー数の上限ってどうなってるんでしょうか？",
+    "expected_answer": "スタータープランは3名、チームプランは10名、ビジネスプランは30名、エンタープライズは31名以上の利用が可能です。",
+    "id": "q028",
+    "question_original": "各プランの利用ユーザー数の上限はどのようになっていますか？"
+  },
+  {
+    "category": "service",
+    "question": "請求書払いって、どのプランで使えるんでしたっけ？",
+    "expected_answer": "請求書払いはビジネスプラン以上で個別相談が可能ですが、審査によりご希望に添えない場合があります。",
+    "id": "q029",
+    "question_original": "請求書払いはどのプランで利用できますか？"
+  },
+  {
+    "category": "service",
+    "question": "ダウングレードする時って、何か気をつけることってありますかね？",
+    "expected_answer": "ダウングレードは次回更新日から反映され、上限を超える場合は事前にユーザー削減やデータ整理が必要です。",
+    "id": "q030",
+    "question_original": "ダウングレードの際の注意点は何ですか？"
+  },
+  {
+    "category": "service",
+    "question": "アップグレードの時って、料金ってどんなふうに計算されるんでしょうかね？",
+    "expected_answer": "アップグレードは差額を日割り計算で請求されます。",
+    "id": "q031",
+    "question_original": "アップグレードの際の料金はどのように計算されますか？"
+  },
+  {
+    "category": "service",
+    "question": "ユーザー数の上限を超えちゃった場合って、どうなるんでしょうかね？",
+    "expected_answer": "上限を超える追加はできず、上位プランへの変更または個別見積をご案内します。",
+    "id": "q032",
+    "question_original": "ユーザー数の上限を超えた場合はどうなりますか？"
+  },
+  {
+    "category": "service",
+    "question": "AIサポート機能を追加したいんですけど、どうやってやればいいんでしょうか？",
+    "expected_answer": "AIサポート機能の追加は月額3,000円（税込）で、月間利用上限を拡張できます。",
+    "id": "q033",
+    "question_original": "AIサポート機能の追加はどのように行いますか？"
+  },
+  {
+    "category": "service",
+    "question": "監査ログの出力オプションって、具体的にはどんな感じなんでしょうか？",
+    "expected_answer": "監査ログ出力は月額2,000円（税込）で、管理操作の履歴を出力できるようになります。",
+    "id": "q034",
+    "question_original": "監査ログ出力のオプションはどのような内容ですか？"
+  },
+  {
+    "category": "service",
+    "question": "SLAサポートって具体的にはどんなサービスなんですかね？",
+    "expected_answer": "SLAサポートは月額5,000円（税込）で、問い合わせの優先対応を提供します。",
+    "id": "q035",
+    "question_original": "SLAサポートはどのようなサービスですか？"
+  },
+  {
+    "category": "service",
+    "question": "すみません、サポート窓口の連絡先ってどこにあるんでしょうか？",
+    "expected_answer": "サポート窓口はsupport@sampledesk.exampleで、受付時間は平日9:00～18:00です。",
+    "id": "q036",
+    "question_original": "サポート窓口の連絡先はどこですか？"
+  },
+  {
+    "category": "service",
+    "question": "急にお聞きしたいんですが、SampleDeskの請求って具体的にはどうなるんでしょうか？",
+    "expected_answer": "SampleDeskは月額課金のサブスクリプションサービスで、1契約あたり月1回請求されます。料金はすべて税込価格です。",
+    "id": "q037",
+    "question_original": "SampleDeskの請求はどのように行われますか？"
+  },
+  {
+    "category": "service",
+    "question": "請求書払いって、どのプランで使えるんですかね？",
+    "expected_answer": "請求書払いはビジネスプラン以上で利用可能で、事前審査が必要です。",
+    "id": "q038",
+    "question_original": "請求書払いはどのプランで利用できますか？"
+  },
+  {
+    "category": "service",
+    "question": "支払い方法って、どんな選択肢があるんですかね？",
+    "expected_answer": "支払い方法はクレジットカード決済（Visa、Mastercard、JCB、American Express）と、条件付きの請求書払いがあります。",
+    "id": "q039",
+    "question_original": "支払い方法にはどのような選択肢がありますか？"
+  },
+  {
+    "category": "service",
+    "question": "請求書って、どんな感じで発行されるんでしょうか？",
+    "expected_answer": "請求書は請求書払いの場合、PDF形式で発行され、発行後に登録メールアドレス宛に送付されます。",
+    "id": "q040",
+    "question_original": "請求書はどのように発行されますか？"
+  },
+  {
+    "category": "service",
+    "question": "アップグレードしたら、請求ってどうなるんでしょうか？",
+    "expected_answer": "アップグレードは申請後即時反映され、当月分は差額を日割り計算で請求されます。",
+    "id": "q041",
+    "question_original": "アップグレードした場合の請求はどうなりますか？"
+  },
+  {
+    "category": "service",
+    "question": "ダウングレードした場合の請求って、どうなるんでしょうかね？",
+    "expected_answer": "ダウングレードは次回更新日から反映され、既に支払済みの料金については返金は行われません。",
+    "id": "q042",
+    "question_original": "ダウングレードした場合の請求はどうなりますか？"
+  },
+  {
+    "category": "service",
+    "question": "支払いが遅れちゃった場合って、どう対応すればいいんでしょうかね？",
+    "expected_answer": "支払いが確認できない場合、通知を送信し、一定期間後にサービスを停止することがあります。未払いが続くと契約解除の可能性もあります。",
+    "id": "q043",
+    "question_original": "支払いが遅れた場合の対応はどうなりますか？"
+  },
+  {
+    "category": "service",
+    "question": "請求内容を確認する方法って、どんな感じになってますかね？",
+    "expected_answer": "契約者は管理画面にログインし、「アカウント設定」→「請求・支払い情報」を選択することで請求内容を確認できます。",
+    "id": "q044",
+    "question_original": "請求内容を確認する方法は？"
+  },
+  {
+    "category": "service",
+    "question": "あの、もし誤請求があった場合って、どうしたらいいんでしょうか？",
+    "expected_answer": "誤請求があった場合は、契約者名、対象月、該当する請求内容、確認したい点を添えてお問い合わせください。",
+    "id": "q045",
+    "question_original": "誤請求があった場合、どうすればいいですか？"
+  },
+  {
+    "category": "service",
+    "question": "領収書って、いつ頃発行されるんでしょうか？",
+    "expected_answer": "領収書はクレジットカード決済完了後に管理画面からダウンロード可能です。",
+    "id": "q046",
+    "question_original": "領収書はどのタイミングで発行されますか？"
+  },
+  {
+    "category": "service",
+    "question": "支払い方法を変えたいんですけど、どうしたらいいでしょうかね？",
+    "expected_answer": "支払い方法は管理画面から変更可能です。",
+    "id": "q047",
+    "question_original": "支払い方法を変更するにはどうすればいいですか？"
+  },
+  {
+    "category": "service",
+    "question": "請求書払いの支払い期限って、いつになるんでしょうか？",
+    "expected_answer": "請求書払いの支払い期限は原則、請求書発行日から30日以内です。",
+    "id": "q048",
+    "question_original": "請求書払いの支払い期限はいつですか？"
+  },
+  {
+    "category": "service",
+    "question": "SampleDeskって、1人でいくつかアカウント持てるんでしょうか？",
+    "expected_answer": "原則としてできません。1人1アカウントでの利用をお願いします。",
+    "id": "q049",
+    "question_original": "SampleDeskでは1人で複数のアカウントを持つことはできますか？"
+  },
+  {
+    "category": "service",
+    "question": "すみません、管理者の権限って、後から変更できるもんなんでしょうか？",
+    "expected_answer": "はい。既存の管理者が権限を変更することで対応可能です。",
+    "id": "q050",
+    "question_original": "管理者の権限を後から変更することは可能ですか？"
+  },
+  {
+    "category": "service",
+    "question": "権限によって見える情報って、やっぱり違ったりするんでしょうか？",
+    "expected_answer": "はい。権限に応じて、操作可能な範囲や表示内容が異なります。",
+    "id": "q051",
+    "question_original": "権限によって見える情報は異なりますか？"
+  },
+  {
+    "category": "service",
+    "question": "ユーザーを追加したいんですけど、どうすればいいでしょうか？",
+    "expected_answer": "管理者は管理画面からユーザーを招待できます。手順に従って招待メールを送信してください。",
+    "id": "q052",
+    "question_original": "ユーザーを追加するにはどうすればいいですか？"
+  },
+  {
+    "category": "service",
+    "question": "アカウントを削除したいなと思っているんですけど、どんな時に削除しなきゃいけないんでしょうか？",
+    "expected_answer": "退職者や利用しなくなったユーザーは速やかに削除してください。削除後、そのユーザーはSampleDeskにログインできなくなります。",
+    "id": "q053",
+    "question_original": "アカウントを削除する必要があるのはどのような場合ですか？"
+  },
+  {
+    "category": "service",
+    "question": "管理者権限って、どうやってうまく管理すればいいんでしょうかね？",
+    "expected_answer": "管理者権限は必要最小限の人数に付与し、定期的にアカウント一覧を確認して不要なアカウントは削除してください。",
+    "id": "q054",
+    "question_original": "管理者権限はどのように管理すればよいですか？"
+  },
+  {
+    "category": "service",
+    "question": "すみません、急に聞くんですが、SampleDeskってどうやってログインするんでしょうか？",
+    "expected_answer": "ログインはメールアドレスとパスワードで行います。",
+    "id": "q055",
+    "question_original": "SampleDeskのログイン方法は何ですか？"
+  },
+  {
+    "category": "service",
+    "question": "パスワードって、どれくらいの頻度で変えた方がいいんでしょうかね？",
+    "expected_answer": "不正アクセス防止のため、パスワードの定期的な変更を推奨します。",
+    "id": "q056",
+    "question_original": "パスワードの変更はどのくらいの頻度で行うべきですか？"
+  },
+  {
+    "category": "service",
+    "question": "権限の変更って、どうやってやればいいんでしょうか？",
+    "expected_answer": "管理者はいつでもユーザーの権限を変更でき、変更内容は即時反映されます。",
+    "id": "q057",
+    "question_original": "権限変更はどのように行いますか？"
+  },
+  {
+    "category": "service",
+    "question": "閲覧者権限って、主にどんな人たちが使ってるんですかね？",
+    "expected_answer": "閲覧者権限の主な利用者は管理職や状況把握のみを行うメンバーです。",
+    "id": "q058",
+    "question_original": "閲覧者権限の主な利用者は誰ですか？"
+  },
+  {
+    "category": "service",
+    "question": "問い合わせの対応ルールって、実際には誰が管理してるんですかね？",
+    "expected_answer": "管理者が問い合わせ対応ルールやFAQの管理を行います。",
+    "id": "q059",
+    "question_original": "問い合わせ対応ルールの管理は誰が行いますか？"
+  },
+  {
+    "category": "service",
+    "question": "操作ログって、どうやって記録されるんでしょうか？",
+    "expected_answer": "操作ログは管理目的で記録され、提供範囲はプランにより異なります。",
+    "id": "q060",
+    "question_original": "操作ログはどのように記録されますか？"
+  },
+  {
+    "category": "service",
+    "question": "急にSampleDeskを使ってみたいと思ったんですが、始めるにはどうしたらいいんでしょうか？",
+    "expected_answer": "SampleDeskの利用開始は、アカウント登録、初期設定、問い合わせの取り込み、社内FAQ・対応ルールの登録、運用開始の5ステップで進みます。",
+    "id": "q061",
+    "question_original": "SampleDeskの利用を始めるにはどうすればいいですか？"
+  },
+  {
+    "category": "service",
+    "question": "アカウント登録のやり方って、どうすればいいんでしょうか？",
+    "expected_answer": "アカウント登録は、公式サイトにアクセスし、「無料トライアルを開始」または「新規登録」を選択し、必要情報を入力後、確認メールの案内に従ってログインします。",
+    "id": "q062",
+    "question_original": "アカウント登録の手順を教えてください。"
+  },
+  {
+    "category": "service",
+    "question": "初期設定って、具体的に何をやればいいんでしょうかね？",
+    "expected_answer": "初期設定では、会社情報の登録、タイムゾーン・通知設定の確認、ユーザー登録、問い合わせ受付設定を行います。",
+    "id": "q063",
+    "question_original": "初期設定では何を行う必要がありますか？"
+  },
+  {
+    "category": "service",
+    "question": "問い合わせって、どうやって受け取ることができるんでしょうか？",
+    "expected_answer": "問い合わせは、Webフォームからの問い合わせや専用メールアドレスへの問い合わせで受信できます。受信した問い合わせはダッシュボードに自動で表示されます。",
+    "id": "q064",
+    "question_original": "問い合わせはどのように受信できますか？"
+  },
+  {
+    "category": "service",
+    "question": "社内のFAQとか対応ルールって、いつ頃登録したらいいんでしょうかね？",
+    "expected_answer": "運用開始前に社内FAQや対応ルールを登録することを推奨します。これにより、対応品質のばらつきを防ぎます。",
+    "id": "q065",
+    "question_original": "社内FAQや対応ルールはいつ登録すればいいですか？"
+  },
+  {
+    "category": "service",
+    "question": "運用を始めた後の問い合わせ対応って、基本的にはどうすればいいんですかね？",
+    "expected_answer": "運用開始後は、担当者を割り当て、対応内容を入力し、ステータスを「完了」に変更する基本操作を行います。",
+    "id": "q066",
+    "question_original": "運用開始後の問い合わせ対応の基本操作は何ですか？"
+  },
+  {
+    "category": "service",
+    "question": "すみません、過去に問い合わせた履歴って、どうやって確認できるんですかね？",
+    "expected_answer": "過去の問い合わせは、管理画面で検索し、対応履歴を参照・共有することができます。",
+    "id": "q067",
+    "question_original": "過去の問い合わせ履歴はどのように確認できますか？"
+  },
+  {
+    "category": "service",
+    "question": "困ったときって、サポートってどうやって使えばいいんでしょうか？",
+    "expected_answer": "操作方法や設定で不明点がある場合は、管理画面内の問い合わせフォームやメールでの問い合わせを利用できます。",
+    "id": "q068",
+    "question_original": "困ったときのサポートはどのように利用できますか？"
+  },
+  {
+    "category": "service",
+    "question": "すみません、サポート窓口の連絡先ってどこにあるんでしょうか？",
+    "expected_answer": "サポート窓口はsupport@sampledesk.exampleで、受付時間は平日9:00～18:00です。",
+    "id": "q069",
+    "question_original": "サポート窓口の連絡先はどこですか？"
+  },
+  {
+    "category": "service",
+    "question": "SampleDeskの無料トライアルって、どれくらいの期間なんでしょうかね？",
+    "expected_answer": "初回登録時には30日間の無料トライアルが適用されます。",
+    "id": "q070",
+    "question_original": "SampleDeskの無料トライアルはどのくらいの期間ですか？"
+  },
+  {
+    "category": "service",
+    "question": "ユーザー登録の時って、何を設定しなきゃいけないんでしょうか？",
+    "expected_answer": "ユーザー登録では、利用するメンバーを招待し、役割（管理者、担当者、閲覧者）を設定する必要があります。",
+    "id": "q071",
+    "question_original": "ユーザー登録では何を設定する必要がありますか？"
+  },
+  {
+    "category": "service",
+    "question": "すみません、問い合わせ用のメールアドレスってどうやって設定すればいいんでしょうか？",
+    "expected_answer": "問い合わせ受付設定で、問い合わせ用メールアドレスを設定することができます。",
+    "id": "q072",
+    "question_original": "問い合わせ用のメールアドレスはどのように設定しますか？"
+  },
+  {
+    "category": "service",
+    "question": "SampleDeskって、どんなサービスなんでしょうかね？",
+    "expected_answer": "SampleDeskは、企業の問い合わせ対応業務を効率化するクラウド型の問い合わせ管理・業務支援ツールです。",
+    "id": "q073",
+    "question_original": "SampleDeskはどのようなサービスですか？"
+  },
+  {
+    "category": "service",
+    "question": "すみません、問い合わせの一元管理って具体的にはどうやってやってるんですかね？",
+    "expected_answer": "SampleDeskでは、メールやWebフォームから届く問い合わせを一元管理し、対応状況や履歴を可視化します。",
+    "id": "q074",
+    "question_original": "問い合わせの一元管理はどのように行われますか？"
+  },
+  {
+    "category": "service",
+    "question": "AIサポート機能って、具体的にはどんな感じなんでしょうか？",
+    "expected_answer": "AIサポート機能では、問い合わせ内容に応じた回答候補の提示や、社内FAQ、過去の対応履歴を参照したサポートを提供します。",
+    "id": "q075",
+    "question_original": "AIサポート機能はどのようなものですか？"
+  },
+  {
+    "category": "service",
+    "question": "すみません、SampleDeskを使うにはどんな環境が必要なんでしょうか？",
+    "expected_answer": "SampleDeskはインターネット接続環境があれば利用可能で、PCブラウザでの利用を想定しています。",
+    "id": "q076",
+    "question_original": "SampleDeskを利用するための環境は何ですか？"
+  },
+  {
+    "category": "service",
+    "question": "導入したら、どんな効果があるのかなって思ってるんですが、教えてもらえますか？",
+    "expected_answer": "導入による効果には、問い合わせ対応時間の短縮や対応漏れ・二重対応の防止、新人スタッフの教育コスト削減などがあります。",
+    "id": "q077",
+    "question_original": "導入による効果にはどのようなものがありますか？"
+  },
+  {
+    "category": "service",
+    "question": "問い合わせの対応状況って、どうやって管理されてるんでしょうか？",
+    "expected_answer": "SampleDeskでは、対応ステータスを未対応、対応中、完了の3つに分けて管理します。",
+    "id": "q078",
+    "question_original": "問い合わせの対応状況はどのように管理されますか？"
+  },
+  {
+    "category": "service",
+    "question": "過去の問い合わせ履歴って、どうやって検索すればいいんでしょうかね？",
+    "expected_answer": "SampleDeskでは、過去の問い合わせ履歴を検索する機能があり、キーワードによる絞り込みも可能です。",
+    "id": "q079",
+    "question_original": "過去の問い合わせ履歴はどのように検索できますか？"
+  },
+  {
+    "category": "service",
+    "question": "新人スタッフを早く戦力にしたいんですけど、どんな支援があるんでしょうかね？",
+    "expected_answer": "SampleDeskは、問い合わせ対応の属人化を解消し、対応履歴の共有・引き継ぎを通じて新人スタッフの早期戦力化を支援します。",
+    "id": "q080",
+    "question_original": "新人スタッフの早期戦力化はどのように支援されますか？"
+  },
+  {
+    "category": "service",
+    "question": "すみません、FAQとかマニュアルの管理って、具体的にはどういう感じでやってるんですかね？",
+    "expected_answer": "SampleDeskでは、FAQやマニュアルの登録・編集が可能で、カテゴリ分けによる整理やよく参照されるFAQの可視化が行えます。",
+    "id": "q081",
+    "question_original": "FAQやマニュアルの管理はどのように行われますか？"
+  },
+  {
+    "category": "service",
+    "question": "問い合わせの件数って、どうやって集計してるんでしょうかね？",
+    "expected_answer": "SampleDeskでは、問い合わせ件数の集計を期間別に行い、対応状況の簡易レポートも提供します。",
+    "id": "q082",
+    "question_original": "問い合わせ件数の集計はどのように行われますか？"
+  },
+  {
+    "category": "service",
+    "question": "問い合わせの対応って、具体的にはどんな感じで運用されてるんですかね？",
+    "expected_answer": "SampleDeskは、業務ルールに基づいた対応を行い、判断が必要な場合には案内に留める対応ができる設計です。",
+    "id": "q083",
+    "question_original": "問い合わせ対応方針はどのように運用されますか？"
+  },
+  {
+    "category": "service",
+    "question": "急にサポート窓口の連絡先ってどこか教えてもらえますかね？",
+    "expected_answer": "サポート窓口はsupport@sampledesk.exampleで、受付時間は平日9:00～18:00です。",
+    "id": "q084",
+    "question_original": "サポート窓口の連絡先はどこですか？"
+  },
+  {
+    "category": "company",
+    "question": "株式会社 SampleSolutionsって、設立日っていつなんでしょうか？",
+    "expected_answer": "株式会社 SampleSolutionsは2021年7月に設立されました。",
+    "id": "q085",
+    "question_original": "株式会社 SampleSolutionsの設立日はいつですか？"
+  },
+  {
+    "category": "company",
+    "question": "SampleDeskって、どんな主な機能があるのか教えてもらえますかね？",
+    "expected_answer": "SampleDeskの主な機能には、問い合わせ管理ダッシュボード、対応ステータス管理、社内FAQ・業務マニュアル登録機能、対応履歴の検索・閲覧、簡易レポート機能があります。",
+    "id": "q086",
+    "question_original": "SampleDeskの主な機能には何がありますか？"
+  },
+  {
+    "category": "company",
+    "question": "あの、SampleDeskってどんな企業向けなんですかね？気になってて。",
+    "expected_answer": "SampleDeskは中小企業およびスタートアップを対象に、問い合わせ対応業務の効率化を目的としています。",
+    "id": "q087",
+    "question_original": "SampleDeskはどのような企業を対象にしていますか？"
+  },
+  {
+    "category": "company",
+    "question": "すみません、料金プランってどんなのがあるんでしょうか？",
+    "expected_answer": "料金プランには、スタータープラン（月額3,000円）、チームプラン（月額8,000円）、ビジネスプラン（月額15,000円）があり、すべて月額契約です。",
+    "id": "q088",
+    "question_original": "料金プランにはどのようなものがありますか？"
+  },
+  {
+    "category": "company",
+    "question": "初月のトライアルって、やっぱりあるんですかね？",
+    "expected_answer": "SampleDeskでは初月無料トライアルが提供されています。",
+    "id": "q089",
+    "question_original": "初月のトライアルはありますか？"
+  },
+  {
+    "category": "company",
+    "question": "サポートの対応時間って、いつなんでしょうか？",
+    "expected_answer": "サポート対応時間は平日9:00～18:00です。",
+    "id": "q090",
+    "question_original": "サポート対応時間はいつですか？"
+  },
+  {
+    "category": "company",
+    "question": "SampleDeskのセキュリティ対策って、具体的にどんな感じなんですかね？",
+    "expected_answer": "SampleDeskは通信の暗号化やアクセス権限管理により、安心して利用できる環境を提供しています。",
+    "id": "q091",
+    "question_original": "SampleDeskのセキュリティ対策には何がありますか？"
+  },
+  {
+    "category": "company",
+    "question": "すみません、問い合わせ管理プラットフォームってどんな特徴があるんでしょうか？",
+    "expected_answer": "SampleDeskは、問い合わせ内容を整理・可視化し、経験の浅いスタッフでも対応しやすい環境を提供する業務効率を重視した設計が特徴です。",
+    "id": "q092",
+    "question_original": "問い合わせ管理プラットフォームの特徴は何ですか？"
+  },
+  {
+    "category": "company",
+    "question": "すみません、導入企業ってどれくらいあるんでしょうかね？",
+    "expected_answer": "2025年時点での導入企業数は350社です。",
+    "id": "q093",
+    "question_original": "導入企業数はどのくらいですか？"
+  },
+  {
+    "category": "company",
+    "question": "あの、継続利用率って大体どれくらいなんでしょうかね？",
+    "expected_answer": "SampleDeskの継続利用率は94％です。",
+    "id": "q094",
+    "question_original": "継続利用率はどのくらいですか？"
+  },
+  {
+    "category": "company",
+    "question": "問い合わせって、どうやってやればいいんでしょうかね？",
+    "expected_answer": "問い合わせはメールサポートや管理画面内の問い合わせフォームを通じて行えます。",
+    "id": "q095",
+    "question_original": "問い合わせはどのように行えますか？"
+  },
+  {
+    "category": "company",
+    "question": "すみません、SampleDeskの導入ってどうやってやればいいんでしょうかね？",
+    "expected_answer": "SampleDeskは初期設定を最小限に抑え、既存の業務フローを大きく変えずに導入可能です。",
+    "id": "q096",
+    "question_original": "SampleDeskの導入はどのように行いますか？"
+  },
+  {
+    "category": "customer",
+    "question": "今の契約プランって、一体どんな感じなんでしょうか？",
+    "expected_answer": "現在の契約プランはチームプランです。",
+    "id": "q097",
+    "question_original": "現在の契約プランは何ですか？"
+  },
+  {
+    "category": "customer",
+    "question": "契約の開始日って、いつになるんでしょうか？",
+    "expected_answer": "契約開始日は2024年4月1日です。",
+    "id": "q098",
+    "question_original": "契約開始日はいつですか？"
+  },
+  {
+    "category": "customer",
+    "question": "契約の更新って、いつになるんでしたっけ？",
+    "expected_answer": "契約更新日は毎月1日です。",
+    "id": "q099",
+    "question_original": "契約更新日はいつになりますか？"
+  },
+  {
+    "category": "customer",
+    "question": "今使ってる支払い方法って、何だったっけ？",
+    "expected_answer": "支払い方法はクレジットカード決済です。",
+    "id": "q100",
+    "question_original": "利用している支払い方法は何ですか？"
+  },
+  {
+    "category": "customer",
+    "question": "登録してるユーザーの数って、今どれくらいなんですかね？",
+    "expected_answer": "登録ユーザー数は8名です。",
+    "id": "q101",
+    "question_original": "登録ユーザー数は何名ですか？"
+  },
+  {
+    "category": "customer",
+    "question": "最近ちょっと気になってるんですけど、平均的に月にどれくらいの問い合わせがあるんでしょうか？",
+    "expected_answer": "平均月間問い合わせ件数は約120件です。",
+    "id": "q102",
+    "question_original": "平均月間問い合わせ件数はどのくらいですか？"
+  },
+  {
+    "category": "customer",
+    "question": "最近ちょっと気になってるんですが、一番よく見られてるFAQのカテゴリってどれなんでしょうか？",
+    "expected_answer": "最も参照されているFAQカテゴリは料金・契約関連とサービス仕様に関する質問です。",
+    "id": "q103",
+    "question_original": "最も参照されているFAQカテゴリは何ですか？"
+  },
+  {
+    "category": "customer",
+    "question": "最近ちょっと気になってるんですけど、サポートってどのくらいの頻度で使ってる方が多いんでしょうか？",
+    "expected_answer": "サポート利用頻度は月1〜2回です。",
+    "id": "q104",
+    "question_original": "サポート利用頻度はどのくらいですか？"
+  },
+  {
+    "category": "customer",
+    "question": "すみません、主にどんな感じで問い合わせすることができるんでしょうか？",
+    "expected_answer": "主な問い合わせ手段はメール（70%）と管理画面フォーム（30%）です。",
+    "id": "q105",
+    "question_original": "主な問い合わせ手段は何ですか？"
+  },
+  {
+    "category": "customer",
+    "question": "最近サポートを利用したんですけど、対応の満足度ってどんな感じなんでしょうか？",
+    "expected_answer": "対応満足度の平均評価は4.7/5です。",
+    "id": "q106",
+    "question_original": "対応満足度はどのくらいですか？"
+  },
+  {
+    "category": "customer",
+    "question": "導入初期って、どんな課題があったんでしょうかね？",
+    "expected_answer": "導入初期の課題はFAQの粒度が粗く、回答作成に時間がかかっていたことです。",
+    "id": "q107",
+    "question_original": "導入初期の課題は何でしたか？"
+  },
+  {
+    "category": "customer",
+    "question": "今、使ってるオプションって何なんでしょうかね？",
+    "expected_answer": "現在利用中のオプションはCSVエクスポート機能です。",
+    "id": "q108",
+    "question_original": "現在利用中のオプションは何ですか？"
+  },
+  {
+    "category": "technical",
+    "question": "急にログインできなくなっちゃったんですけど、どうすればいいんでしょうか？",
+    "expected_answer": "メールアドレスとパスワードが正しいか確認してください。パスワードを忘れた場合は再設定できます。再設定メールが届かない場合は迷惑メールフォルダを確認し、届かない場合はサポートにお問い合わせください。",
+    "id": "q109",
+    "question_original": "ログインできない場合、どうすればいいですか？"
+  },
+  {
+    "category": "technical",
+    "question": "急にメールが受信できなくなっちゃったんですけど、どうしたらいいでしょうか？",
+    "expected_answer": "専用メールアドレスの設定を確認し、正しく入力されているか確認してください。また、受信サーバーのフィルタリング設定を見直し、ドメイン「sampledesk.example」を許可リストに追加してください。",
+    "id": "q110",
+    "question_original": "メールが受信できないのですが、どうすればいいですか？"
+  },
+  {
+    "category": "technical",
+    "question": "ダッシュボードが急に表示されなくなっちゃったんですけど、どうしたらいいんでしょうか？",
+    "expected_answer": "ブラウザのキャッシュをクリアし、推奨ブラウザの最新版を使用してください。また、JavaScriptが無効になっている場合は有効にしてください。",
+    "id": "q111",
+    "question_original": "ダッシュボードが表示されない場合の対処法は？"
+  },
+  {
+    "category": "technical",
+    "question": "CSVのエクスポートができないみたいなんですけど、これってどうしてなんでしょうか？",
+    "expected_answer": "エクスポート対象のデータが0件の場合、CSVは生成されません。検索条件を見直す必要があります。また、チームプラン以上でのみ利用可能な機能です。",
+    "id": "q112",
+    "question_original": "CSVエクスポートができない理由は何ですか？"
+  },
+  {
+    "category": "technical",
+    "question": "通知メールが届かないことが多いんですが、どうすれば改善できるんでしょうかね？",
+    "expected_answer": "通知設定画面で「メール通知」がオンになっているか確認し、送信元メールアドレス「noreply@sampledesk.example」を受信許可リストに追加してください。",
+    "id": "q113",
+    "question_original": "通知メールが届かない場合、どうすれば改善できますか？"
+  },
+  {
+    "category": "technical",
+    "question": "最近、操作がちょっと重かったり応答が遅かったりすることが多いんですけど、何か対処法とかあったりしますでしょうか？",
+    "expected_answer": "一時的なサーバー負荷の可能性があるため、しばらく待ってから再度操作してください。また、不要なブラウザタブを閉じることや、ネットワーク管理者に確認することも推奨します。",
+    "id": "q114",
+    "question_original": "操作が重い・応答が遅い場合の対処法は？"
+  },
+  {
+    "category": "technical",
+    "question": "急にデータが消えちゃったんですけど、どうやって復元すればいいでしょうか？",
+    "expected_answer": "操作ログから確認でき、削除後72時間以内であればサポートによるデータ復元が可能です。すぐにサポート窓口にお問い合わせください。",
+    "id": "q115",
+    "question_original": "データが消えた場合、どうすれば復元できますか？"
+  },
+  {
+    "category": "technical",
+    "question": "あの、パスワードの設定ってどうすればいいんでしょうか？",
+    "expected_answer": "パスワードは8文字以上で、英数字と記号を組み合わせることを推奨します。90日ごとの変更と二段階認証の設定も推奨されています。",
+    "id": "q116",
+    "question_original": "パスワードの設定について教えてください。"
+  },
+  {
+    "category": "technical",
+    "question": "二段階認証の設定って、どうやってやるんですかね？",
+    "expected_answer": "アカウント設定から「セキュリティ設定」を選択し、「二段階認証を有効にする」をクリックします。認証アプリやSMSによる確認コードの2種類に対応しています。",
+    "id": "q117",
+    "question_original": "二段階認証の設定方法は？"
+  },
+  {
+    "category": "technical",
+    "question": "サポートに問い合わせたいんですけど、どうしたらいいんでしょうか？",
+    "expected_answer": "管理画面内の問い合わせフォームまたはsupport@sampledesk.exampleへご連絡ください。受付時間は平日9:00〜18:00です。",
+    "id": "q118",
+    "question_original": "サポートに問い合わせる方法は？"
+  },
+  {
+    "category": "technical",
+    "question": "パスワードをうっかり忘れちゃったんですけど、どうしたらいいでしょうか？",
+    "expected_answer": "ログイン画面の「パスワードを忘れた方はこちら」から再設定できます。再設定メールが届かない場合は迷惑メールフォルダを確認してください。",
+    "id": "q119",
+    "question_original": "パスワードを忘れた場合、どうすればいいですか？"
+  },
+  {
+    "category": "technical",
+    "question": "メールの通知設定って、どうやって確認したらいいんでしょうか？",
+    "expected_answer": "通知設定画面を開き、「メール通知」がオンになっているか確認してください。担当者ごとの設定も個別に確認が必要です。",
+    "id": "q120",
+    "question_original": "メール通知の設定を確認するにはどうすればいいですか？"
+  },
+  {
+    "category": "technical",
+    "question": "問い合わせのステータスが全然更新されないんですけど、これってどういうことなんでしょうか？",
+    "expected_answer": "担当者がステータスを変更しても画面に反映されない場合、ブラウザのキャッシュが古い可能性があります。ページを強制リロード（Ctrl+F5）してください。",
+    "id": "q121",
+    "question_original": "問い合わせステータスが更新されないのはなぜですか？"
+  },
+  {
+    "category": "technical",
+    "question": "ファイルが添付できないんですけど、なんでなんでしょうかね？",
+    "expected_answer": "ファイル添付時にエラーが出る場合、ファイルサイズまたは形式が制限を超えている可能性があります。1ファイルあたりの上限は10MBで、対応形式はPDF、Word、Excel、PNG、JPGです。",
+    "id": "q122",
+    "question_original": "ファイルを添付できないのはどうしてですか？"
+  },
+  {
+    "category": "technical",
+    "question": "検索結果がちゃんと表示されないんですけど、これってどういう理由なんでしょうか？",
+    "expected_answer": "キーワード検索で関連する問い合わせが表示されない場合、検索インデックスの更新に時間がかかっている可能性があります。新規登録した問い合わせは最大5分かかることがあります。",
+    "id": "q123",
+    "question_original": "検索結果が正しく表示されないのはなぜですか？"
+  },
+  {
+    "category": "technical",
+    "question": "ダッシュボードの件数とレポートの件数がちょっと違うんですけど、これってどういうことなんでしょうか？",
+    "expected_answer": "ダッシュボードはリアルタイム集計、レポートは日次バッチ処理のため、タイミングによってズレが生じます。レポートは毎朝6:00に更新されるため、前日分は翌朝以降に確認してください。",
+    "id": "q124",
+    "question_original": "ダッシュボードの件数とレポートの件数が異なるのはどうしてですか？"
+  },
+  {
+    "category": "technical",
+    "question": "急にメール連携が止まっちゃったんですけど、これってどういう理由なんでしょうか？",
+    "expected_answer": "問い合わせメールが届かなくなった場合、メールサーバーの認証情報が変更されたか、SMTP設定が失効している可能性があります。設定画面で接続テストを実行してください。",
+    "id": "q125",
+    "question_original": "メール連携が突然停止した理由は何ですか？"
+  },
+  {
+    "category": "technical",
+    "question": "特定の担当者にアサインできないのって、どうしてなんでしょうかね？",
+    "expected_answer": "問い合わせを特定の担当者にアサインできない場合、そのユーザーが無効化されているか、権限が「閲覧者」になっている可能性があります。管理者がユーザー管理画面で確認してください。",
+    "id": "q126",
+    "question_original": "特定の担当者にアサインできないのはなぜですか？"
+  },
+  {
+    "category": "technical",
+    "question": "急に気になったんですけど、AIサポート機能が回答候補を全然表示しないのはなんでなんでしょうか？",
+    "expected_answer": "AIサポートの回答候補が表示されない場合、FAQデータが登録されていないか、AI機能がオフになっている可能性があります。設定画面で確認し、FAQを登録してください。",
+    "id": "q127",
+    "question_original": "AIサポート機能が回答候補を表示しないのはどうしてですか？"
+  },
+  {
+    "category": "technical",
+    "question": "CSVをインポートしようとしたらエラーが出ちゃったんですけど、これってどうしてなんでしょうか？",
+    "expected_answer": "FAQをCSVで一括インポートする際にエラーが発生する場合、CSVのフォーマットが指定のテンプレートと異なるか、文字コードが正しくない可能性があります。テンプレートをダウンロードしてください。",
+    "id": "q128",
+    "question_original": "CSVインポートでエラーが出る理由は何ですか？"
+  },
+  {
+    "category": "technical",
+    "question": "急にブラウザのキャッシュをクリアしたいんですけど、どうすればいいでしょうか？",
+    "expected_answer": "ブラウザのキャッシュをクリアするには、設定メニューからキャッシュとCookieを選択し、クリアを実行してください。これにより、古いキャッシュが削除されます。",
+    "id": "q129",
+    "question_original": "ブラウザのキャッシュをクリアする方法は？"
+  },
+  {
+    "category": "technical",
+    "question": "メールの連携設定の接続テストって、どこでできるんですかね？",
+    "expected_answer": "メール連携設定の接続テストは、設定画面の「メール連携設定」から実行できます。接続テストを行い、認証エラーが出た場合はパスワードを再設定してください。",
+    "id": "q130",
+    "question_original": "メール連携設定の接続テストはどこで行えますか？"
+  },
+  {
+    "category": "technical",
+    "question": "FAQデータがまだ登録されてないみたいなんですけど、どうしたらいいでしょうか？",
+    "expected_answer": "FAQデータが登録されていない場合、AIサポート機能は回答候補を表示しません。まずはFAQを登録してから、AI機能を有効にしてください。",
+    "id": "q131",
+    "question_original": "FAQデータが登録されていない場合、どうすればいいですか？"
+  },
+  {
+    "category": "technical",
+    "question": "CSVファイルの文字コードって、結局どれを使ったらいいんでしょうか？",
+    "expected_answer": "CSVファイルの文字コードはUTF-8（BOMなし）を使用してください。Excelで保存したCSVはShift-JISになる場合があるため、注意が必要です。",
+    "id": "q132",
+    "question_original": "CSVファイルの文字コードは何を使うべきですか？"
+  },
+  {
+    "category": "legal",
+    "question": "すみません、SampleDeskを使い始めたいんですけど、どうすればいいですかね？",
+    "expected_answer": "本サービスの利用を希望する法人または個人は、所定の手続きに従い利用登録を行う必要があります。",
+    "id": "q133",
+    "question_original": "SampleDeskの利用を始めるにはどうすればいいですか？"
+  },
+  {
+    "category": "legal",
+    "question": "アカウントのIDとかパスワードって、結局誰が管理してるんでしょうか？",
+    "expected_answer": "利用者はアカウントのID・パスワードを自己の責任において管理するものとし、不正使用による損害について当社は責任を負いません。",
+    "id": "q134",
+    "question_original": "アカウントのIDやパスワードは誰が管理するのですか？"
+  },
+  {
+    "category": "legal",
+    "question": "利用料金って、どうやって決まるんでしょうかね？",
+    "expected_answer": "本サービスの利用料金は別途定める料金プランに従い、月額制で契約更新日に自動決済されます。",
+    "id": "q135",
+    "question_original": "利用料金はどのように決まりますか？"
+  },
+  {
+    "category": "legal",
+    "question": "すみません、禁止されている行為って具体的にはどんなことなんでしょうか？",
+    "expected_answer": "利用者は法令や公序良俗に反する行為、他の利用者や第三者への迷惑行為、サービスの運営を妨害する行為などを行ってはなりません。",
+    "id": "q136",
+    "question_original": "禁止されている行為にはどのようなものがありますか？"
+  },
+  {
+    "category": "legal",
+    "question": "サービスが急に一時停止しちゃうことってあるんですかね？",
+    "expected_answer": "当社はシステムメンテナンスや障害、天災等の事由により、事前通知なくサービスを一時停止することがあります。",
+    "id": "q137",
+    "question_original": "サービスが一時停止することはありますか？"
+  },
+  {
+    "category": "legal",
+    "question": "登録したデータって、結局誰のものになるんですかね？",
+    "expected_answer": "利用者が登録したデータは利用者に帰属し、契約終了後30日以内に当社がデータを削除します。",
+    "id": "q138",
+    "question_original": "登録したデータは誰のものになりますか？"
+  },
+  {
+    "category": "legal",
+    "question": "サービス使ってて何か損害が出た場合って、責任ってどうなるんでしょうか？",
+    "expected_answer": "当社は本サービスの利用により生じた損害について、故意または重過失がある場合を除き責任を負いません。",
+    "id": "q139",
+    "question_original": "サービス利用による損害についての責任はどうなりますか？"
+  },
+  {
+    "category": "legal",
+    "question": "急に規約が変わることってあると思うんですけど、その時ってどうやって知らせてくれるんでしょうか？",
+    "expected_answer": "重要な規約の変更は30日前までにメールまたは管理画面内通知で告知されます。",
+    "id": "q140",
+    "question_original": "規約が変更される場合、どのように通知されますか？"
+  },
+  {
+    "category": "legal",
+    "question": "利用登録の時にちょっと嘘の情報を入れちゃった場合、どうなるんですかね？",
+    "expected_answer": "登録情報に虚偽がある場合、当社はアカウントを停止または削除できるものとします。",
+    "id": "q141",
+    "question_original": "利用登録の際に虚偽の情報を提供した場合はどうなりますか？"
+  },
+  {
+    "category": "legal",
+    "question": "アカウントって、譲ったり貸したりすることってできるんでしょうか？",
+    "expected_answer": "アカウントの譲渡・貸与は禁止されています。",
+    "id": "q142",
+    "question_original": "アカウントの譲渡や貸与は可能ですか？"
+  },
+  {
+    "category": "legal",
+    "question": "サービスのメンテナンスって、どれくらい前にお知らせが来るんでしょうかね？",
+    "expected_answer": "計画メンテナンスは原則として1週間前までに通知されます。",
+    "id": "q143",
+    "question_original": "サービスのメンテナンスはどのくらい前に通知されますか？"
+  },
+  {
+    "category": "legal",
+    "question": "すみません、急に質問なんですけど、このサービスに関するトラブルって、結局どこで解決すればいいんでしょうか？",
+    "expected_answer": "本サービスに関する紛争は東京地方裁判所を第一審の専属合意管轄裁判所とします。",
+    "id": "q144",
+    "question_original": "本サービスに関する紛争はどこで解決されますか？"
+  },
+  {
+    "category": "legal",
+    "question": "あの、どんな感じの情報を集めてるんですかね？",
+    "expected_answer": "当社は、利用登録時の会社名・氏名・メールアドレス・電話番号、サービス利用時のアクセスログ・操作履歴、決済情報、サポート問い合わせ時の情報を収集します。",
+    "id": "q145",
+    "question_original": "どのような情報を収集していますか？"
+  },
+  {
+    "category": "legal",
+    "question": "収集した情報って、具体的にどんなふうに使われるんですかね？",
+    "expected_answer": "収集した情報は、サービスの提供・改善、新機能開発、利用料金の請求・決済処理、カスタマーサポートの提供、重要な通知の送信、利用規約違反の調査・対処に使用されます。",
+    "id": "q146",
+    "question_original": "収集した情報はどのように利用されますか？"
+  },
+  {
+    "category": "legal",
+    "question": "あの、個人情報って第三者に渡っちゃったりするんですかね？",
+    "expected_answer": "当社は、利用者の同意がある場合や法令に基づく場合、生命・身体・財産の保護に必要な場合、業務委託先への提供を除き、個人情報を第三者に提供しません。",
+    "id": "q147",
+    "question_original": "個人情報は第三者に提供されますか？"
+  },
+  {
+    "category": "legal",
+    "question": "データって一体どこに保管されてるんでしょうか？",
+    "expected_answer": "利用者のデータは国内のデータセンターに保管され、契約終了後30日以内にデータが削除されます。バックアップデータは最大90日間保持されます。",
+    "id": "q148",
+    "question_original": "データはどこに保管されていますか？"
+  },
+  {
+    "category": "legal",
+    "question": "セキュリティ対策って、具体的にどんな感じになってるんでしょうかね？",
+    "expected_answer": "当社は、個人情報保護のためにSSL/TLSによる通信の暗号化、アクセス権限の厳格な管理、定期的なセキュリティ監査を実施しています。",
+    "id": "q149",
+    "question_original": "セキュリティ対策はどのようになっていますか？"
+  },
+  {
+    "category": "legal",
+    "question": "Cookieって、具体的にどういうふうに使われてるんですかね？",
+    "expected_answer": "本サービスでは、セッション管理や利便性向上のためにCookieを使用しています。ブラウザ設定でCookieを無効にすることも可能ですが、一部機能が制限される場合があります。",
+    "id": "q150",
+    "question_original": "Cookieはどのように使用されていますか？"
+  },
+  {
+    "category": "legal",
+    "question": "個人情報の開示とか訂正、削除って、どうやってお願いすればいいんでしょうか？",
+    "expected_answer": "利用者は自己の個人情報の開示・訂正・削除を請求する権利があり、請求はprivacy@sampledesk.exampleまでご連絡ください。本人確認の上、合理的な期間内に対応します。",
+    "id": "q151",
+    "question_original": "個人情報の開示・訂正・削除はどうすればいいですか？"
+  },
+  {
+    "category": "legal",
+    "question": "プライバシーポリシーって、急に変更されたりすることってあるんですかね？",
+    "expected_answer": "本ポリシーは法令改正やサービス変更に伴い更新されることがあります。重要な変更は事前にメール通知されます。",
+    "id": "q152",
+    "question_original": "プライバシーポリシーは変更されることがありますか？"
+  },
+  {
+    "category": "legal",
+    "question": "すみません、個人情報に関してちょっと聞きたいんですけど、どこに問い合わせたらいいんでしょうか？",
+    "expected_answer": "個人情報の取り扱いに関するご質問は、privacy@sampledesk.exampleまでお問い合わせください。",
+    "id": "q153",
+    "question_original": "個人情報に関する問い合わせ先はどこですか？"
+  },
+  {
+    "category": "legal",
+    "question": "決済情報って、どんなふうに管理されてるんですかね？",
+    "expected_answer": "決済に関する情報は当社では保持せず、決済代行会社が管理します。",
+    "id": "q154",
+    "question_original": "決済情報はどのように管理されていますか？"
+  },
+  {
+    "category": "legal",
+    "question": "データの削除って、だいたいどのくらいで終わるもんなんでしょうかね？",
+    "expected_answer": "契約終了後30日以内にデータが削除され、バックアップデータは最大90日間保持されます。",
+    "id": "q155",
+    "question_original": "データ削除はどのくらいの期間で行われますか？"
+  },
+  {
+    "category": "legal",
+    "question": "サポートに問い合わせる時って、どんな情報が必要なんですかね？",
+    "expected_answer": "サポート問い合わせ時には、提供された情報が必要です。具体的な情報はお問い合わせ内容に応じて異なります。",
+    "id": "q156",
+    "question_original": "サポート問い合わせ時に必要な情報は何ですか？"
+  },
+  {
+    "category": "security",
+    "question": "SampleDeskのセキュリティポリシーの基本的な考え方って、どんな感じなんでしょうか？",
+    "expected_answer": "SampleDeskは顧客データの安全な管理を最優先事項とし、情報セキュリティマネジメントシステム（ISMS）に基づいて継続的なセキュリティ改善を実施しています。",
+    "id": "q157",
+    "question_original": "SampleDeskのセキュリティポリシーの基本方針は何ですか？"
+  },
+  {
+    "category": "security",
+    "question": "SampleDeskとの通信って、どうやって暗号化されてるんでしょうか？",
+    "expected_answer": "SampleDeskとの全通信はTLS 1.2以上で暗号化されており、HTTPでのアクセスは自動的にHTTPSにリダイレクトされます。",
+    "id": "q158",
+    "question_original": "SampleDeskとの通信はどのように暗号化されていますか？"
+  },
+  {
+    "category": "security",
+    "question": "保存データって、どんな感じで守られてるんでしょうか？",
+    "expected_answer": "保存データはAES-256による暗号化で保護され、暗号化キーは定期的にローテーションされます。",
+    "id": "q159",
+    "question_original": "保存データはどのように保護されていますか？"
+  },
+  {
+    "category": "security",
+    "question": "SampleDeskへのアクセスって、どうやって制御されてるんでしょうかね？",
+    "expected_answer": "本サービスへのアクセスはID・パスワードによる認証が必須で、パスワードはbcryptによりハッシュ化して保存されています。",
+    "id": "q160",
+    "question_original": "SampleDeskへのアクセスはどのように制御されていますか？"
+  },
+  {
+    "category": "security",
+    "question": "二段階認証って、どうやって設定すればいいんですかね？",
+    "expected_answer": "二段階認証は推奨されており、設定により必須化も可能です。",
+    "id": "q161",
+    "question_original": "二段階認証はどのように設定できますか？"
+  },
+  {
+    "category": "security",
+    "question": "すみません、ユーザーの権限管理ってどうやってやってるんでしょうか？",
+    "expected_answer": "ユーザーには必要最小限の権限が付与され、権限の付与・変更は管理者のみが実施し、操作ログとして記録されます。",
+    "id": "q162",
+    "question_original": "ユーザーの権限管理はどのように行われていますか？"
+  },
+  {
+    "category": "security",
+    "question": "脆弱性管理って、具体的にはどんな感じでやってるんですかね？",
+    "expected_answer": "定期的な脆弱性スキャンを実施し、重大な脆弱性が発見された場合は24時間以内に対応します。",
+    "id": "q163",
+    "question_original": "脆弱性管理はどのように行われていますか？"
+  },
+  {
+    "category": "security",
+    "question": "急にセキュリティインシデントが起こったら、どんな感じで対応することになってるんでしょうか？",
+    "expected_answer": "セキュリティインシデントが発生した場合、72時間以内に影響を受ける利用者へ通知し、インシデント対応チームが24時間365日体制で監視します。",
+    "id": "q164",
+    "question_original": "セキュリティインシデントが発生した場合の対応はどうなりますか？"
+  },
+  {
+    "category": "security",
+    "question": "データセンターのセキュリティって、どんな感じになってるんでしょうかね？",
+    "expected_answer": "データセンターは第三者機関による認証を取得し、入退室管理や監視カメラ、無停電電源装置（UPS）を完備しています。",
+    "id": "q165",
+    "question_original": "データセンターの物理セキュリティはどのようになっていますか？"
+  },
+  {
+    "category": "security",
+    "question": "監査ログって、どうやって管理されてるんでしょうかね？",
+    "expected_answer": "全ての管理操作はログとして記録され、改ざん防止のため専用ストレージに保管され、保存期間は1年間です。",
+    "id": "q166",
+    "question_original": "監査ログはどのように管理されていますか？"
+  },
+  {
+    "category": "security",
+    "question": "急に気になったんですが、セキュリティの脆弱性を見つけた場合、どこに報告すればいいんでしょうか？",
+    "expected_answer": "セキュリティの脆弱性を発見した場合はsecurity@sampledesk.exampleまでご報告ください。",
+    "id": "q167",
+    "question_original": "セキュリティの脆弱性を発見した場合、どこに報告すればよいですか？"
+  },
+  {
+    "category": "security",
+    "question": "ビジネスプランの監査ログ出力オプションって、どうやって使えるんでしょうか？",
+    "expected_answer": "ビジネスプランでは監査ログ出力オプション（月額2,000円）を追加することで、ログのCSVエクスポートが可能です。",
+    "id": "q168",
+    "question_original": "ビジネスプランでの監査ログ出力オプションはどのように利用できますか？"
+  },
+  {
+    "category": "security",
+    "question": "SampleDeskの管理者って、具体的にどんな権限を持ってるんですかね？",
+    "expected_answer": "管理者は全機能にアクセスでき、ユーザーの招待・削除、権限変更、サービス設定変更、全問い合わせの対応、料金プランの変更、レポートのエクスポートなどが可能です。",
+    "id": "q169",
+    "question_original": "SampleDeskの管理者はどのような権限を持っていますか？"
+  },
+  {
+    "category": "security",
+    "question": "担当者って、具体的にどんな権限を持ってるんでしょうかね？",
+    "expected_answer": "担当者はアサインされた問い合わせの対応、FAQの参照、対応履歴の閲覧、自分のプロフィール変更が可能ですが、問い合わせの削除や設定変更はできません。",
+    "id": "q170",
+    "question_original": "担当者はどのような権限を持っていますか？"
+  },
+  {
+    "category": "security",
+    "question": "すみません、ちょっとお聞きしたいんですが、閲覧者の役割って具体的にどんな感じなんでしょうか？",
+    "expected_answer": "閲覧者は問い合わせやレポート、FAQの閲覧が可能ですが、回答や設定変更はできない経営層や監査担当者向けの権限です。",
+    "id": "q171",
+    "question_original": "閲覧者の役割は何ですか？"
+  },
+  {
+    "category": "security",
+    "question": "権限設定って、どうやったらうまくできるかなぁって思ってるんですけど、何かいい方法とかあれば教えてもらえますか？",
+    "expected_answer": "最小権限の原則を守ること、複数の管理者を設定すること、退職者のアカウントを即時無効化すること、定期的に権限を見直すことが推奨されています。",
+    "id": "q172",
+    "question_original": "権限設定のベストプラクティスには何がありますか？"
+  },
+  {
+    "category": "security",
+    "question": "急に思い立ったんですけど、ビジネスプランのIPアドレス制限についてちょっと教えてもらえますか？",
+    "expected_answer": "ビジネスプランでは特定のIPアドレスからのみアクセスを許可する設定が可能で、社内ネットワーク外からのアクセスを禁止することでセキュリティを強化できます。",
+    "id": "q173",
+    "question_original": "ビジネスプランのIPアドレス制限について教えてください。"
+  },
+  {
+    "category": "security",
+    "question": "急に聞きたいんですけど、SampleDeskのセッション管理って具体的にどうなってるんでしょうか？",
+    "expected_answer": "一定時間操作がない場合、自動的にログアウトされ、デフォルトのタイムアウト時間は30分です。管理者はこの時間を5分から8時間の範囲で変更できます。",
+    "id": "q174",
+    "question_original": "SampleDeskのセッション管理はどのように行われていますか？"
+  },
+  {
+    "category": "security",
+    "question": "二段階認証って、どうやって設定すればいいんでしょうか？",
+    "expected_answer": "管理者は全ユーザーに二段階認証を強制設定でき、設定後は次回ログイン時に二段階認証の設定が促されます。未設定のユーザーはログイン後に設定画面へリダイレクトされます。",
+    "id": "q175",
+    "question_original": "二段階認証はどのように設定されますか？"
+  },
+  {
+    "category": "security",
+    "question": "退職者のアカウントって、どうしたらいいんでしょうか？",
+    "expected_answer": "退職者のアカウントは即時無効化する必要があります。放置するとセキュリティリスクが生じるため、迅速な対応が求められます。",
+    "id": "q176",
+    "question_original": "退職者のアカウントはどのように扱うべきですか？"
+  },
+  {
+    "category": "security",
+    "question": "管理者って、何人くらい設定するのがいいんですかね？",
+    "expected_answer": "管理者は複数人設定することが推奨されており、1名の場合、担当者が退職・離席時に対応できなくなるリスクがあります。",
+    "id": "q177",
+    "question_original": "管理者は何人設定することが推奨されていますか？"
+  },
+  {
+    "category": "security",
+    "question": "急に権限の見直しを考えてるんですけど、いつくらいがいいんでしょうか？",
+    "expected_answer": "業務変更に伴い不要な権限が残る場合があるため、定期的に権限を見直すことが重要です。",
+    "id": "q178",
+    "question_original": "権限を見直すタイミングはいつが良いですか？"
+  },
+  {
+    "category": "security",
+    "question": "SampleDeskの管理者ができる設定の変更って、具体的にはどんなことがあるんでしょうかね？",
+    "expected_answer": "管理者はユーザーの権限変更、サービス全体の設定変更、AIサポート設定の変更など、幅広い設定変更が可能です。",
+    "id": "q179",
+    "question_original": "SampleDeskの管理者が行える設定変更には何がありますか？"
+  },
+  {
+    "category": "security",
+    "question": "セキュリティ設定って、どこでやればいいんでしょうかね？",
+    "expected_answer": "セキュリティ設定は管理画面の「セキュリティ設定」から行うことができます。",
+    "id": "q180",
+    "question_original": "セキュリティ設定はどこで行いますか？"
+  },
+  {
+    "category": "release",
+    "question": "急に気になったんですけど、AIサポート機能の精度とか、最近どうなってるんでしょうか？",
+    "expected_answer": "AIサポート機能の精度が向上し、回答候補の関連度スコアが表示されるようになりました。スコアが高いほど、関連性の高い回答候補です。",
+    "id": "q181",
+    "question_original": "AIサポート機能の精度向上について教えてください。"
+  },
+  {
+    "category": "release",
+    "question": "一括対応機能って、どうやって使ったらいいんでしょうか？",
+    "expected_answer": "一括対応機能を使用すると、複数の問い合わせを選択して一括でステータス変更や担当者のアサインが可能です。",
+    "id": "q182",
+    "question_original": "一括対応機能はどのように使いますか？"
+  },
+  {
+    "category": "release",
+    "question": "Webhook連携の機能について、もうちょっと詳しく教えてもらえるとありがたいんですが、どうでしょうか？",
+    "expected_answer": "Webhook連携により、問い合わせの新規受信やステータス変更時に外部サービスへ通知を送信できます。SlackやMicrosoft Teamsとの連携が可能です。",
+    "id": "q183",
+    "question_original": "Webhook連携の機能について詳しく教えてください。"
+  },
+  {
+    "category": "release",
+    "question": "ダッシュボードの表示速度って、どのくらい良くなったんですかね？",
+    "expected_answer": "ダッシュボードの表示速度が平均40%改善され、より快適に利用できるようになりました。",
+    "id": "q184",
+    "question_original": "ダッシュボードの表示速度はどのくらい改善されましたか？"
+  },
+  {
+    "category": "release",
+    "question": "CSVのエクスポートって、ファイルサイズの上限がどうなったのか教えてもらえますかね？",
+    "expected_answer": "CSVエクスポート時のファイルサイズ上限が50MBから200MBに拡大され、より多くのデータを一度にエクスポートできるようになりました。",
+    "id": "q185",
+    "question_original": "CSVエクスポートのファイルサイズ上限はどのように変更されましたか？"
+  },
+  {
+    "category": "release",
+    "question": "モバイルブラウザでの表示レイアウト、なんか改善されたって聞いたんですけど、具体的にどんな感じになったんでしょうか？",
+    "expected_answer": "モバイルブラウザでの表示レイアウトが最適化され、スマートフォンやタブレットでの利用がより快適になりました。",
+    "id": "q186",
+    "question_original": "モバイルブラウザでの表示レイアウトはどのように改善されましたか？"
+  },
+  {
+    "category": "release",
+    "question": "特定の条件でメール通知がうまくいってないみたいなんですけど、これってどうやって修正されたんでしょうか？",
+    "expected_answer": "特定条件下でメール通知が二重送信される不具合が修正され、正常に通知が送信されるようになりました。",
+    "id": "q187",
+    "question_original": "特定条件下でのメール通知の不具合はどのように修正されましたか？"
+  },
+  {
+    "category": "release",
+    "question": "カスタムステータス機能って、具体的にどんな感じになってるのか教えてもらえますかね？",
+    "expected_answer": "カスタムステータス機能により、「未対応」「対応中」「完了」に加えて、独自のステータスを最大5つ追加できるようになりました。",
+    "id": "q188",
+    "question_original": "カスタムステータス機能について教えてください。"
+  },
+  {
+    "category": "release",
+    "question": "対応テンプレートの変数機能って、どうやって使ったらいいんでしょうか？",
+    "expected_answer": "対応テンプレート内に{{顧客名}}などの変数を使用することで、送信時に自動的に顧客名が置換され、効率的に対応できます。",
+    "id": "q189",
+    "question_original": "対応テンプレートの変数機能はどのように使いますか？"
+  },
+  {
+    "category": "release",
+    "question": "二段階認証の設定を強制的にするには、どうすればいいんでしょうか？",
+    "expected_answer": "管理者は全ユーザーに対して二段階認証を必須に設定できるようになり、セキュリティを強化できます。",
+    "id": "q190",
+    "question_original": "二段階認証の強制設定はどのように行いますか？"
+  },
+  {
+    "category": "release",
+    "question": "ハイブリッド検索って具体的にはどんなことなんでしょうか？",
+    "expected_answer": "ハイブリッド検索対応により、キーワード検索とAIの意味検索を組み合わせた精度の高い検索が可能になりました。",
+    "id": "q191",
+    "question_original": "ハイブリッド検索対応とは何ですか？"
+  },
+  {
+    "category": "release",
+    "question": "監査ログのCSVエクスポートって、どうやって使えばいいんでしょうか？",
+    "expected_answer": "監査ログのCSVエクスポートは、月額2,000円のオプションを追加することで利用可能になり、操作ログをエクスポートできます。",
+    "id": "q192",
+    "question_original": "監査ログのCSVエクスポートはどのように利用できますか？"
+  },
+  {
+    "category": "release",
+    "question": "Webhookの連携機能って、具体的にはどうやって使うんでしょうかね？",
+    "expected_answer": "Webhook連携機能を使うと、SampleDeskでの問い合わせや状態変化をSlackやMicrosoft Teamsに自動通知できます。管理画面で設定を行い、トリガーを選択してテスト送信後に保存します。",
+    "id": "q193",
+    "question_original": "Webhook連携機能はどのように使いますか？"
+  },
+  {
+    "category": "release",
+    "question": "突然なんですけど、Webhookの設定手順ってどうやるんでしょうか？",
+    "expected_answer": "Webhookの設定手順は、管理画面の「連携設定」から「Webhook」を開き、新規Webhookを追加し、送信先URLとトリガーを選択し、テスト送信後に保存します。",
+    "id": "q194",
+    "question_original": "Webhookの設定手順を教えてください。"
+  },
+  {
+    "category": "release",
+    "question": "カスタムステータスって、どうやって設定するんでしたっけ？",
+    "expected_answer": "カスタムステータス機能は、管理画面の「ステータス設定」でカスタムステータスを追加し、ステータス名と色を設定、順序を並べ替えた後に保存します。",
+    "id": "q195",
+    "question_original": "カスタムステータス機能はどのように設定しますか？"
+  },
+  {
+    "category": "release",
+    "question": "カスタムステータスって、どんな風に使ったらいいか具体例とかあったりしますかね？",
+    "expected_answer": "カスタムステータスの活用例として、「未対応」から「対応中」、「承認待ち」、「完了」という4段階フローを設定することで、上長確認が必要な問い合わせを管理しやすくなります。",
+    "id": "q196",
+    "question_original": "カスタムステータスの活用例はありますか？"
+  },
+  {
+    "category": "release",
+    "question": "対応テンプレートに変数を使う方法って、どうすればいいんでしょうか？",
+    "expected_answer": "対応テンプレートに変数を挿入することで、顧客ごとにパーソナライズされた回答を作成できます。使用可能な変数には{{顧客名}}や{{問い合わせ番号}}などがあります。",
+    "id": "q197",
+    "question_original": "対応テンプレートに変数を使う方法は？"
+  },
+  {
+    "category": "release",
+    "question": "AIサポート機能の使い方、教えてもらえますかね？",
+    "expected_answer": "AIサポート機能は、問い合わせ内容に基づいて回答候補を自動提示します。担当者はAIの提案を参考にし、最終的な返答を判断・編集して送信します。",
+    "id": "q198",
+    "question_original": "AIサポート機能の活用方法を教えてください。"
+  },
+  {
+    "category": "release",
+    "question": "AIの回答がもっと正確になるようにするには、どうしたらいいんでしょうかね？",
+    "expected_answer": "AIの回答精度を上げるには、FAQの質と量を充実させ、具体的な質問と回答のペアを登録し、定期的にFAQを見直すことが重要です。",
+    "id": "q199",
+    "question_original": "AIの回答精度を上げるためにはどうすればいいですか？"
+  },
+  {
+    "category": "release",
+    "question": "急にSLA設定機能の使い方が気になってるんですけど、教えてもらえますか？",
+    "expected_answer": "SLA設定機能は、管理画面の「SLA設定」でカテゴリや優先度ごとに対応期限を設定し、期限超過前の通知タイミングを設定してアラートの送信先を指定します。",
+    "id": "q200",
+    "question_original": "SLA設定機能の使い方を教えてください。"
+  },
+  {
+    "category": "release",
+    "question": "SLA設定すると、具体的にどんな表示が出てくるんでしょうか？",
+    "expected_answer": "SLAが設定されると、問い合わせ一覧に対応期限と残り時間が表示され、期限が近づくと色が変わり視覚的に優先度を把握できます。",
+    "id": "q201",
+    "question_original": "SLA設定をすると何が表示されますか？"
+  },
+  {
+    "category": "release",
+    "question": "Webhookの連携って、具体的にどんな感じで使われてるんでしょうかね？",
+    "expected_answer": "Webhook連携の具体例として、問い合わせが届いた際にSlackの指定チャンネルに「新しい問い合わせが届きました: [件名]」という通知が送られます。",
+    "id": "q202",
+    "question_original": "Webhook連携の具体例はありますか？"
+  }
+]
