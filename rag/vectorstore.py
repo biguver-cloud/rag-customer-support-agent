@@ -61,6 +61,7 @@ def hybrid_retrieve_with_score(
     k: int = 4,
     category: str = "unknown",
     rrf_k: int = 60,
+    use_janome: bool = True,
 ) -> list[tuple[Document, float]]:
     """BM25 + ベクトル検索を RRF で統合するハイブリッド検索。
     BM25 が利用できない場合はベクトル検索のみにフォールバックする。
@@ -96,13 +97,17 @@ def hybrid_retrieve_with_score(
 
         n = len(all_contents)
 
-        # BM25 検索（日本語: Janome 形態素解析によるトークナイズ）
-        try:
-            from janome.tokenizer import Tokenizer as JanomeTokenizer
-            _jt = JanomeTokenizer()
-            def _tokenize(text: str) -> list[str]:
-                return [t.surface for t in _jt.tokenize(text)]
-        except ImportError:
+        # BM25 検索（トークナイズ）
+        if use_janome:
+            try:
+                from janome.tokenizer import Tokenizer as JanomeTokenizer
+                _jt = JanomeTokenizer()
+                def _tokenize(text: str) -> list[str]:
+                    return [t.surface for t in _jt.tokenize(text)]
+            except ImportError:
+                def _tokenize(text: str) -> list[str]:
+                    return re.findall(r'\w+', text)
+        else:
             def _tokenize(text: str) -> list[str]:
                 return re.findall(r'\w+', text)
 

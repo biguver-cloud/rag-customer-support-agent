@@ -60,9 +60,11 @@ def run():
     parser.add_argument("--temperature", type=float, default=TEMPERATURE)
     parser.add_argument("--rewrite", action="store_true", help="クエリリライトを有効にする")
     parser.add_argument("--dataset", type=str, default=None, help="使用するデータセットファイル名（eval/配下）")
+    parser.add_argument("--no-janome", action="store_true", help="Janome形態素解析を無効にする（正規表現にフォールバック）")
     args = parser.parse_args()
     temperature = args.temperature
     use_rewrite = args.rewrite
+    use_janome = not args.no_janome
 
     load_dotenv()
 
@@ -72,6 +74,7 @@ def run():
     print("📊 RAG 精度評価：ベクトル検索 vs ハイブリッド検索")
     print(f"   Temperature: {temperature}")
     print(f"   クエリリライト: {'あり' if use_rewrite else 'なし'}")
+    print(f"   Janome形態素解析: {'あり' if use_janome else 'なし（正規表現）'}")
     print(f"   データセット: {dataset_path.name}")
     print("=" * 55)
 
@@ -95,7 +98,8 @@ def run():
     RESULTS_DIR.mkdir(exist_ok=True)
     rewrite_label = "_rewrite" if use_rewrite else ""
     dataset_label = f"_{dataset_path.stem}" if args.dataset else ""
-    results_path = RESULTS_DIR / f"eval_{datetime.now().strftime('%Y%m%d_%H%M%S')}_temp{temperature}{dataset_label}{rewrite_label}.csv"
+    janome_label = "_nojanome" if not use_janome else ""
+    results_path = RESULTS_DIR / f"eval_{datetime.now().strftime('%Y%m%d_%H%M%S')}_temp{temperature}{dataset_label}{janome_label}{rewrite_label}.csv"
 
     rows = []
 
@@ -118,7 +122,7 @@ def run():
 
         # ── ハイブリッド検索 ──────────────────────────────
         print("  🔍 ハイブリッド検索...")
-        hyb_results = hybrid_retrieve_with_score(db, search_query, k=TOP_K, category=category)
+        hyb_results = hybrid_retrieve_with_score(db, search_query, k=TOP_K, category=category, use_janome=use_janome)
         hyb_answer  = _generate_answer(hyb_results, question, llm)
 
         # ── ② LLM as a Judge ─────────────────────────────
