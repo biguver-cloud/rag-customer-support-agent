@@ -26,35 +26,34 @@ OUTPUT_PATH = Path(__file__).resolve().parent / "dataset.json"
 # カテゴリとPDFの対応
 CATEGORY_MAP = {
     "service": [
-        DATA_DIR / "service" / "解約・返金ポリシー.pdf",
-        DATA_DIR / "service" / "問い合わせ対応方針.pdf",
-        DATA_DIR / "service" / "料金プラン.pdf",
-        DATA_DIR / "service" / "請求について.pdf",
-        DATA_DIR / "service" / "アカウント.pdf",
-        DATA_DIR / "service" / "利用開始ガイド.pdf",
-        DATA_DIR / "service" / "サービス機能概要.pdf",
+        DATA_DIR / "service" / "03_解約返金ポリシー.pdf",
+        DATA_DIR / "service" / "06_料金プラン.pdf",
+        DATA_DIR / "service" / "04_請求支払いルール.pdf",
+        DATA_DIR / "service" / "01_アカウント権限管理.pdf",
+        DATA_DIR / "service" / "05_利用開始ガイド.pdf",
+        DATA_DIR / "service" / "02_サービス機能概要.pdf",
     ],
     "company": [
-        DATA_DIR / "company" / "会社概要.pdf",
+        DATA_DIR / "company" / "01_会社概要.pdf",
     ],
     "customer": [
-        DATA_DIR / "customer" / "カスタマープロフィール.pdf",
+        DATA_DIR / "customer" / "01_カスタマープロフィール.pdf",
     ],
     "technical": [
-        DATA_DIR / "technical" / "トラブルシューティングガイド.pdf",
-        DATA_DIR / "technical" / "よくある不具合と対処法.pdf",
+        DATA_DIR / "technical" / "01_トラブルシューティングガイド.pdf",
+        DATA_DIR / "technical" / "02_よくある不具合と対処法.pdf",
     ],
     "legal": [
-        DATA_DIR / "legal" / "利用規約.pdf",
-        DATA_DIR / "legal" / "プライバシーポリシー.pdf",
+        DATA_DIR / "legal" / "02_利用規約.pdf",
+        DATA_DIR / "legal" / "01_プライバシーポリシー.pdf",
     ],
     "security": [
-        DATA_DIR / "security" / "セキュリティポリシー.pdf",
-        DATA_DIR / "security" / "アクセス制御ガイドライン.pdf",
+        DATA_DIR / "security" / "02_セキュリティポリシー.pdf",
+        DATA_DIR / "security" / "01_アクセス制御ガイドライン.pdf",
     ],
     "release": [
-        DATA_DIR / "release" / "リリースノート.pdf",
-        DATA_DIR / "release" / "新機能ガイド.pdf",
+        DATA_DIR / "release" / "01_リリースノート.pdf",
+        DATA_DIR / "release" / "02_新機能ガイド.pdf",
     ],
 }
 
