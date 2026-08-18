@@ -134,6 +134,7 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 | 検索方式 | BM25 + ベクトル検索（ハイブリッド） |
 | コンテナ | Docker / Docker Compose |
 | デプロイ | Google Cloud Run |
+| CI/CD | GitHub Actions（CI）/ Google Cloud Build（CD） |
 
 ---
 
@@ -284,17 +285,6 @@ streamlit run app.py
 
 > ローカル実行時は Streamlit が `API_URL=http://localhost:8000` をデフォルトで使用します。  
 > 別ホストに変更する場合は `.env` に `API_URL=http://<host>:<port>` を追記してください。
-
----
-
-## 🔁 CI/CD
-
-| 項目 | 内容 |
-|:---|:---|
-| CI | GitHub Actions（`.github/workflows/ci.yml`）。push / PR時に依存関係のインストールと構文チェック（`compileall`）を自動実行 |
-| CD | `cloudbuild.yaml`にGoogle Cloud Buildのビルド〜Cloud Runデプロイ手順を定義。現時点ではCloud Buildトリガー未設定のため、デプロイは`gcloud builds submit`による手動実行 |
-
-> 現在テストコード（`test_*.py`等）が存在しないため、CIは構文エラー・依存関係の破損を検知する用途にとどまります。テスト整備は別途対応予定です。
 
 ---
 
