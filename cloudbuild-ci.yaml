@@ -1,0 +1,11 @@
+steps:
+  - name: 'python:3.11-slim'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        pip install --no-cache-dir -r requirements.txt
+        python -m compileall -q .
+
+options:
+  logging: CLOUD_LOGGING_ONLY
