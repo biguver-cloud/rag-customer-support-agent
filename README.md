@@ -134,7 +134,7 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 | 検索方式 | BM25 + ベクトル検索（ハイブリッド） |
 | コンテナ | Docker / Docker Compose |
 | デプロイ | Google Cloud Run |
-| CI/CD | Google Cloud Build（CI・CD統一） |
+| CD | Google Cloud Build（mainへのpushで自動デプロイ） |
 
 ---
 
