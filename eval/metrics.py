@@ -28,24 +28,27 @@ def text_similarity(expected: str, generated: str) -> float:
     return difflib.SequenceMatcher(None, a, b).ratio()
 
 
-def llm_judge(question: str, expected: str, generated: str, llm) -> dict:
-    """
-    LLM as a Judge：生成回答の品質を ○/× で判定する。
-
-    完全一致ではなく「重要な情報が含まれているか」で判定するため、
-    表現が違っても内容が正しければ ○ になる。
-
-    Returns:
-        {"judgment": "○" or "×", "reason": str}
-    """
-    prompt = f"""あなたは回答品質を評価する厳格な審査員です。
+JUDGE_PROMPT_TEMPLATE = """あなたは回答品質を評価する厳格な審査員です。
 
 「質問」「期待する回答」「生成された回答」を比較し、
 生成された回答が質問に対して適切かどうかを判定してください。
 
 【判定基準】
-○：生成回答が質問の要点に答えており、期待回答の重要な情報を含んでいる
-×：重要な情報が欠けている、または内容が明らかに誤っている
+○にする条件（すべて満たす場合）：
+  - 質問が求めている要点に直接答えている
+  - 期待回答に含まれる重要な事実（数値、期限、手順、固有名詞、条件など）が
+    過不足なく含まれている（表現・語順・言い回しの違いは無視してよい）
+
+×にする条件（いずれか1つでも該当する場合）：
+  - 期待回答にある重要な事実が欠落している、または数値・期限・条件などが誤っている
+  - 質問と無関係な内容にすり替わっている、もしくは論点をはぐらかしている
+  - 資料に記載がない旨を回答しているが、期待回答には具体的な答えが存在する
+  - 断定を避けた曖昧な表現（例：「〜の場合があります」を多用するなど）に終始し、
+    期待回答が示す具体的な結論に到達していない
+
+【判定しないこと】
+  - 文体・敬語・語順など表現上の違いだけで減点しない
+  - 期待回答にない補足情報が追加されているだけでは減点しない
 
 [質問]
 {question}
@@ -59,6 +62,10 @@ def llm_judge(question: str, expected: str, generated: str, llm) -> dict:
 以下のJSON形式のみで回答してください（説明文不要）：
 {{"judgment": "○ または ×", "reason": "判定理由を1文で"}}"""
 
+
+def _invoke_judge(question: str, expected: str, generated: str, llm) -> dict:
+    """LLMを1回呼び出し、判定結果を1件返す内部ヘルパー。"""
+    prompt = JUDGE_PROMPT_TEMPLATE.format(question=question, expected=expected, generated=generated)
     try:
         response = llm.invoke([{"role": "user", "content": prompt}]).content
         match = re.search(r'\{[^}]+\}', response, re.DOTALL)
@@ -70,3 +77,55 @@ def llm_judge(question: str, expected: str, generated: str, llm) -> dict:
         print(f"  [LLM Judge] エラー: {e}")
 
     return {"judgment": "×", "reason": "評価エラー"}
+
+
+def llm_judge(question: str, expected: str, generated: str, llm) -> dict:
+    """
+    LLM as a Judge：生成回答の品質を ○/× で判定する（1回判定）。
+
+    完全一致ではなく「重要な情報が含まれているか」で判定するため、
+    表現が違っても内容が正しければ ○ になる。
+
+    Returns:
+        {"judgment": "○" or "×", "reason": str}
+    """
+    return _invoke_judge(question, expected, generated, llm)
+
+
+def llm_judge_majority(question: str, expected: str, generated: str, llm, n_votes: int = 3) -> dict:
+    """
+    LLM as a Judge：同じ判定を n_votes 回実行し、多数決で最終判定する。
+
+    1回だけの判定はプロンプトへの解釈ゆれで結果がぶれることがあるため、
+    複数回判定した多数決を採用して安定性を高める。
+
+    Args:
+        llm: 判定用のLLM。多数決に意味を持たせるため、呼び出し側で
+             temperature > 0 のインスタンスを渡すこと（temperature=0だと
+             毎回同じ結果になり多数決が機能しない）。
+        n_votes: 判定を実行する回数（デフォルト3、奇数推奨）。
+
+    Returns:
+        {
+            "judgment": "○" or "×"（多数決の結果）,
+            "reason": str（多数決側の判定のうち最初の理由）,
+            "votes": ["○", "×", "○"] のような各回の判定,
+            "agreement": "2/3" のような多数決側の一致率,
+        }
+    """
+    votes = [_invoke_judge(question, expected, generated, llm) for _ in range(n_votes)]
+    judgments = [v["judgment"] for v in votes]
+
+    maru_count = judgments.count("○")
+    batsu_count = judgments.count("×")
+    majority = "○" if maru_count >= batsu_count else "×"
+    majority_votes = maru_count if majority == "○" else batsu_count
+
+    reason = next((v["reason"] for v in votes if v["judgment"] == majority), "")
+
+    return {
+        "judgment": majority,
+        "reason": reason,
+        "votes": judgments,
+        "agreement": f"{majority_votes}/{n_votes}",
+    }
