@@ -26,11 +26,11 @@ from langchain_openai import ChatOpenAI
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from rag.config import MODEL_NAME, TEMPERATURE, TOP_K, AGENT_ROUNDS
+from rag.config import MODEL_NAME, TEMPERATURE, TOP_K, AGENT_ROUNDS, JUDGE_TEMPERATURE, JUDGE_VOTES
 from rag.vectorstore import open_vectorstore, hybrid_retrieve_with_score, _vector_only_search
 from rag.agent import agent_answer
 from rag.query import rewrite_query_for_search
-from eval.metrics import text_similarity, llm_judge
+from eval.metrics import text_similarity, llm_judge, llm_judge_majority
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PERSIST_DIR = BASE_DIR / "storage" / "chroma"
@@ -43,6 +43,7 @@ CSV_HEADERS = [
     "vector_judge", "hybrid_judge",
     "vector_similarity", "hybrid_similarity",
     "vector_judge_reason", "hybrid_judge_reason",
+    "vector_judge_agreement", "hybrid_judge_agreement",
 ]
 
 
@@ -61,10 +62,13 @@ def run():
     parser.add_argument("--rewrite", action="store_true", help="クエリリライトを有効にする")
     parser.add_argument("--dataset", type=str, default=None, help="使用するデータセットファイル名（eval/配下）")
     parser.add_argument("--no-janome", action="store_true", help="Janome形態素解析を無効にする（正規表現にフォールバック）")
+    parser.add_argument("--judge-votes", type=int, default=JUDGE_VOTES,
+                         help="LLM Judgeの多数決に使う判定回数（1にすると従来の1回判定）")
     args = parser.parse_args()
     temperature = args.temperature
     use_rewrite = args.rewrite
     use_janome = not args.no_janome
+    judge_votes = args.judge_votes
 
     load_dotenv()
 
@@ -76,6 +80,7 @@ def run():
     print(f"   クエリリライト: {'あり' if use_rewrite else 'なし'}")
     print(f"   Janome形態素解析: {'あり' if use_janome else 'なし（正規表現）'}")
     print(f"   データセット: {dataset_path.name}")
+    print(f"   LLM Judge: {judge_votes}回判定" + ("・多数決" if judge_votes > 1 else ""))
     print("=" * 55)
 
     # データセット読み込み
@@ -94,6 +99,8 @@ def run():
 
     db = open_vectorstore(PERSIST_DIR)
     llm = ChatOpenAI(model=MODEL_NAME, temperature=temperature)
+    # 多数決judgeは票がばらつく必要があるため、生成用とは別温度のLLMを使う
+    judge_llm = ChatOpenAI(model=MODEL_NAME, temperature=JUDGE_TEMPERATURE) if judge_votes > 1 else llm
 
     RESULTS_DIR.mkdir(exist_ok=True)
     rewrite_label = "_rewrite" if use_rewrite else ""
@@ -127,8 +134,12 @@ def run():
 
         # ── ② LLM as a Judge ─────────────────────────────
         print("  🤖 LLM評価...")
-        vec_judge = llm_judge(question, expected, vec_answer, llm)
-        hyb_judge = llm_judge(question, expected, hyb_answer, llm)
+        if judge_votes > 1:
+            vec_judge = llm_judge_majority(question, expected, vec_answer, judge_llm, n_votes=judge_votes)
+            hyb_judge = llm_judge_majority(question, expected, hyb_answer, judge_llm, n_votes=judge_votes)
+        else:
+            vec_judge = llm_judge(question, expected, vec_answer, judge_llm)
+            hyb_judge = llm_judge(question, expected, hyb_answer, judge_llm)
 
         # ── ③ 文字類似度 ──────────────────────────────────
         vec_sim = text_similarity(expected, vec_answer)
@@ -150,6 +161,8 @@ def run():
             "hybrid_similarity":    f"{hyb_sim:.3f}",
             "vector_judge_reason":  vec_judge["reason"],
             "hybrid_judge_reason":  hyb_judge["reason"],
+            "vector_judge_agreement": vec_judge.get("agreement", ""),
+            "hybrid_judge_agreement": hyb_judge.get("agreement", ""),
         })
 
     # ── CSV 出力 ───────────────────────────────────────────

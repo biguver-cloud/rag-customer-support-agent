@@ -18,3 +18,7 @@ SHOW_RAW_SCORE = False   # raw値を併記するかどうか
 
 # Agent設定
 AGENT_ROUNDS = 0  # 速度優先: 改善ラウンドを無効化
+
+# LLM Judge設定
+JUDGE_TEMPERATURE = 0.5  # 複数回判定で票がばらつくよう、生成用とは別に設定
+JUDGE_VOTES = 3  # 多数決に使う判定回数
