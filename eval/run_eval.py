@@ -64,11 +64,23 @@ def run():
     parser.add_argument("--no-janome", action="store_true", help="Janome形態素解析を無効にする（正規表現にフォールバック）")
     parser.add_argument("--judge-votes", type=int, default=JUDGE_VOTES,
                          help="LLM Judgeの多数決に使う判定回数（1にすると従来の1回判定）")
+    parser.add_argument("--reuse-vector-from", type=str, default=None,
+                         help="指定したCSVからベクトル検索側の結果（回答・判定・類似度）を再利用し、"
+                              "ベクトル検索の再計算をスキップする（idで突き合わせ）。"
+                              "Janomeはハイブリッド検索のみに影響するため、Janomeあり/なしの"
+                              "比較でベクトル側を使い回してAPIコストを削減する用途を想定。")
     args = parser.parse_args()
     temperature = args.temperature
     use_rewrite = args.rewrite
     use_janome = not args.no_janome
     judge_votes = args.judge_votes
+
+    reused_vector = {}
+    if args.reuse_vector_from:
+        reuse_path = Path(args.reuse_vector_from)
+        with open(reuse_path, encoding="utf-8-sig") as f:
+            for row in csv.DictReader(f):
+                reused_vector[row["id"]] = row
 
     load_dotenv()
 
@@ -81,6 +93,8 @@ def run():
     print(f"   Janome形態素解析: {'あり' if use_janome else 'なし（正規表現）'}")
     print(f"   データセット: {dataset_path.name}")
     print(f"   LLM Judge: {judge_votes}回判定" + ("・多数決" if judge_votes > 1 else ""))
+    if reused_vector:
+        print(f"   ベクトル検索: {args.reuse_vector_from} から再利用（再計算スキップ）")
     print("=" * 55)
 
     # データセット読み込み
@@ -122,27 +136,42 @@ def run():
         if use_rewrite:
             print(f"  ✏️  リライト: {search_query}")
 
-        # ── ベクトル検索 ──────────────────────────────────
-        print("  🔍 ベクトル検索...")
-        vec_results = _vector_only_search(db, search_query, k=TOP_K, category=category)
-        vec_answer  = _generate_answer(vec_results, question, llm)
+        reused = reused_vector.get(qid)
+
+        if reused:
+            # ── ベクトル検索（再利用） ──────────────────────
+            vec_answer = reused["vector_answer"]
+            vec_judge  = {
+                "judgment": reused["vector_judge"],
+                "reason":   reused["vector_judge_reason"],
+                "agreement": reused.get("vector_judge_agreement", ""),
+            }
+            vec_sim = float(reused["vector_similarity"])
+            print("  🔍 ベクトル検索... （再利用）")
+        else:
+            # ── ベクトル検索 ──────────────────────────────────
+            print("  🔍 ベクトル検索...")
+            vec_results = _vector_only_search(db, search_query, k=TOP_K, category=category)
+            vec_answer  = _generate_answer(vec_results, question, llm)
+            if judge_votes > 1:
+                vec_judge = llm_judge_majority(question, expected, vec_answer, judge_llm, n_votes=judge_votes)
+            else:
+                vec_judge = llm_judge(question, expected, vec_answer, judge_llm)
+            vec_sim = text_similarity(expected, vec_answer)
 
         # ── ハイブリッド検索 ──────────────────────────────
         print("  🔍 ハイブリッド検索...")
         hyb_results = hybrid_retrieve_with_score(db, search_query, k=TOP_K, category=category, use_janome=use_janome)
         hyb_answer  = _generate_answer(hyb_results, question, llm)
 
-        # ── ② LLM as a Judge ─────────────────────────────
+        # ── ② LLM as a Judge（ハイブリッド側） ────────────
         print("  🤖 LLM評価...")
         if judge_votes > 1:
-            vec_judge = llm_judge_majority(question, expected, vec_answer, judge_llm, n_votes=judge_votes)
             hyb_judge = llm_judge_majority(question, expected, hyb_answer, judge_llm, n_votes=judge_votes)
         else:
-            vec_judge = llm_judge(question, expected, vec_answer, judge_llm)
             hyb_judge = llm_judge(question, expected, hyb_answer, judge_llm)
 
-        # ── ③ 文字類似度 ──────────────────────────────────
-        vec_sim = text_similarity(expected, vec_answer)
+        # ── ③ 文字類似度（ハイブリッド側） ────────────────
         hyb_sim = text_similarity(expected, hyb_answer)
 
         print(f"  ベクトル   : {vec_judge['judgment']}  類似度 {vec_sim:.1%}")
