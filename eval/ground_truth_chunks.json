@@ -1,0 +1,1504 @@
+{
+  "q001": [
+    {
+      "chunk_id": "7dcbe38f-0a5a-440c-bc64-c7c63bd454df",
+      "similarity": 0.8,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\03_解約返金ポリシー.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "577fc900-34a6-45b0-9764-352f3e7bd0f8",
+      "similarity": 0.45,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 1
+    }
+  ],
+  "q002": [
+    {
+      "chunk_id": "7dcbe38f-0a5a-440c-bc64-c7c63bd454df",
+      "similarity": 0.966,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\03_解約返金ポリシー.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "a93ac1be-3ce1-44cf-8bf3-137fa7d1becf",
+      "similarity": 0.593,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\03_解約返金ポリシー.pdf",
+      "page": 2
+    }
+  ],
+  "q003": [
+    {
+      "chunk_id": "7dcbe38f-0a5a-440c-bc64-c7c63bd454df",
+      "similarity": 0.96,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\03_解約返金ポリシー.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "c59da8bd-9e8a-4038-8e3f-ed8bdae8e605",
+      "similarity": 0.78,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\03_解約返金ポリシー.pdf",
+      "page": 1
+    }
+  ],
+  "q004": [
+    {
+      "chunk_id": "c59da8bd-9e8a-4038-8e3f-ed8bdae8e605",
+      "similarity": 0.68,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\03_解約返金ポリシー.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "7dcbe38f-0a5a-440c-bc64-c7c63bd454df",
+      "similarity": 0.4,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\03_解約返金ポリシー.pdf",
+      "page": 0
+    }
+  ],
+  "q005": [
+    {
+      "chunk_id": "c59da8bd-9e8a-4038-8e3f-ed8bdae8e605",
+      "similarity": 0.904,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\03_解約返金ポリシー.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "b444f21b-543a-4cd4-95dc-1f89f2581c13",
+      "similarity": 0.865,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\04_請求支払いルール.pdf",
+      "page": 2
+    }
+  ],
+  "q006": [
+    {
+      "chunk_id": "a93ac1be-3ce1-44cf-8bf3-137fa7d1becf",
+      "similarity": 0.955,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\03_解約返金ポリシー.pdf",
+      "page": 2
+    },
+    {
+      "chunk_id": "082c2535-0baf-4e65-a2e7-2ad627a02196",
+      "similarity": 0.379,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 2
+    }
+  ],
+  "q007": [
+    {
+      "chunk_id": "a93ac1be-3ce1-44cf-8bf3-137fa7d1becf",
+      "similarity": 0.673,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\03_解約返金ポリシー.pdf",
+      "page": 2
+    },
+    {
+      "chunk_id": "0323edb0-a8e3-46c1-a4c0-16a640d22ceb",
+      "similarity": 0.564,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 4
+    }
+  ],
+  "q008": [
+    {
+      "chunk_id": "a99d719d-1e6e-4837-bad3-d3ec506e2e0a",
+      "similarity": 0.843,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "a4426ab4-9063-4a01-adb6-49d54de517f4",
+      "similarity": 0.706,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\04_請求支払いルール.pdf",
+      "page": 0
+    }
+  ],
+  "q009": [
+    {
+      "chunk_id": "a99d719d-1e6e-4837-bad3-d3ec506e2e0a",
+      "similarity": 0.852,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "c59da8bd-9e8a-4038-8e3f-ed8bdae8e605",
+      "similarity": 0.543,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\03_解約返金ポリシー.pdf",
+      "page": 1
+    }
+  ],
+  "q010": [
+    {
+      "chunk_id": "c2e64b9f-9ddd-4231-bd8d-9b4242ad0df1",
+      "similarity": 0.703,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "a99d719d-1e6e-4837-bad3-d3ec506e2e0a",
+      "similarity": 0.604,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 0
+    }
+  ],
+  "q011": [
+    {
+      "chunk_id": "c2e64b9f-9ddd-4231-bd8d-9b4242ad0df1",
+      "similarity": 0.965,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "ab1fd60e-c604-4978-bb82-55c5eb72101a",
+      "similarity": 0.353,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\02_サービス機能概要.pdf",
+      "page": 2
+    }
+  ],
+  "q012": [
+    {
+      "chunk_id": "c2e64b9f-9ddd-4231-bd8d-9b4242ad0df1",
+      "similarity": 0.75,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "9fac6add-cbf1-4154-a966-e8bbe310e4ae",
+      "similarity": 0.576,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 2
+    }
+  ],
+  "q013": [
+    {
+      "chunk_id": "4f4b83fb-8a56-414b-85ee-7f8cf6a114db",
+      "similarity": 0.91,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 3
+    }
+  ],
+  "q014": [
+    {
+      "chunk_id": "4f4b83fb-8a56-414b-85ee-7f8cf6a114db",
+      "similarity": 0.73,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "ed4660d0-4cfa-42a2-9cf6-9cf83aa9ba41",
+      "similarity": 0.338,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 0
+    }
+  ],
+  "q015": [
+    {
+      "chunk_id": "a4426ab4-9063-4a01-adb6-49d54de517f4",
+      "similarity": 0.979,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\04_請求支払いルール.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "a99d719d-1e6e-4837-bad3-d3ec506e2e0a",
+      "similarity": 0.532,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 0
+    }
+  ],
+  "q016": [
+    {
+      "chunk_id": "a99d719d-1e6e-4837-bad3-d3ec506e2e0a",
+      "similarity": 0.717,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "699fab5d-3f72-44b7-a45d-c41cbeb1924b",
+      "similarity": 0.55,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\04_請求支払いルール.pdf",
+      "page": 1
+    }
+  ],
+  "q017": [
+    {
+      "chunk_id": "a4426ab4-9063-4a01-adb6-49d54de517f4",
+      "similarity": 0.982,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\04_請求支払いルール.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "699fab5d-3f72-44b7-a45d-c41cbeb1924b",
+      "similarity": 0.357,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\04_請求支払いルール.pdf",
+      "page": 1
+    }
+  ],
+  "q018": [
+    {
+      "chunk_id": "699fab5d-3f72-44b7-a45d-c41cbeb1924b",
+      "similarity": 0.769,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\04_請求支払いルール.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "b444f21b-543a-4cd4-95dc-1f89f2581c13",
+      "similarity": 0.481,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\04_請求支払いルール.pdf",
+      "page": 2
+    }
+  ],
+  "q019": [
+    {
+      "chunk_id": "b444f21b-543a-4cd4-95dc-1f89f2581c13",
+      "similarity": 0.904,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\04_請求支払いルール.pdf",
+      "page": 2
+    },
+    {
+      "chunk_id": "c59da8bd-9e8a-4038-8e3f-ed8bdae8e605",
+      "similarity": 0.865,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\03_解約返金ポリシー.pdf",
+      "page": 1
+    }
+  ],
+  "q020": [
+    {
+      "chunk_id": "b444f21b-543a-4cd4-95dc-1f89f2581c13",
+      "similarity": 0.925,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\04_請求支払いルール.pdf",
+      "page": 2
+    },
+    {
+      "chunk_id": "7dcbe38f-0a5a-440c-bc64-c7c63bd454df",
+      "similarity": 0.373,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\03_解約返金ポリシー.pdf",
+      "page": 0
+    }
+  ],
+  "q021": [
+    {
+      "chunk_id": "3e361267-d645-4650-b72b-5223f902768d",
+      "similarity": 0.906,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\04_請求支払いルール.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "4f4b83fb-8a56-414b-85ee-7f8cf6a114db",
+      "similarity": 0.321,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 3
+    }
+  ],
+  "q022": [
+    {
+      "chunk_id": "ed4660d0-4cfa-42a2-9cf6-9cf83aa9ba41",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "a4426ab4-9063-4a01-adb6-49d54de517f4",
+      "similarity": 0.588,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\04_請求支払いルール.pdf",
+      "page": 0
+    }
+  ],
+  "q023": [
+    {
+      "chunk_id": "ed4660d0-4cfa-42a2-9cf6-9cf83aa9ba41",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "577fc900-34a6-45b0-9764-352f3e7bd0f8",
+      "similarity": 0.475,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 1
+    }
+  ],
+  "q024": [
+    {
+      "chunk_id": "ed4660d0-4cfa-42a2-9cf6-9cf83aa9ba41",
+      "similarity": 0.964,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 0
+    }
+  ],
+  "q025": [
+    {
+      "chunk_id": "ed4660d0-4cfa-42a2-9cf6-9cf83aa9ba41",
+      "similarity": 0.952,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "577fc900-34a6-45b0-9764-352f3e7bd0f8",
+      "similarity": 0.762,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 1
+    }
+  ],
+  "q026": [
+    {
+      "chunk_id": "577fc900-34a6-45b0-9764-352f3e7bd0f8",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "082c2535-0baf-4e65-a2e7-2ad627a02196",
+      "similarity": 0.494,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 2
+    }
+  ],
+  "q027": [
+    {
+      "chunk_id": "082c2535-0baf-4e65-a2e7-2ad627a02196",
+      "similarity": 0.872,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 2
+    },
+    {
+      "chunk_id": "b444f21b-543a-4cd4-95dc-1f89f2581c13",
+      "similarity": 0.404,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\04_請求支払いルール.pdf",
+      "page": 2
+    }
+  ],
+  "q028": [
+    {
+      "chunk_id": "082c2535-0baf-4e65-a2e7-2ad627a02196",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 2
+    },
+    {
+      "chunk_id": "ba7905c2-0aa1-4458-b3e6-a0b60524b456",
+      "similarity": 0.516,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\05_利用開始ガイド.pdf",
+      "page": 0
+    }
+  ],
+  "q029": [
+    {
+      "chunk_id": "ba7905c2-0aa1-4458-b3e6-a0b60524b456",
+      "similarity": 0.919,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\05_利用開始ガイド.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "ed4660d0-4cfa-42a2-9cf6-9cf83aa9ba41",
+      "similarity": 0.432,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 0
+    }
+  ],
+  "q030": [
+    {
+      "chunk_id": "ba7905c2-0aa1-4458-b3e6-a0b60524b456",
+      "similarity": 0.98,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\05_利用開始ガイド.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "577fc900-34a6-45b0-9764-352f3e7bd0f8",
+      "similarity": 0.33,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\01_アカウント権限管理.pdf",
+      "page": 1
+    }
+  ],
+  "q031": [
+    {
+      "chunk_id": "1a112906-6599-476a-bca3-fe8b0a37c760",
+      "similarity": 0.908,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\05_利用開始ガイド.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "ba7905c2-0aa1-4458-b3e6-a0b60524b456",
+      "similarity": 0.316,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\05_利用開始ガイド.pdf",
+      "page": 0
+    }
+  ],
+  "q032": [
+    {
+      "chunk_id": "1a112906-6599-476a-bca3-fe8b0a37c760",
+      "similarity": 0.875,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\05_利用開始ガイド.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "1ade3c5a-a69c-4164-8320-58c79cc17194",
+      "similarity": 0.5,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\02_サービス機能概要.pdf",
+      "page": 1
+    }
+  ],
+  "q033": [
+    {
+      "chunk_id": "ba7905c2-0aa1-4458-b3e6-a0b60524b456",
+      "similarity": 0.493,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\05_利用開始ガイド.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "bc251545-0141-49b8-8af7-e136abec5861",
+      "similarity": 0.449,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\05_利用開始ガイド.pdf",
+      "page": 2
+    }
+  ],
+  "q034": [
+    {
+      "chunk_id": "bc251545-0141-49b8-8af7-e136abec5861",
+      "similarity": 0.827,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\05_利用開始ガイド.pdf",
+      "page": 2
+    },
+    {
+      "chunk_id": "1ade3c5a-a69c-4164-8320-58c79cc17194",
+      "similarity": 0.42,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\02_サービス機能概要.pdf",
+      "page": 1
+    }
+  ],
+  "q035": [
+    {
+      "chunk_id": "bc251545-0141-49b8-8af7-e136abec5861",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\05_利用開始ガイド.pdf",
+      "page": 2
+    },
+    {
+      "chunk_id": "3e361267-d645-4650-b72b-5223f902768d",
+      "similarity": 0.463,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\04_請求支払いルール.pdf",
+      "page": 3
+    }
+  ],
+  "q036": [
+    {
+      "chunk_id": "9c24d7c2-dcfc-4af0-baba-1382542ff757",
+      "similarity": 0.989,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\02_サービス機能概要.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "ba7905c2-0aa1-4458-b3e6-a0b60524b456",
+      "similarity": 0.456,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\05_利用開始ガイド.pdf",
+      "page": 0
+    }
+  ],
+  "q037": [
+    {
+      "chunk_id": "9c24d7c2-dcfc-4af0-baba-1382542ff757",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\02_サービス機能概要.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "5fd36b30-9b7a-483d-8b34-613b9005b969",
+      "similarity": 0.495,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\02_サービス機能概要.pdf",
+      "page": 3
+    }
+  ],
+  "q038": [
+    {
+      "chunk_id": "9c24d7c2-dcfc-4af0-baba-1382542ff757",
+      "similarity": 0.925,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\02_サービス機能概要.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "1ade3c5a-a69c-4164-8320-58c79cc17194",
+      "similarity": 0.43,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\02_サービス機能概要.pdf",
+      "page": 1
+    }
+  ],
+  "q039": [
+    {
+      "chunk_id": "1ade3c5a-a69c-4164-8320-58c79cc17194",
+      "similarity": 0.984,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\02_サービス機能概要.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "ba7905c2-0aa1-4458-b3e6-a0b60524b456",
+      "similarity": 0.393,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\05_利用開始ガイド.pdf",
+      "page": 0
+    }
+  ],
+  "q040": [
+    {
+      "chunk_id": "ab1fd60e-c604-4978-bb82-55c5eb72101a",
+      "similarity": 0.832,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\02_サービス機能概要.pdf",
+      "page": 2
+    },
+    {
+      "chunk_id": "a99d719d-1e6e-4837-bad3-d3ec506e2e0a",
+      "similarity": 0.421,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 0
+    }
+  ],
+  "q041": [
+    {
+      "chunk_id": "5fd36b30-9b7a-483d-8b34-613b9005b969",
+      "similarity": 0.925,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\02_サービス機能概要.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "9c24d7c2-dcfc-4af0-baba-1382542ff757",
+      "similarity": 0.537,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\02_サービス機能概要.pdf",
+      "page": 0
+    }
+  ],
+  "q042": [
+    {
+      "chunk_id": "5fd36b30-9b7a-483d-8b34-613b9005b969",
+      "similarity": 0.986,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\02_サービス機能概要.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "a99d719d-1e6e-4837-bad3-d3ec506e2e0a",
+      "similarity": 0.419,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\service\\06_料金プラン.pdf",
+      "page": 0
+    }
+  ],
+  "q043": [
+    {
+      "chunk_id": "8f41302d-102d-4857-9dff-57df5fbe280c",
+      "similarity": 0.972,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\company\\01_会社概要.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "2a4ab650-1c8d-44ae-a9b3-575ed0e7e51c",
+      "similarity": 0.417,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\company\\01_会社概要.pdf",
+      "page": 1
+    }
+  ],
+  "q044": [
+    {
+      "chunk_id": "2a4ab650-1c8d-44ae-a9b3-575ed0e7e51c",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\company\\01_会社概要.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "8f41302d-102d-4857-9dff-57df5fbe280c",
+      "similarity": 0.434,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\company\\01_会社概要.pdf",
+      "page": 0
+    }
+  ],
+  "q045": [
+    {
+      "chunk_id": "4baca70e-bc9b-4319-b3d9-8f21a857895d",
+      "similarity": 0.863,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\company\\01_会社概要.pdf",
+      "page": 3
+    }
+  ],
+  "q046": [
+    {
+      "chunk_id": "4baca70e-bc9b-4319-b3d9-8f21a857895d",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\company\\01_会社概要.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "1d83933c-a8fc-4ca5-a667-62688a07f107",
+      "similarity": 0.889,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\company\\01_会社概要.pdf",
+      "page": 4
+    }
+  ],
+  "q047": [
+    {
+      "chunk_id": "4baca70e-bc9b-4319-b3d9-8f21a857895d",
+      "similarity": 0.932,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\company\\01_会社概要.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "2a4ab650-1c8d-44ae-a9b3-575ed0e7e51c",
+      "similarity": 0.523,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\company\\01_会社概要.pdf",
+      "page": 1
+    }
+  ],
+  "q048": [
+    {
+      "chunk_id": "1d83933c-a8fc-4ca5-a667-62688a07f107",
+      "similarity": 0.851,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\company\\01_会社概要.pdf",
+      "page": 4
+    },
+    {
+      "chunk_id": "2a4ab650-1c8d-44ae-a9b3-575ed0e7e51c",
+      "similarity": 0.397,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\company\\01_会社概要.pdf",
+      "page": 1
+    }
+  ],
+  "q049": [
+    {
+      "chunk_id": "8f41302d-102d-4857-9dff-57df5fbe280c",
+      "similarity": 0.742,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\company\\01_会社概要.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "4baca70e-bc9b-4319-b3d9-8f21a857895d",
+      "similarity": 0.532,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\company\\01_会社概要.pdf",
+      "page": 3
+    }
+  ],
+  "q050": [
+    {
+      "chunk_id": "e0f108dc-e144-49a2-92e8-01b2e4393c1f",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\customer\\01_カスタマープロフィール.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "86e16dd2-d8e8-4350-934b-f3147aa74d31",
+      "similarity": 0.739,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\customer\\01_カスタマープロフィール.pdf",
+      "page": 1
+    }
+  ],
+  "q051": [
+    {
+      "chunk_id": "e0f108dc-e144-49a2-92e8-01b2e4393c1f",
+      "similarity": 0.971,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\customer\\01_カスタマープロフィール.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "9e91dfb7-f247-4760-b6e9-5390b1df94b7",
+      "similarity": 0.371,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\customer\\01_カスタマープロフィール.pdf",
+      "page": 1
+    }
+  ],
+  "q052": [
+    {
+      "chunk_id": "9e91dfb7-f247-4760-b6e9-5390b1df94b7",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\customer\\01_カスタマープロフィール.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "86e16dd2-d8e8-4350-934b-f3147aa74d31",
+      "similarity": 0.727,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\customer\\01_カスタマープロフィール.pdf",
+      "page": 1
+    }
+  ],
+  "q053": [
+    {
+      "chunk_id": "9e91dfb7-f247-4760-b6e9-5390b1df94b7",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\customer\\01_カスタマープロフィール.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "28071940-1a2f-47b0-920e-ead59a3f70a0",
+      "similarity": 0.302,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\customer\\01_カスタマープロフィール.pdf",
+      "page": 3
+    }
+  ],
+  "q054": [
+    {
+      "chunk_id": "9e91dfb7-f247-4760-b6e9-5390b1df94b7",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\customer\\01_カスタマープロフィール.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "86e16dd2-d8e8-4350-934b-f3147aa74d31",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\customer\\01_カスタマープロフィール.pdf",
+      "page": 1
+    }
+  ],
+  "q055": [
+    {
+      "chunk_id": "28071940-1a2f-47b0-920e-ead59a3f70a0",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\customer\\01_カスタマープロフィール.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "e0f108dc-e144-49a2-92e8-01b2e4393c1f",
+      "similarity": 0.564,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\customer\\01_カスタマープロフィール.pdf",
+      "page": 0
+    }
+  ],
+  "q056": [
+    {
+      "chunk_id": "28071940-1a2f-47b0-920e-ead59a3f70a0",
+      "similarity": 0.536,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\customer\\01_カスタマープロフィール.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "86e16dd2-d8e8-4350-934b-f3147aa74d31",
+      "similarity": 0.321,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\customer\\01_カスタマープロフィール.pdf",
+      "page": 1
+    }
+  ],
+  "q057": [
+    {
+      "chunk_id": "59eddfd0-f9b8-47bd-9363-765b950b5ec7",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\01_トラブルシューティングガイド.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "9e926419-d5bc-426f-a81f-1a02d488e0ed",
+      "similarity": 0.4,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\02_よくある不具合と対処法.pdf",
+      "page": 1
+    }
+  ],
+  "q058": [
+    {
+      "chunk_id": "59eddfd0-f9b8-47bd-9363-765b950b5ec7",
+      "similarity": 0.739,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\01_トラブルシューティングガイド.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "ad3176ef-111d-493f-b7eb-f1d7b6671de6",
+      "similarity": 0.398,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\01_トラブルシューティングガイド.pdf",
+      "page": 1
+    }
+  ],
+  "q059": [
+    {
+      "chunk_id": "59eddfd0-f9b8-47bd-9363-765b950b5ec7",
+      "similarity": 0.991,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\01_トラブルシューティングガイド.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "ad3176ef-111d-493f-b7eb-f1d7b6671de6",
+      "similarity": 0.33,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\01_トラブルシューティングガイド.pdf",
+      "page": 1
+    }
+  ],
+  "q060": [
+    {
+      "chunk_id": "59eddfd0-f9b8-47bd-9363-765b950b5ec7",
+      "similarity": 0.613,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\01_トラブルシューティングガイド.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "ad3176ef-111d-493f-b7eb-f1d7b6671de6",
+      "similarity": 0.462,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\01_トラブルシューティングガイド.pdf",
+      "page": 1
+    }
+  ],
+  "q061": [
+    {
+      "chunk_id": "ad3176ef-111d-493f-b7eb-f1d7b6671de6",
+      "similarity": 0.704,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\01_トラブルシューティングガイド.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "9e926419-d5bc-426f-a81f-1a02d488e0ed",
+      "similarity": 0.321,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\02_よくある不具合と対処法.pdf",
+      "page": 1
+    }
+  ],
+  "q062": [
+    {
+      "chunk_id": "ad3176ef-111d-493f-b7eb-f1d7b6671de6",
+      "similarity": 0.939,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\01_トラブルシューティングガイド.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "59eddfd0-f9b8-47bd-9363-765b950b5ec7",
+      "similarity": 0.622,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\01_トラブルシューティングガイド.pdf",
+      "page": 0
+    }
+  ],
+  "q063": [
+    {
+      "chunk_id": "dd25fb9e-accf-4e01-a58c-5c1f9bae5b30",
+      "similarity": 0.859,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\01_トラブルシューティングガイド.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "cf27aa2b-0894-4508-9f07-b3b6d8521f8d",
+      "similarity": 0.353,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\02_よくある不具合と対処法.pdf",
+      "page": 3
+    }
+  ],
+  "q064": [
+    {
+      "chunk_id": "bd5a0bdf-d472-4caf-92cf-8f41c6264f13",
+      "similarity": 0.926,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\02_よくある不具合と対処法.pdf",
+      "page": 0
+    }
+  ],
+  "q065": [
+    {
+      "chunk_id": "bd5a0bdf-d472-4caf-92cf-8f41c6264f13",
+      "similarity": 0.678,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\02_よくある不具合と対処法.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "cf27aa2b-0894-4508-9f07-b3b6d8521f8d",
+      "similarity": 0.3,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\02_よくある不具合と対処法.pdf",
+      "page": 3
+    }
+  ],
+  "q066": [
+    {
+      "chunk_id": "bd5a0bdf-d472-4caf-92cf-8f41c6264f13",
+      "similarity": 0.797,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\02_よくある不具合と対処法.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "9e926419-d5bc-426f-a81f-1a02d488e0ed",
+      "similarity": 0.649,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\02_よくある不具合と対処法.pdf",
+      "page": 1
+    }
+  ],
+  "q067": [
+    {
+      "chunk_id": "9e926419-d5bc-426f-a81f-1a02d488e0ed",
+      "similarity": 0.888,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\02_よくある不具合と対処法.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "ad3176ef-111d-493f-b7eb-f1d7b6671de6",
+      "similarity": 0.337,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\01_トラブルシューティングガイド.pdf",
+      "page": 1
+    }
+  ],
+  "q068": [
+    {
+      "chunk_id": "9e926419-d5bc-426f-a81f-1a02d488e0ed",
+      "similarity": 0.931,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\02_よくある不具合と対処法.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "59eddfd0-f9b8-47bd-9363-765b950b5ec7",
+      "similarity": 0.356,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\01_トラブルシューティングガイド.pdf",
+      "page": 0
+    }
+  ],
+  "q069": [
+    {
+      "chunk_id": "cf27aa2b-0894-4508-9f07-b3b6d8521f8d",
+      "similarity": 0.924,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\02_よくある不具合と対処法.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "9e926419-d5bc-426f-a81f-1a02d488e0ed",
+      "similarity": 0.329,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\02_よくある不具合と対処法.pdf",
+      "page": 1
+    }
+  ],
+  "q070": [
+    {
+      "chunk_id": "cf27aa2b-0894-4508-9f07-b3b6d8521f8d",
+      "similarity": 0.846,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\02_よくある不具合と対処法.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "9e926419-d5bc-426f-a81f-1a02d488e0ed",
+      "similarity": 0.341,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\technical\\02_よくある不具合と対処法.pdf",
+      "page": 1
+    }
+  ],
+  "q071": [
+    {
+      "chunk_id": "a69f772b-fa22-4c16-9439-3f26eca2189a",
+      "similarity": 0.661,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\02_利用規約.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "65e610c9-0f50-41c2-b291-fe703184a8ce",
+      "similarity": 0.393,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\01_プライバシーポリシー.pdf",
+      "page": 0
+    }
+  ],
+  "q072": [
+    {
+      "chunk_id": "a69f772b-fa22-4c16-9439-3f26eca2189a",
+      "similarity": 0.53,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\02_利用規約.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "ec756d4a-8608-4ca0-8a09-d45eadeca3ca",
+      "similarity": 0.318,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\01_プライバシーポリシー.pdf",
+      "page": 1
+    }
+  ],
+  "q073": [
+    {
+      "chunk_id": "a69f772b-fa22-4c16-9439-3f26eca2189a",
+      "similarity": 0.807,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\02_利用規約.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "70d71c18-440b-446d-a351-05b5f5f9c5c2",
+      "similarity": 0.474,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\02_利用規約.pdf",
+      "page": 2
+    }
+  ],
+  "q074": [
+    {
+      "chunk_id": "3471706a-c3c2-469a-b6ae-68a71502fbb4",
+      "similarity": 0.867,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\02_利用規約.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "ec756d4a-8608-4ca0-8a09-d45eadeca3ca",
+      "similarity": 0.3,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\01_プライバシーポリシー.pdf",
+      "page": 1
+    }
+  ],
+  "q075": [
+    {
+      "chunk_id": "70d71c18-440b-446d-a351-05b5f5f9c5c2",
+      "similarity": 0.948,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\02_利用規約.pdf",
+      "page": 2
+    },
+    {
+      "chunk_id": "ba794c8f-2750-4c58-856e-f86050ee7a55",
+      "similarity": 0.416,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\01_プライバシーポリシー.pdf",
+      "page": 3
+    }
+  ],
+  "q076": [
+    {
+      "chunk_id": "70d71c18-440b-446d-a351-05b5f5f9c5c2",
+      "similarity": 0.877,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\02_利用規約.pdf",
+      "page": 2
+    },
+    {
+      "chunk_id": "ec756d4a-8608-4ca0-8a09-d45eadeca3ca",
+      "similarity": 0.491,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\01_プライバシーポリシー.pdf",
+      "page": 1
+    }
+  ],
+  "q077": [
+    {
+      "chunk_id": "d0573cef-4fa1-422e-94d6-02535bd44fdc",
+      "similarity": 0.84,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\02_利用規約.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "70d71c18-440b-446d-a351-05b5f5f9c5c2",
+      "similarity": 0.36,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\02_利用規約.pdf",
+      "page": 2
+    }
+  ],
+  "q078": [
+    {
+      "chunk_id": "65e610c9-0f50-41c2-b291-fe703184a8ce",
+      "similarity": 0.989,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\01_プライバシーポリシー.pdf",
+      "page": 0
+    }
+  ],
+  "q079": [
+    {
+      "chunk_id": "65e610c9-0f50-41c2-b291-fe703184a8ce",
+      "similarity": 0.963,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\01_プライバシーポリシー.pdf",
+      "page": 0
+    }
+  ],
+  "q080": [
+    {
+      "chunk_id": "ec756d4a-8608-4ca0-8a09-d45eadeca3ca",
+      "similarity": 0.985,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\01_プライバシーポリシー.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "a69f772b-fa22-4c16-9439-3f26eca2189a",
+      "similarity": 0.354,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\02_利用規約.pdf",
+      "page": 0
+    }
+  ],
+  "q081": [
+    {
+      "chunk_id": "ec756d4a-8608-4ca0-8a09-d45eadeca3ca",
+      "similarity": 0.75,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\01_プライバシーポリシー.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "70d71c18-440b-446d-a351-05b5f5f9c5c2",
+      "similarity": 0.611,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\02_利用規約.pdf",
+      "page": 2
+    }
+  ],
+  "q082": [
+    {
+      "chunk_id": "ec756d4a-8608-4ca0-8a09-d45eadeca3ca",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\01_プライバシーポリシー.pdf",
+      "page": 1
+    }
+  ],
+  "q083": [
+    {
+      "chunk_id": "ba794c8f-2750-4c58-856e-f86050ee7a55",
+      "similarity": 0.934,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\01_プライバシーポリシー.pdf",
+      "page": 3
+    }
+  ],
+  "q084": [
+    {
+      "chunk_id": "ba794c8f-2750-4c58-856e-f86050ee7a55",
+      "similarity": 0.974,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\01_プライバシーポリシー.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "4e07dc40-0106-4831-9b85-5cf3e6adeaf1",
+      "similarity": 0.564,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\legal\\01_プライバシーポリシー.pdf",
+      "page": 4
+    }
+  ],
+  "q085": [
+    {
+      "chunk_id": "7d17a2a6-79be-4cab-b86a-c8dfa912e0ed",
+      "similarity": 0.963,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\02_セキュリティポリシー.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "793033df-fd4a-4be5-96db-b6ee76db13e9",
+      "similarity": 0.358,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\01_アクセス制御ガイドライン.pdf",
+      "page": 1
+    }
+  ],
+  "q086": [
+    {
+      "chunk_id": "7d17a2a6-79be-4cab-b86a-c8dfa912e0ed",
+      "similarity": 0.964,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\02_セキュリティポリシー.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "3d69b6fe-962a-4768-b151-57e97bfdced4",
+      "similarity": 0.313,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\02_セキュリティポリシー.pdf",
+      "page": 1
+    }
+  ],
+  "q087": [
+    {
+      "chunk_id": "7d17a2a6-79be-4cab-b86a-c8dfa912e0ed",
+      "similarity": 0.892,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\02_セキュリティポリシー.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "05027da8-4e0d-479d-ae5d-c278062a30ab",
+      "similarity": 0.392,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\02_セキュリティポリシー.pdf",
+      "page": 3
+    }
+  ],
+  "q088": [
+    {
+      "chunk_id": "3d69b6fe-962a-4768-b151-57e97bfdced4",
+      "similarity": 0.919,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\02_セキュリティポリシー.pdf",
+      "page": 1
+    }
+  ],
+  "q089": [
+    {
+      "chunk_id": "3d69b6fe-962a-4768-b151-57e97bfdced4",
+      "similarity": 0.848,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\02_セキュリティポリシー.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "793033df-fd4a-4be5-96db-b6ee76db13e9",
+      "similarity": 0.561,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\01_アクセス制御ガイドライン.pdf",
+      "page": 1
+    }
+  ],
+  "q090": [
+    {
+      "chunk_id": "a5b22ea9-7f1c-46d5-852d-f7a6817fcc30",
+      "similarity": 0.986,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\02_セキュリティポリシー.pdf",
+      "page": 2
+    },
+    {
+      "chunk_id": "7d17a2a6-79be-4cab-b86a-c8dfa912e0ed",
+      "similarity": 0.319,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\02_セキュリティポリシー.pdf",
+      "page": 0
+    }
+  ],
+  "q091": [
+    {
+      "chunk_id": "a5b22ea9-7f1c-46d5-852d-f7a6817fcc30",
+      "similarity": 0.938,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\02_セキュリティポリシー.pdf",
+      "page": 2
+    },
+    {
+      "chunk_id": "3d69b6fe-962a-4768-b151-57e97bfdced4",
+      "similarity": 0.333,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\02_セキュリティポリシー.pdf",
+      "page": 1
+    }
+  ],
+  "q092": [
+    {
+      "chunk_id": "03adbd53-ebd8-44ba-a0fa-f547360576a4",
+      "similarity": 0.973,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\01_アクセス制御ガイドライン.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "793033df-fd4a-4be5-96db-b6ee76db13e9",
+      "similarity": 0.301,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\01_アクセス制御ガイドライン.pdf",
+      "page": 1
+    }
+  ],
+  "q093": [
+    {
+      "chunk_id": "03adbd53-ebd8-44ba-a0fa-f547360576a4",
+      "similarity": 0.889,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\01_アクセス制御ガイドライン.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "793033df-fd4a-4be5-96db-b6ee76db13e9",
+      "similarity": 0.444,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\01_アクセス制御ガイドライン.pdf",
+      "page": 1
+    }
+  ],
+  "q094": [
+    {
+      "chunk_id": "793033df-fd4a-4be5-96db-b6ee76db13e9",
+      "similarity": 0.538,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\01_アクセス制御ガイドライン.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "03adbd53-ebd8-44ba-a0fa-f547360576a4",
+      "similarity": 0.369,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\01_アクセス制御ガイドライン.pdf",
+      "page": 0
+    }
+  ],
+  "q095": [
+    {
+      "chunk_id": "793033df-fd4a-4be5-96db-b6ee76db13e9",
+      "similarity": 0.76,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\01_アクセス制御ガイドライン.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "7d17a2a6-79be-4cab-b86a-c8dfa912e0ed",
+      "similarity": 0.307,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\02_セキュリティポリシー.pdf",
+      "page": 0
+    }
+  ],
+  "q096": [
+    {
+      "chunk_id": "793033df-fd4a-4be5-96db-b6ee76db13e9",
+      "similarity": 0.983,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\01_アクセス制御ガイドライン.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "7d17a2a6-79be-4cab-b86a-c8dfa912e0ed",
+      "similarity": 0.35,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\02_セキュリティポリシー.pdf",
+      "page": 0
+    }
+  ],
+  "q097": [
+    {
+      "chunk_id": "812ab224-4060-4dda-9bb3-d463b9563700",
+      "similarity": 0.942,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\01_アクセス制御ガイドライン.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "793033df-fd4a-4be5-96db-b6ee76db13e9",
+      "similarity": 0.308,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\01_アクセス制御ガイドライン.pdf",
+      "page": 1
+    }
+  ],
+  "q098": [
+    {
+      "chunk_id": "812ab224-4060-4dda-9bb3-d463b9563700",
+      "similarity": 0.932,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\01_アクセス制御ガイドライン.pdf",
+      "page": 3
+    },
+    {
+      "chunk_id": "3d69b6fe-962a-4768-b151-57e97bfdced4",
+      "similarity": 0.411,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\security\\02_セキュリティポリシー.pdf",
+      "page": 1
+    }
+  ],
+  "q099": [
+    {
+      "chunk_id": "2fadb48f-8bfb-48d0-a9f4-88dfdbb88633",
+      "similarity": 1.0,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "933a2e19-b898-4f49-802a-dee916819a3e",
+      "similarity": 0.951,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 0
+    }
+  ],
+  "q100": [
+    {
+      "chunk_id": "2fadb48f-8bfb-48d0-a9f4-88dfdbb88633",
+      "similarity": 0.773,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "0c254f4d-1660-406a-a6c3-cfcb6cc0ed7f",
+      "similarity": 0.75,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\02_新機能ガイド.pdf",
+      "page": 1
+    }
+  ],
+  "q101": [
+    {
+      "chunk_id": "2fadb48f-8bfb-48d0-a9f4-88dfdbb88633",
+      "similarity": 0.872,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "60cf1d39-3fe1-4c73-8ac9-ee1828b1bd8a",
+      "similarity": 0.596,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\02_新機能ガイド.pdf",
+      "page": 0
+    }
+  ],
+  "q102": [
+    {
+      "chunk_id": "2fadb48f-8bfb-48d0-a9f4-88dfdbb88633",
+      "similarity": 0.962,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "89173456-623c-4f58-9082-cf8eb7d8d6de",
+      "similarity": 0.385,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 1
+    }
+  ],
+  "q103": [
+    {
+      "chunk_id": "2fadb48f-8bfb-48d0-a9f4-88dfdbb88633",
+      "similarity": 0.975,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "129d26c5-c82b-422d-9112-e54108d4a9ca",
+      "similarity": 0.575,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 2
+    }
+  ],
+  "q104": [
+    {
+      "chunk_id": "933a2e19-b898-4f49-802a-dee916819a3e",
+      "similarity": 0.841,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "2fadb48f-8bfb-48d0-a9f4-88dfdbb88633",
+      "similarity": 0.556,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 0
+    }
+  ],
+  "q105": [
+    {
+      "chunk_id": "89173456-623c-4f58-9082-cf8eb7d8d6de",
+      "similarity": 0.933,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 1
+    },
+    {
+      "chunk_id": "cb6c24e5-f795-4405-9a58-1dd51f7036b2",
+      "similarity": 0.573,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 1
+    }
+  ],
+  "q106": [
+    {
+      "chunk_id": "60cf1d39-3fe1-4c73-8ac9-ee1828b1bd8a",
+      "similarity": 0.99,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\02_新機能ガイド.pdf",
+      "page": 0
+    }
+  ],
+  "q107": [
+    {
+      "chunk_id": "60cf1d39-3fe1-4c73-8ac9-ee1828b1bd8a",
+      "similarity": 0.64,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\02_新機能ガイド.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "4b6928bc-3d3f-43ea-8580-d3664deb4354",
+      "similarity": 0.314,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\02_新機能ガイド.pdf",
+      "page": 2
+    }
+  ],
+  "q108": [
+    {
+      "chunk_id": "0c254f4d-1660-406a-a6c3-cfcb6cc0ed7f",
+      "similarity": 0.347,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\02_新機能ガイド.pdf",
+      "page": 1
+    }
+  ],
+  "q109": [
+    {
+      "chunk_id": "2fadb48f-8bfb-48d0-a9f4-88dfdbb88633",
+      "similarity": 0.803,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "0c254f4d-1660-406a-a6c3-cfcb6cc0ed7f",
+      "similarity": 0.712,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\02_新機能ガイド.pdf",
+      "page": 1
+    }
+  ],
+  "q110": [
+    {
+      "chunk_id": "4b6928bc-3d3f-43ea-8580-d3664deb4354",
+      "similarity": 0.844,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\02_新機能ガイド.pdf",
+      "page": 2
+    },
+    {
+      "chunk_id": "60cf1d39-3fe1-4c73-8ac9-ee1828b1bd8a",
+      "similarity": 0.39,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\02_新機能ガイド.pdf",
+      "page": 0
+    }
+  ],
+  "q111": [
+    {
+      "chunk_id": "60cf1d39-3fe1-4c73-8ac9-ee1828b1bd8a",
+      "similarity": 0.904,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\02_新機能ガイド.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "2fadb48f-8bfb-48d0-a9f4-88dfdbb88633",
+      "similarity": 0.462,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 0
+    }
+  ],
+  "q112": [
+    {
+      "chunk_id": "60cf1d39-3fe1-4c73-8ac9-ee1828b1bd8a",
+      "similarity": 0.78,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\02_新機能ガイド.pdf",
+      "page": 0
+    },
+    {
+      "chunk_id": "89173456-623c-4f58-9082-cf8eb7d8d6de",
+      "similarity": 0.61,
+      "source": "C:\\Users\\User\\Desktop\\rag-customer-support-agent\\rag-customer-support-agent\\data\\release\\01_リリースノート.pdf",
+      "page": 1
+    }
+  ]
+}
