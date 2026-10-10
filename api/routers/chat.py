@@ -1,5 +1,5 @@
 import csv
-import traceback
+import logging
 from datetime import datetime
 from pathlib import Path
 
@@ -11,6 +11,8 @@ from rag.query import guess_category, rewrite_query_for_search
 from rag.vectorstore import open_vectorstore, hybrid_retrieve_with_score
 from rag.agent import agent_answer
 from api.schemas import ChatRequest, ChatResponse, CitationItem
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -141,10 +143,11 @@ def chat(request: ChatRequest):
                     "score": score,
                 })
 
-    except Exception as e:
+    except Exception:
+        logger.exception("チャット処理中にエラーが発生しました (question=%r)", user_text)
         raise HTTPException(
             status_code=500,
-            detail=f"{type(e).__name__}: {e}\n{traceback.format_exc()}",
+            detail="内部エラーが発生しました。しばらくしてから再度お試しください。",
         )
 
     if not context.strip():
