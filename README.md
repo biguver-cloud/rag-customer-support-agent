@@ -118,7 +118,6 @@ LLM単体ではなく、検索＋生成（RAG）構成を採用し、**実務で
 │   ├── loader.py           # PDF読み込み処理
 │   ├── prompts.py          # プロンプトテンプレート管理
 │   ├── query.py            # クエリ前処理・カテゴリ推定
-│   ├── retriever.py        # 検索結果評価・スコア判定・フォールバック処理
 │   ├── ui.py               # Streamlit UIヘルパー
 │   └── vectorstore.py      # ハイブリッド検索（BM25 + Janome + ベクトル）
 ├── storage/
@@ -163,7 +162,7 @@ graph TD
             subgraph Phase1["フェーズ1：RAG回答生成（自動）"]
                 Q["① クエリ前処理\nquery.py\nカテゴリ推定 / クエリリライト"]
                 S["② ハイブリッド検索\nvectorstore.py\nBM25 + ベクトル検索（RRF）"]
-                E["③ 検索結果評価\nretriever.py\nスコア判定 / 低精度フォールバック"]
+                E["③ 検索結果評価\nvectorstore.py\nスコア判定 / 低精度フォールバック"]
                 A["④ 回答生成\nagent.py\nコンテキスト圧縮 / 自己改善ループ"]
                 SC["⑤ 自己採点\nagent.py\n正確性 / 網羅性スコア"]
             end
