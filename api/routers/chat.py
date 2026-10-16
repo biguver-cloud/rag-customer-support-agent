@@ -156,7 +156,14 @@ def chat(request: ChatRequest):
     elif best_score is not None and best_score > WEAK_SCORE_THRESHOLD:
         answer = _build_followup_questions()
     else:
-        result = agent_answer(llm, user_text, context, rounds=AGENT_ROUNDS)
+        try:
+            result = agent_answer(llm, user_text, context, rounds=AGENT_ROUNDS)
+        except Exception:
+            logger.exception("回答生成中にエラーが発生しました (question=%r)", user_text)
+            raise HTTPException(
+                status_code=500,
+                detail="内部エラーが発生しました。しばらくしてから再度お試しください。",
+            )
         answer = result["answer"]
         agent_loops = result["loops"]
         agent_tokens = result["tokens"]
