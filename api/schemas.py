@@ -1,8 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+QUESTION_MAX_LENGTH = 1000
 
 
 class ChatRequest(BaseModel):
-    question: str
+    question: str = Field(max_length=QUESTION_MAX_LENGTH)
 
 
 class CitationItem(BaseModel):
